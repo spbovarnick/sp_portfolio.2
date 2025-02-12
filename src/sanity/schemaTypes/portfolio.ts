@@ -1,0 +1,64 @@
+import { defineField, defineType } from "sanity";
+
+export default defineType({
+  name: 'portfolio',
+  title: 'Portfolio',
+  type: 'document',
+  fields: [
+    defineField({
+      name: 'projectName',
+      title: 'Project Name',
+      type: 'string',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'projectLocation',
+      title: 'Project Location',
+      type: 'string',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'role',
+      title: 'Role',
+      type: 'string',
+    }),
+    defineField({
+      name: 'contractee',
+      title: 'Contractee',
+      type: 'string',
+    }),
+    defineField({
+      name: 'photoCredit',
+      title: 'Photo Credit(s)',
+      type: 'array',
+      of: [{
+        type: 'document',
+        fields: [
+          defineField({
+            name: 'photogName',
+            title: 'Photographer Name',
+            type: 'string',
+            validation: (rule) => rule.required(),
+          }),
+          defineField({
+            name: 'photogUrl',
+            title: 'Photographer Site URL',
+            type: 'url',
+          }),
+        ]
+      }]
+    }),
+    defineField({
+      name: 'photos',
+      title: 'Photos',
+      type: 'array',
+      of: [{
+        type: 'image',
+        validation: (rule) => rule.required(),
+        options: {
+          hotspot: true
+        },
+      }],
+    }),
+  ],
+})
