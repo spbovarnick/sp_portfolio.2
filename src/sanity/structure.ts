@@ -2,7 +2,7 @@ import type { StructureResolver } from 'sanity/structure';
 import At from './icons/at';
 import About from './icons/info';
 import Blurb from './icons/blurb';
-import Portfolio from './icons/portfolio';
+import {FolderIcon} from '@sanity/icons'
 import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list';
 
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
@@ -10,6 +10,14 @@ export const structure: StructureResolver = (S, context) =>
   S.list()
     .title('Content')
     .items([
+      orderableDocumentListDeskItem({
+        icon: FolderIcon,
+        title: 'Portfolio',
+        type: 'portfolio',
+        S,
+        context
+      }),
+      S.divider(),
       S.listItem()
         .title('Contact Info')
         .id('contact')
@@ -43,21 +51,4 @@ export const structure: StructureResolver = (S, context) =>
             .documentId('landingBlurb')
             .title('Landing Blurb')
         ),
-      S.divider(),
-      S.documentTypeListItem('portfolio')
-        .title('Portfolio')
-        .icon(() => Portfolio({ size: '512' }))
-        .child(
-          S.list()
-            .title('Portfolio Projects')
-            .id('portfolio')
-            .items([
-              orderableDocumentListDeskItem({
-                type: 'portfolio',
-                id: 'orderable-en-projects',
-                S,
-                context
-              }),
-            ])
-        )
     ])

@@ -1,5 +1,5 @@
 type PortfolioProps = {
-  size: string;
+  size: string | '512px';
 };
 
 const Portfolio = ({ size }: PortfolioProps) => (

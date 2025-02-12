@@ -7,13 +7,25 @@ export default defineType({
   type: 'document',
   orderings: [orderRankOrdering],
   fields: [
-    orderRankField({ type: 'category' }),
     defineField({
       name: 'projectName',
       title: 'Project Name',
       type: 'string',
       validation: (rule) => rule.required(),
     }),
+    defineField({
+      name: 'photos',
+      title: 'Photos',
+      type: 'array',
+      of: [{
+        type: 'image',
+        validation: (rule) => rule.required(),
+        options: {
+          hotspot: true
+        },
+      }],
+    }),
+    orderRankField({ type: 'category' }),
     defineField({
       name: 'projectLocation',
       title: 'Project Location',
@@ -50,18 +62,6 @@ export default defineType({
           }),
         ]
       }]
-    }),
-    defineField({
-      name: 'photos',
-      title: 'Photos',
-      type: 'array',
-      of: [{
-        type: 'image',
-        validation: (rule) => rule.required(),
-        options: {
-          hotspot: true
-        },
-      }],
     }),
   ],
 })
