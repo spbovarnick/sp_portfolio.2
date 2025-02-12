@@ -12,7 +12,7 @@ export default async function Home() {
     tags: ["portfolio"]
   })
 
-  console.log(portfolio[0])
+  console.log(process.env.SANITY_PROJECT_ID)
 
   return (
     <div className="">
