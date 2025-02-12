@@ -80,6 +80,7 @@ export type Portfolio = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  orderRank?: string;
   projectName?: string;
   projectLocation?: string;
   role?: string;
@@ -230,8 +231,10 @@ export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/app/lib/queries.ts
 // Variable: portfolioQuery
-// Query: *[_type == "portfolio"]{  projectName,  photoCredit,  projectLocation,  photos[]{    asset ->  }}
+// Query: *[_type == "portfolio"]|order(orderRank){  _id,  orderRank,  projectName,  photoCredit,  projectLocation,  photos[]{    asset ->  }}
 export type PortfolioQueryResult = Array<{
+  _id: string;
+  orderRank: string | null;
   projectName: string | null;
   photoCredit: Array<{
     photogName?: string;
@@ -269,6 +272,6 @@ export type PortfolioQueryResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"portfolio\"]{\n  projectName,\n  photoCredit,\n  projectLocation,\n  photos[]{\n    asset ->\n  }\n}": PortfolioQueryResult;
+    "*[_type == \"portfolio\"]|order(orderRank){\n  _id,\n  orderRank,\n  projectName,\n  photoCredit,\n  projectLocation,\n  photos[]{\n    asset ->\n  }\n}": PortfolioQueryResult;
   }
 }

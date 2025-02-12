@@ -12,7 +12,7 @@ export default async function Home() {
     tags: ["portfolio"]
   })
 
-  console.log(portfolio[0].photos)
+  console.log(portfolio[0])
 
   return (
     <div className="">

@@ -3,9 +3,10 @@ import At from './icons/at';
 import About from './icons/info';
 import Blurb from './icons/blurb';
 import Portfolio from './icons/portfolio';
+import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list';
 
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
-export const structure: StructureResolver = (S) =>
+export const structure: StructureResolver = (S, context) =>
   S.list()
     .title('Content')
     .items([
@@ -45,5 +46,18 @@ export const structure: StructureResolver = (S) =>
       S.divider(),
       S.documentTypeListItem('portfolio')
         .title('Portfolio')
-        .icon(() => Portfolio({ size: '512' })),
+        .icon(() => Portfolio({ size: '512' }))
+        .child(
+          S.list()
+            .title('Portfolio Projects')
+            .id('portfolio')
+            .items([
+              orderableDocumentListDeskItem({
+                type: 'portfolio',
+                id: 'orderable-en-projects',
+                S,
+                context
+              }),
+            ])
+        )
     ])
