@@ -9,11 +9,6 @@ interface ProjectCarouselProps {
   portfolio: PortfolioQueryResult;
 }
 
-interface PortfolioIndexState {
-  project: number;
-  image: number;
-}
-
 interface PhotoCred {
   photogName?: string;
   photogUrl?: string;
