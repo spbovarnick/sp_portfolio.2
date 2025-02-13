@@ -83,7 +83,7 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio }) => {
     <div className="mt-[62px]">
       <div className="uppercase text-center">
         <div className="mb-[17px]">
-          {projects && `${prependZero(projectImgIndex + 1)}/${prependZero(projects[projectIndex]?.photos?.length)}`}
+          {projects && `${prependZero(projectImgIndex + 1)}/${projects[projectIndex]?.photos?.length && prependZero(projects[projectIndex]?.photos?.length)}`}
         </div>
         <div>
           {projects[projectIndex]?.projectLocation}
