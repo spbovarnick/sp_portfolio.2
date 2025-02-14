@@ -2,6 +2,7 @@
 
 import { PortfolioQueryResult } from "@/sanity/types"
 import { useEffect, useState, MouseEvent, } from "react";
+import MobileSwiper from "./MobileSwiper";
 // import { urlFor } from "@/sanity/lib/image";
 // import Image from "next/image";
 
@@ -92,6 +93,9 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio }) => {
         }
         <button className="p-3 bg-red-50" onClick={increment}>incrementor</button> <br/>
         <button className="p-3 bg-red-50" onClick={decrement}>decrementor</button>
+      </div>
+      <div className="">
+        {projects[projectIndex]?.photos  && <MobileSwiper project={projects[projectIndex]?.projectName} photos={projects[projectIndex]?.photos}/>}
       </div>
     </div>
   )

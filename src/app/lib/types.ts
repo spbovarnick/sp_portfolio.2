@@ -6,7 +6,8 @@ export interface PhotogCredit {
 }
 
 export interface ImageObject {
-  asset: {
+  photos: Array<{
+      asset: {
         _id: string;
         _type: "sanity.imageAsset";
         _createdAt: string;
@@ -28,5 +29,5 @@ export interface ImageObject {
         metadata?: SanityImageMetadata;
         source?: SanityAssetSourceData;
       } | null;
-  _type: "image";
+    }>
 }
