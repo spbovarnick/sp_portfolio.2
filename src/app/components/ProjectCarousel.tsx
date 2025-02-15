@@ -1,10 +1,10 @@
 "use client"
 
 import { PortfolioQueryResult } from "@/sanity/types"
-import { useEffect, useState, MouseEvent, } from "react";
+import { useEffect, useState,} from "react";
 import MobileSwiper from "./MobileSwiper";
-// import { urlFor } from "@/sanity/lib/image";
-// import Image from "next/image";
+import useCarousel from "./useCarouselHook";
+import { AllImageArray } from "../lib/types";
 
 interface ProjectCarouselProps {
   portfolio: PortfolioQueryResult;
@@ -17,44 +17,34 @@ interface PhotoCred {
 }
 
 const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio }) => {
-  const [projects, setProjects] = useState<PortfolioQueryResult>([])
-  const [projectIndex, setProjectIndex] = useState<number>(0)
-  const [projectImgIndex, setProjectImgIndex] = useState<number>(0)
+  const {
+    projectImgIndex,
+    // state,
+    projectIndex,
+    projectImageCount,
+    next,
+    prev,
+  } = useCarousel(portfolio);
+  const [allImgs, setAllImgs] = useState<Array<AllImageArray>>([]);
 
   useEffect(() => {
     if (portfolio.length > 0) {
-      setProjects(portfolio)
+      const photoSet = portfolio.reduce<AllImageArray[]>((acc, proj) => {
+        if (proj.photos) {
+          return [...acc, ...(proj.photos)]
+        }
+        return acc
+      }, [])
+      setAllImgs(photoSet)
     }
-  }, [portfolio])
-
-  useEffect(() => {
-    if (projectImgIndex === projects[projectIndex]?.photos?.length) {
-      if (projectIndex === projects?.length - 1) {
-        setProjectIndex(0)
-      } else {
-        setProjectIndex(projectIndex+1)
-      }
-      setProjectImgIndex(0)
-    }
-    if (projectImgIndex === -1) {
-      if (projectIndex === 0) {
-        setProjectIndex(projects?.length - 1)
-      } else {
-        setProjectIndex(projectIndex-1)
-      }
-      if (!projects[projectIndex]?.photos) {
-        return
-      }
-      setProjectImgIndex(projects[projectIndex]?.photos?.length - 1)
-    }
-  }, [projectImgIndex, projectIndex, projects])
+  }, [portfolio]);
 
   const prependZero = (input: number) => {
     if (input < 10 ) {
       return '0' + input
     }
     return input
-  }
+  };
 
   const photoCredits = (creditList: PhotoCred[]) => {
     return (
@@ -70,32 +60,28 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio }) => {
     )
   }
 
-  const increment = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setProjectImgIndex(projectImgIndex+1)
-  }
-
-  const decrement = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setProjectImgIndex(projectImgIndex-1)
-  }
-
   return (
     <div className="mt-[62px]">
       <div className="uppercase text-center">
         <div className="mb-[17px]">
-          {projects && `${prependZero(projectImgIndex + 1)}/${projects[projectIndex]?.photos?.length && prependZero(projects[projectIndex]?.photos?.length)}`}
+          {portfolio && `${prependZero(projectImgIndex + 1)}/${projectImageCount && prependZero(projectImageCount)}`}
         </div>
         <div>
-          {projects[projectIndex]?.projectLocation}
+          {portfolio[projectIndex]?.projectLocation}
         </div>
-        { projects[projectIndex]?.photoCredit && photoCredits(projects[projectIndex]?.photoCredit)
+        {
+        portfolio[projectIndex]?.photoCredit && photoCredits(portfolio[projectIndex]?.photoCredit)
         }
-        <button className="p-3 bg-red-50" onClick={increment}>incrementor</button> <br/>
-        <button className="p-3 bg-red-50" onClick={decrement}>decrementor</button>
       </div>
       <div className="">
-        {projects[projectIndex]?.photos  && <MobileSwiper project={projects[projectIndex]?.projectName} photos={projects[projectIndex]?.photos}/>}
+        {allImgs &&
+          <MobileSwiper
+            project={portfolio[projectIndex]?.projectName}
+            allImages={allImgs}
+            next={next}
+            prev={prev}
+          />
+        }
       </div>
     </div>
   )

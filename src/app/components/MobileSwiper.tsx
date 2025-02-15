@@ -1,26 +1,33 @@
 "use client"
-import { ImageObject } from "../lib/types";
+import { AllImageArray } from "../lib/types";
 import {Swiper, SwiperSlide} from "swiper/react";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import 'swiper/css';
+import NextButton from "./NextButton";
+import PrevButton from "./PrevButton";
 
-interface MobileSwiperProps extends ImageObject {
-  project: string | null
+interface MobileSwiperProps {
+  project: string | null;
+  allImages: AllImageArray[];
+  next: () => void;
+  prev: () => void;
 }
 
 
-const MobileSwiper = ({ photos, project }: MobileSwiperProps) => {
-
-  console.log(photos)
+const MobileSwiper = ({ allImages, project, next, prev, }: MobileSwiperProps,) => {
 
   return (
     <div>
       <Swiper
-        onSlideChange={() => console.log('slide change')}
+        onSlideNextTransitionStart={() => next()}
+        onSlidePrevTransitionStart={() => prev()}
         slidesPerView={1}
+        loop={true}
       >
-        {photos.map((photo) => (
+      <NextButton />
+      <PrevButton />
+        {allImages?.map((photo) => (
           <SwiperSlide key={photo.asset?._id}>
             <Image
               className="w-full"

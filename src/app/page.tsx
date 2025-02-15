@@ -14,7 +14,7 @@ export default async function Home() {
   return (
     <div className="columns-1">
       <NameBanner />
-      <ProjectCarousel portfolio={portfolio} />
+      {portfolio && <ProjectCarousel portfolio={portfolio} />}
     </div>
   );
 }
