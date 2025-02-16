@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import { ContactQueryResult } from "@/sanity/types";
 import { sanityFetch } from "./lib/sanityFetch";
 import { contactQuery } from "./lib/queries";
+import NameBanner from "../../public/nameBanner";
 
 const helveticaNeue = localFont({
   src: [
@@ -56,7 +57,13 @@ export default async function RootLayout({
       <body
         className={`${helveticaNeue.className} antialiased`}
       >
-        {children}
+        <div className="min-h-[calc(100vh-133px)]">
+          <div className="px-[16px] pt-[16px]">
+            <NameBanner />
+          </div>
+          {children}
+        </div>
+        {/* FOOTER */}
         {contactInfo && <Footer contactInfo={contactInfo} />}
       </body>
     </html>

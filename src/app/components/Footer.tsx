@@ -8,7 +8,7 @@ interface FooterProps {
 const Footer = ({ contactInfo }: FooterProps) => {
 
   return (
-    <div className="border-t border-black pt-[17px] pb-[19px]">
+    <div className="border-t border-black pt-[17px] pb-[19px]  bottom-0 left-0 right-0 w-full">
       <ul className="uppercase text-center mb-[26px]">
         <li>
           <Link href={'/info'}>INFO</Link>

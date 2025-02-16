@@ -1,5 +1,4 @@
 import { PortfolioQueryResult, TaglineQueryResult } from "@/sanity/types";
-import NameBanner from "../../public/nameBanner";
 import { portfolioQuery, taglineQuery } from "./lib/queries";
 import { sanityFetch } from "./lib/sanityFetch";
 import ProjectCarousel from "./components/ProjectCarousel";
@@ -20,7 +19,6 @@ export default async function Home() {
 
   return (
     <div className="columns-1">
-      <NameBanner />
       {portfolio && <ProjectCarousel portfolio={portfolio} />}
       <div className="w-full flex justify-center mb-5">
         <div className="max-w-[70vw] text-center uppercase">
