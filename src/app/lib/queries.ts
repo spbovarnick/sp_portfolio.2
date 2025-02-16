@@ -28,3 +28,13 @@ export const contactQuery = defineQuery(
     location,
   }`
 )
+
+export const infoPageQuery = defineQuery(
+  `*[_type == 'infoPage'][0]{
+    portrait{
+      asset ->
+    },
+    bioBlurb,
+
+  }`
+)

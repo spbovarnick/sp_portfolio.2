@@ -38,8 +38,7 @@ export default defineType({
     defineField({
       name: 'bioBlurb',
       title: 'Bio Blurb',
-      type: 'array',
-      of: [{type: 'block'}],
+      type: 'text',
       description: 'A few sentences to describe yourself on your Info page',
       validation: (rule) => rule.required(),
     }),
