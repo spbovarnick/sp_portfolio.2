@@ -235,6 +235,7 @@ export type Contact = {
   _rev: string;
   emailAddy?: string;
   instagram?: string;
+  location?: string;
 };
 
 export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Slug | Tagline | Portfolio | LandingBlurb | InfoPage | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Contact;
@@ -279,16 +280,24 @@ export type PortfolioQueryResult = Array<{
   projectType: string | null;
 }>;
 // Variable: taglineQuery
-// Query: *[_type == 'tagline']{    copy,  }
-export type TaglineQueryResult = Array<{
+// Query: *[_type == 'tagline'][0]{    copy,  }
+export type TaglineQueryResult = {
   copy: string | null;
-}>;
+} | null;
+// Variable: contactQuery
+// Query: *[_type == 'contact'][0]{    emailAddy,    instagram,    location,  }
+export type ContactQueryResult = {
+  emailAddy: string | null;
+  instagram: string | null;
+  location: string | null;
+} | null;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"portfolio\"]|order(orderRank){\n    _id,\n    orderRank,\n    projectName,\n    photoCredit,\n    projectLocation,\n    photos[]{\n      asset ->\n    },\n    projectType,\n  }": PortfolioQueryResult;
-    "*[_type == 'tagline']{\n    copy,\n  }": TaglineQueryResult;
+    "*[_type == 'tagline'][0]{\n    copy,\n  }": TaglineQueryResult;
+    "*[_type == 'contact'][0]{\n    emailAddy,\n    instagram,\n    location,\n  }": ContactQueryResult;
   }
 }

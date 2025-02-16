@@ -60,10 +60,8 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio }) => {
     )
   }
 
-  console.log(portfolio[projectIndex])
-
   return (
-    <div className="mt-[62px]">
+    <div className="my-[62px]">
       <div className="uppercase text-center">
         <div className="mb-[17px]">
           {portfolio && `${prependZero(projectImgIndex + 1)}/${projectImageCount && prependZero(projectImageCount)}`}
@@ -87,9 +85,6 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio }) => {
       </div>
       <div className="uppercase text-center">
         {portfolio[projectIndex]?.projectType ?? ''}
-      </div>
-      <div>
-
       </div>
     </div>
   )

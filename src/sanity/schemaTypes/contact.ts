@@ -16,6 +16,12 @@ export default defineType({
       title: 'Instagram Link',
       type: 'url',
       validation: (rule) => rule.required(),
-    })
+    }),
+    defineField({
+      name: 'location',
+      title: 'Location',
+      type: 'string',
+      validation: (rule) => rule.required(),
+    }),
   ]
 })

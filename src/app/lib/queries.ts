@@ -16,7 +16,15 @@ export const portfolioQuery = defineQuery(
 );
 
 export const taglineQuery = defineQuery(
-  `*[_type == 'tagline']{
+  `*[_type == 'tagline'][0]{
     copy,
+  }`
+);
+
+export const contactQuery = defineQuery(
+  `*[_type == 'contact'][0]{
+    emailAddy,
+    instagram,
+    location,
   }`
 )
