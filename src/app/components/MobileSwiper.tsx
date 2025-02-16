@@ -4,8 +4,8 @@ import {Swiper, SwiperSlide} from "swiper/react";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import 'swiper/css';
-import NextButton from "./NextButton";
-import PrevButton from "./PrevButton";
+// import NextButton from "./NextButton";
+// import PrevButton from "./PrevButton";
 
 interface MobileSwiperProps {
   project: string | null;
@@ -25,8 +25,8 @@ const MobileSwiper = ({ allImages, project, next, prev, }: MobileSwiperProps,) =
         slidesPerView={1}
         loop={true}
       >
-      <NextButton />
-      <PrevButton />
+      {/* <NextButton />
+      <PrevButton /> */}
         {allImages?.map((photo) => (
           <SwiperSlide key={photo.asset?._id}>
             <Image

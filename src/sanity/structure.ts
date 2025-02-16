@@ -4,6 +4,7 @@ import About from './icons/info';
 import Blurb from './icons/blurb';
 import {FolderIcon} from '@sanity/icons'
 import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list';
+import { Tag } from './icons/tag';
 
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
 export const structure: StructureResolver = (S, context) =>
@@ -18,6 +19,17 @@ export const structure: StructureResolver = (S, context) =>
         context
       }),
       S.divider(),
+      S.listItem()
+        .title('Tagline')
+        .id('tagline')
+        .icon(() => Tag({ size: '512' }))
+        .child(
+          S.editor()
+            .id('tagline')
+            .schemaType('tagline')
+            .documentId('tagline')
+            .title('Tagline')
+        ),
       S.listItem()
         .title('Contact Info')
         .id('contact')

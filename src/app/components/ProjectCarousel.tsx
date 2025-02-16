@@ -60,20 +60,22 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio }) => {
     )
   }
 
+  console.log(portfolio[projectIndex])
+
   return (
     <div className="mt-[62px]">
       <div className="uppercase text-center">
         <div className="mb-[17px]">
           {portfolio && `${prependZero(projectImgIndex + 1)}/${projectImageCount && prependZero(projectImageCount)}`}
         </div>
-        <div>
-          {portfolio[projectIndex]?.projectLocation}
+        <div className="mb-4">
+          <div>
+            {portfolio[projectIndex]?.projectName}, {portfolio[projectIndex]?.projectLocation}
+          </div>
+          {portfolio[projectIndex]?.photoCredit && photoCredits(portfolio[projectIndex]?.photoCredit)}
         </div>
-        {
-        portfolio[projectIndex]?.photoCredit && photoCredits(portfolio[projectIndex]?.photoCredit)
-        }
       </div>
-      <div className="">
+      <div className="mb-4">
         {allImgs &&
           <MobileSwiper
             project={portfolio[projectIndex]?.projectName}
@@ -82,6 +84,12 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio }) => {
             prev={prev}
           />
         }
+      </div>
+      <div className="uppercase text-center">
+        {portfolio[projectIndex]?.projectType ?? ''}
+      </div>
+      <div>
+
       </div>
     </div>
   )

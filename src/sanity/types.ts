@@ -74,6 +74,15 @@ export type Slug = {
   source?: string;
 };
 
+export type Tagline = {
+  _id: string;
+  _type: "tagline";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  copy?: string;
+};
+
 export type Portfolio = {
   _id: string;
   _type: "portfolio";
@@ -102,6 +111,7 @@ export type Portfolio = {
     photogUrl?: string;
     _key: string;
   }>;
+  projectType?: string;
 };
 
 export type LandingBlurb = {
@@ -227,11 +237,11 @@ export type Contact = {
   instagram?: string;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Slug | Portfolio | LandingBlurb | InfoPage | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Contact;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Slug | Tagline | Portfolio | LandingBlurb | InfoPage | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Contact;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/app/lib/queries.ts
 // Variable: portfolioQuery
-// Query: *[_type == "portfolio"]|order(orderRank){    _id,    orderRank,    projectName,    photoCredit,    projectLocation,    photos[]{      asset ->    }  }
+// Query: *[_type == "portfolio"]|order(orderRank){    _id,    orderRank,    projectName,    photoCredit,    projectLocation,    photos[]{      asset ->    },    projectType,  }
 export type PortfolioQueryResult = Array<{
   _id: string;
   orderRank: string | null;
@@ -266,12 +276,19 @@ export type PortfolioQueryResult = Array<{
       source?: SanityAssetSourceData;
     } | null;
   }> | null;
+  projectType: string | null;
+}>;
+// Variable: taglineQuery
+// Query: *[_type == 'tagline']{    copy,  }
+export type TaglineQueryResult = Array<{
+  copy: string | null;
 }>;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"portfolio\"]|order(orderRank){\n    _id,\n    orderRank,\n    projectName,\n    photoCredit,\n    projectLocation,\n    photos[]{\n      asset ->\n    }\n  }": PortfolioQueryResult;
+    "*[_type == \"portfolio\"]|order(orderRank){\n    _id,\n    orderRank,\n    projectName,\n    photoCredit,\n    projectLocation,\n    photos[]{\n      asset ->\n    },\n    projectType,\n  }": PortfolioQueryResult;
+    "*[_type == 'tagline']{\n    copy,\n  }": TaglineQueryResult;
   }
 }

@@ -10,6 +10,13 @@ export const portfolioQuery = defineQuery(
     projectLocation,
     photos[]{
       asset ->
-    }
+    },
+    projectType,
+  }`
+);
+
+export const taglineQuery = defineQuery(
+  `*[_type == 'tagline']{
+    copy,
   }`
 )

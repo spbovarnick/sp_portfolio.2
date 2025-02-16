@@ -63,5 +63,11 @@ export default defineType({
         ]
       }]
     }),
+    defineField({
+      name: 'projectType',
+      title: 'Project Type',
+      type: 'string',
+      validation: (rule) => rule.required(),
+    }),
   ],
 })
