@@ -13,7 +13,9 @@ import {apiVersion, dataset, projectId} from './src/sanity/env'
 import {schema} from './src/sanity/schemaTypes'
 import {structure} from './src/sanity/structure'
 
-const singletonTypes = new Set(['tagline', 'contact', 'infoPage', 'landingBlurb', ])
+const singletonTypes = new Set(['tagline', 'contact', 'infoPage', ])
+
+const singletonActions = new Set(["publish", "discardChanges", "restore"])
 
 export default defineConfig({
   basePath: '/admin',
@@ -26,9 +28,12 @@ export default defineConfig({
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({defaultApiVersion: apiVersion}),
   ],
-  schema:{
+  schema: {
     types: schema.types,
     // Filter out singleton types from the global “New document” menu options
     templates: (templates) => templates.filter(({schemaType}) => !singletonTypes.has(schemaType))
   },
+  document: {
+    actions: (input, context) => singletonTypes.has(context.schemaType) ? input.filter(({ action }) => action && singletonActions.has(action)) : input
+  }
 })

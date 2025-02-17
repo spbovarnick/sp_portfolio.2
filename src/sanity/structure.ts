@@ -1,7 +1,6 @@
 import type { StructureResolver } from 'sanity/structure';
 import At from './icons/at';
 import About from './icons/info';
-import Blurb from './icons/blurb';
 import {FolderIcon} from '@sanity/icons'
 import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list';
 import { Tag } from './icons/tag';
@@ -51,16 +50,5 @@ export const structure: StructureResolver = (S, context) =>
             .schemaType('infoPage')
             .documentId('infoPage')
             .title('Info Page')
-        ),
-      S.listItem()
-        .title('Landing Blurb')
-        .id('landingBlurb')
-        .icon(() => Blurb({ size: '512' }))
-        .child(
-          S.editor()
-            .id('landingBlurb')
-            .schemaType('landingBlurb')
-            .documentId('landingBlurb')
-            .title('Landing Blurb')
         ),
     ])
