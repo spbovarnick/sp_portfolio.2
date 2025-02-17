@@ -35,6 +35,7 @@ export const infoPageQuery = defineQuery(
       asset ->
     },
     bioBlurb,
-
+    previousProjects[],
+    pressContact,
   }`
 )

@@ -36,9 +36,12 @@ const MobileSwiper = ({ allImages, project, next, prev, }: MobileSwiperProps,) =
                 .height(500)
                 .url()
               }
+              loading="lazy"
               width={500}
               height={500}
               alt={`Photo of ${project}`}
+              placeholder="blur"
+              blurDataURL={urlFor(photo).blur(58).url()}
             />
           </SwiperSlide>
         ))}

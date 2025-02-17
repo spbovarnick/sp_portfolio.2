@@ -114,15 +114,6 @@ export type Portfolio = {
   projectType?: string;
 };
 
-export type LandingBlurb = {
-  _id: string;
-  _type: "landingBlurb";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  blurb?: string;
-};
-
 export type InfoPage = {
   _id: string;
   _type: "infoPage";
@@ -143,24 +134,7 @@ export type InfoPage = {
     creditUrl?: string;
     _type: "image";
   };
-  bioBlurb?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
+  bioBlurb?: string;
   previousProjects?: Array<{
     projectName?: string;
     projectCity?: string;
@@ -238,7 +212,7 @@ export type Contact = {
   location?: string;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Slug | Tagline | Portfolio | LandingBlurb | InfoPage | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Contact;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Slug | Tagline | Portfolio | InfoPage | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Contact;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/app/lib/queries.ts
 // Variable: portfolioQuery
@@ -291,6 +265,42 @@ export type ContactQueryResult = {
   instagram: string | null;
   location: string | null;
 } | null;
+// Variable: infoPageQuery
+// Query: *[_type == 'infoPage'][0]{    portrait{      asset ->    },    bioBlurb,    previousProjects[],    pressContact,  }
+export type InfoPageQueryResult = {
+  portrait: {
+    asset: {
+      _id: string;
+      _type: "sanity.imageAsset";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      originalFilename?: string;
+      label?: string;
+      title?: string;
+      description?: string;
+      altText?: string;
+      sha1hash?: string;
+      extension?: string;
+      mimeType?: string;
+      size?: number;
+      assetId?: string;
+      uploadId?: string;
+      path?: string;
+      url?: string;
+      metadata?: SanityImageMetadata;
+      source?: SanityAssetSourceData;
+    };
+  } | null;
+  bioBlurb: string | null;
+  previousProjects: Array<{
+    projectName?: string;
+    projectCity?: string;
+    studio?: string;
+    _key: string;
+  }> | null;
+  pressContact: string | null;
+} | null;
 
 // Query TypeMap
 import "@sanity/client";
@@ -299,5 +309,6 @@ declare module "@sanity/client" {
     "*[_type == \"portfolio\"]|order(orderRank){\n    _id,\n    orderRank,\n    projectName,\n    photoCredit,\n    projectLocation,\n    photos[]{\n      asset ->\n    },\n    projectType,\n  }": PortfolioQueryResult;
     "*[_type == 'tagline'][0]{\n    copy,\n  }": TaglineQueryResult;
     "*[_type == 'contact'][0]{\n    emailAddy,\n    instagram,\n    location,\n  }": ContactQueryResult;
+    "*[_type == 'infoPage'][0]{\n    portrait{\n      asset ->\n    },\n    bioBlurb,\n    previousProjects[],\n    pressContact,\n  }": InfoPageQueryResult;
   }
 }

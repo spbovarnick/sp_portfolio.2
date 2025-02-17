@@ -53,11 +53,13 @@ export default defineType({
             name: 'projectName',
             title: 'Project Name',
             type: 'string',
+            validation: rule => rule.required(),
           }),
           defineField({
             name: 'projectCity',
             title: 'Project City',
             type: 'string',
+            validation: rule => rule.required(),
           }),
           defineField({
             name: 'studio',
