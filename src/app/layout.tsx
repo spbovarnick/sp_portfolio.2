@@ -64,7 +64,7 @@ export default async function RootLayout({
           {children}
         </div>
         {/* FOOTER */}
-        {contactInfo && <Footer contactInfo={contactInfo} />}
+        <Footer contactInfo={contactInfo} />
       </body>
     </html>
   );

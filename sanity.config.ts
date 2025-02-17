@@ -13,16 +13,22 @@ import {apiVersion, dataset, projectId} from './src/sanity/env'
 import {schema} from './src/sanity/schemaTypes'
 import {structure} from './src/sanity/structure'
 
+const singletonTypes = new Set(['tagline', 'contact', 'infoPage', 'landingBlurb', ])
+
 export default defineConfig({
   basePath: '/admin',
   projectId,
   dataset,
   // Add and edit the content schema in the './sanity/schemaTypes' folder
-  schema,
   plugins: [
     structureTool({structure}),
     // Vision is for querying with GROQ from inside the Studio
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({defaultApiVersion: apiVersion}),
   ],
+  schema:{
+    types: schema.types,
+    // Filter out singleton types from the global “New document” menu options
+    templates: (templates) => templates.filter(({schemaType}) => !singletonTypes.has(schemaType))
+  },
 })
