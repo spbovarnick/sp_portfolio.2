@@ -19,7 +19,6 @@ interface PhotoCred {
 const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio }) => {
   const {
     projectImgIndex,
-    // state,
     projectIndex,
     projectImageCount,
     next,
@@ -73,7 +72,7 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio }) => {
           {portfolio[projectIndex]?.photoCredit && photoCredits(portfolio[projectIndex]?.photoCredit)}
         </div>
       </div>
-      <div className="mb-4">
+      <div className="swiper-div mb-4">
         {allImgs &&
           <MobileSwiper
             project={portfolio[projectIndex]?.projectName}

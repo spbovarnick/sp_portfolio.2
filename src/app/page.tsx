@@ -18,7 +18,7 @@ export default async function Home() {
   const staticTagline = "Sarita Posada Interiors is a design studio that creates high-end, brand-specific worlds for retail, hospitality, and residential projects."
 
   return (
-    <div className="columns-1">
+    <div className="columns-1 md:columns-2">
       {portfolio && <ProjectCarousel portfolio={portfolio} />}
       <div className="w-full flex justify-center mb-5">
         <div className="max-w-[70vw] text-center uppercase">
