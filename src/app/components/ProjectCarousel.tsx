@@ -6,6 +6,7 @@ import MobileSwiper from "./MobileSwiper";
 import useCarousel from "./useCarouselHook";
 import { AllImageArray } from "../lib/types";
 
+
 interface ProjectCarouselProps {
   portfolio: PortfolioQueryResult;
   tagline: TaglineQueryResult;
@@ -79,6 +80,14 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio, tagline })
         </div>
       </div>
       <div className="swiper-div mb-4 md:mb-0 md:min-w-[50vw] md:max-w-[50vw] md:order-last">
+        {/* <div
+          id="click-prev"
+          className="hidden md:block absolute h-full w-1/2 bg-sky-500/50 z-50 left-0"
+        ></div>
+        <div
+          id="click-next"
+          className="hidden md:block absolute h-full w-1/2 bg-sky-500/50 z-50 right-0"
+        ></div> */}
         {allImgs &&
           <MobileSwiper
             project={portfolio[projectIndex]?.projectName}
