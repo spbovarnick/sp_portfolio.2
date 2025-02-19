@@ -21,7 +21,7 @@ const MobileSwiper = ({ allImages, project, next, prev, }: MobileSwiperProps,) =
       onSlidePrevTransitionStart={() => prev()}
       slidesPerView={1}
       loop={true}
-      className="w-full h-full"
+      className="w-full h-full md:h-screen"
     >
       {allImages?.map((photo) => (
         <SwiperSlide key={photo.asset?._id}>

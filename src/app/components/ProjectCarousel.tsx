@@ -1,6 +1,6 @@
 "use client"
 
-import { PortfolioQueryResult } from "@/sanity/types"
+import { PortfolioQueryResult, TaglineQueryResult } from "@/sanity/types"
 import { useEffect, useState,} from "react";
 import MobileSwiper from "./MobileSwiper";
 import useCarousel from "./useCarouselHook";
@@ -8,6 +8,7 @@ import { AllImageArray } from "../lib/types";
 
 interface ProjectCarouselProps {
   portfolio: PortfolioQueryResult;
+  tagline: TaglineQueryResult;
 }
 
 interface PhotoCred {
@@ -16,7 +17,7 @@ interface PhotoCred {
   _key: string;
 }
 
-const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio }) => {
+const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio, tagline }) => {
   const {
     projectImgIndex,
     projectIndex,
@@ -37,6 +38,8 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio }) => {
       setAllImgs(photoSet)
     }
   }, [portfolio]);
+
+  const staticTagline = "Sarita Posada Interiors is a design studio that creates high-end, brand-specific worlds for retail, hospitality, and residential projects.";
 
   const prependZero = (input: number) => {
     if (input < 10 ) {
@@ -60,19 +63,22 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio }) => {
   }
 
   return (
-    <div className="my-[62px]">
-      <div className="uppercase text-center">
-        <div className="mb-[17px]">
+    <div className="my-[62px] md:my-0 md:flex md:flex-col md:font md:text-base">
+      <div className="uppercase text-center md:flex md:flex-row md:justify-between md:px-4 md:items-center md:h-[70.7vh]">
+        <div className="mt-[62px] mb-[17px] md:m-0">
           {portfolio && `${prependZero(projectImgIndex + 1)}/${projectImageCount && prependZero(projectImageCount)}`}
         </div>
-        <div className="mb-4">
+        <div className="mb-4 md:m-0">
           <div>
             {portfolio[projectIndex]?.projectName}, {portfolio[projectIndex]?.projectLocation}
           </div>
           {portfolio[projectIndex]?.photoCredit && photoCredits(portfolio[projectIndex]?.photoCredit)}
         </div>
+        <div className="uppercase text-center hidden md:block">
+          {portfolio[projectIndex]?.projectType ?? ''}
+        </div>
       </div>
-      <div className="swiper-div mb-4">
+      <div className="swiper-div mb-4 md:mb-0 md:min-w-[50vw] md:max-w-[50vw] md:order-last">
         {allImgs &&
           <MobileSwiper
             project={portfolio[projectIndex]?.projectName}
@@ -82,10 +88,15 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio }) => {
           />
         }
       </div>
-      <div className="uppercase text-center">
+      <div className="uppercase text-center md:hidden">
         {portfolio[projectIndex]?.projectType ?? ''}
       </div>
-    </div>
+      <div className="w-full flex justify-center mb-5 mt-[62px] md:m-0">
+        <div className="max-w-[70vw] md:max-w-[70.625%] text-center uppercase">
+          {tagline?.copy ?? staticTagline}
+        </div>
+      </div>
+  </div>
   )
 }
 
