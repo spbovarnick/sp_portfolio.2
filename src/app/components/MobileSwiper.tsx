@@ -18,17 +18,32 @@ interface MobileSwiperProps {
 const MobileSwiper = ({ allImages, project, next, prev, }: MobileSwiperProps,) => {
   const swiperRef = useRef<SwiperType | null>(null)
 
-  const handleSwiperNav = (e: MouseEvent<HTMLElement>) => {
+  // Click to swipe function that preserves native Swipe UI
+  // const handleSwiperNav = (e: MouseEvent<HTMLElement>) => {
+  //   e.preventDefault();
+
+  //   if (window.innerWidth < 768) { return }
+  //   const breakPoint = e.currentTarget.offsetWidth / 2;
+  //   const clickPoint = e.nativeEvent.offsetX;
+
+  //   if (clickPoint < breakPoint) {
+  //     if (swiperRef.current) {swiperRef?.current.slidePrev();};
+  //   } else {
+  //     if (swiperRef.current) {swiperRef.current.slideNext();};
+  //   }
+  // }
+
+  // click handler that disables native Swiper UI
+  const handleNavClick = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();
+    if (window.innerWidth < 768) {return};
+    const id = e.currentTarget.id;
 
-    if (window.innerWidth < 768) { return }
-    const breakPoint = e.currentTarget.offsetWidth / 2;
-    const clickPoint = e.nativeEvent.offsetX;
-
-    if (clickPoint < breakPoint) {
-      if (swiperRef.current) {swiperRef?.current.slidePrev();};
-    } else {
-      if (swiperRef.current) {swiperRef.current.slideNext();};
+    if (id === 'left') {
+      swiperRef.current?.slidePrev();
+    }
+    if (id === 'right') {
+      swiperRef.current?.slideNext();
     }
   }
 
@@ -42,25 +57,36 @@ const MobileSwiper = ({ allImages, project, next, prev, }: MobileSwiperProps,) =
       onSlidePrevTransitionStart={() => prev()}
       slidesPerView={1}
       loop={true}
-      className="w-full h-full md:h-screen"
+      className="w-full h-[45vh] md:h-screen"
     >
-      <button className="w-full h-full bg-red-400" onClick={(e) => handleSwiperNav(e)}>SHIT PISS</button>
+      {/* Two divs that overlay .swiper-slide, disabling native Swiper UI, allowing for easier cursor styling */}
+      <div
+        id='left'
+        className="w-1/2 h-full absolute top-0 left-0 z-50 hidden md:block"
+        onClick={e => handleNavClick(e)}
+      ></div>
+      <div
+        id='right'
+        className=" w-1/2 h-full absolute top-0 right-0 z-50 hidden md:block"
+        onClick={e => handleNavClick(e)}
+      ></div>
       {allImages?.map((photo) => (
         <SwiperSlide key={photo.asset?._id}>
           <Image
-            className="w-full"
             src={urlFor(photo)
-              // .width(500)
-              // .height(500)
+              .width(800)
+              .height(800)
               .url()
             }
             loading="lazy"
-            width={500}
-            height={500}
-            alt={`Photo of ${project}`}
             placeholder="blur"
+            objectFit="cover"
+            fill={true}
+            sizes="(max-width: 768px) 100vw, (max-width 1920px) 50vw"
+            alt={`Photo of ${project}`}
             blurDataURL={photo.asset?.metadata?.lqip}
-            onClick={e => handleSwiperNav(e)}
+            // synthetic click event handler that maintains native Swiper UI
+            // onClick={e => handleSwiperNav(e)}
           />
         </SwiperSlide>
       ))}

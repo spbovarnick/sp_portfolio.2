@@ -19,3 +19,17 @@ body {
   letter-spacing: -0.234px;
   font-weight: 500;
 }
+
+@media (min-width: 768px){
+  body {
+    line-height: 17px;
+  }
+}
+
+#left {
+  cursor: url(/left-circle-o.png), pointer;
+}
+
+#right {
+  cursor: url(/right-circle-o.png), auto;
+}
