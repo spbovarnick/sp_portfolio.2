@@ -64,7 +64,8 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio, tagline })
   }
 
   return (
-    <div className="mt-[6.32vh] md:my-0 md:flex md:flex-col md:font md:text-[16px]">
+    // <div className="mt-[6.32vh] md:my-0 md:flex md:flex-col md:font md:text-[16px]">
+    <>
       <div className="uppercase text-center md:flex md:flex-row md:justify-between md:px-4 md:items-center md:h-[70.7vh]">
         <div className="mt-[62px] mb-[17px] md:m-0">
           {portfolio && `${prependZero(projectImgIndex + 1)}/${projectImageCount && prependZero(projectImageCount)}`}
@@ -79,7 +80,12 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio, tagline })
           {portfolio[projectIndex]?.projectType ?? ''}
         </div>
       </div>
-      <div id='swiper-frame' className="swiper-div mb-4 md:mb-0 md:min-w-[50vw] md:max-w-[50vw] md:order-last">
+      <div className="w-full hidden justify-center mb-5 mt-[6.32vh] md:m-0 md:flex">
+        <div className="max-w-[70vw] md:max-w-[70.625%] text-center uppercase">
+          {tagline?.copy ?? staticTagline}
+        </div>
+      </div>
+      <div id='swiper-frame' className="swiper-div mb-4 md:mb-0 w-full ">
         {allImgs &&
           <MobileSwiper
             project={portfolio[projectIndex]?.projectName}
@@ -92,12 +98,13 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio, tagline })
       <div className="uppercase text-center md:hidden">
         {portfolio[projectIndex]?.projectType ?? ''}
       </div>
-      <div className="w-full flex justify-center mb-5 mt-[6.32vh] md:m-0">
+      <div className="w-full flex justify-center mb-5 mt-[6.32vh] md:m-0 md:hidden">
         <div className="max-w-[70vw] md:max-w-[70.625%] text-center uppercase">
           {tagline?.copy ?? staticTagline}
         </div>
       </div>
-  </div>
+  {/* </div> */}
+    </>
   )
 }
 

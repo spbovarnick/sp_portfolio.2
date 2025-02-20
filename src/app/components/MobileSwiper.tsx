@@ -82,7 +82,7 @@ const MobileSwiper = ({ allImages, project, next, prev, }: MobileSwiperProps,) =
             placeholder="blur"
             objectFit="cover"
             fill={true}
-            sizes="(max-width: 768px) 100vw, (max-width 1920px) 50vw"
+            sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw"
             alt={`Photo of ${project}`}
             blurDataURL={photo.asset?.metadata?.lqip}
             // synthetic click event handler that maintains native Swiper UI

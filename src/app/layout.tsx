@@ -55,12 +55,10 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${helveticaNeue.className} antialiased`}
+        className={`${helveticaNeue.className} antialiased bg-[#fcf3de]`}
       >
-        <div className="min-h-[calc(100vh-133px)] md:columns-2 md:gap-0">
-          {/* <div className="px-[16px] pt-[16px] md:px-6 md:pt-6 md:w-[50vw] ">
-            <NameBanner />
-          </div> */}
+        <div className="min-h-[calc(100vh-130px)] md:columns-2 md:gap-0 md:min-h-screen md:max-h-screen">
+
           <div className="px-[16px] pt-[16px] md:px-6 md:pt-6 md:w-[50vw] md:min-w-[50vw]">
             <NameBanner />
           </div>
