@@ -57,7 +57,7 @@ export default async function RootLayout({
       <body
         className={`${helveticaNeue.className} antialiased bg-[#fcf3de]`}
       >
-        <div className="min-h-[calc(100vh-130px)] md:grid md:grid-col-2 md:gap-0 md:min-h-screen md:max-h-screen">
+        <div className="min-h-[calc(100vh-130px)] md:grid md:grid-col-2 md:gap-0 md:min-h-screen md:max-h-screen md:max-w-screen md:overflow-x-hidden">
           {children}
         </div>
         {/* FOOTER */}
