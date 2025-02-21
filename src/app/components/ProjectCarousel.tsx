@@ -5,6 +5,7 @@ import { useEffect, useState,} from "react";
 import MobileSwiper from "./MobileSwiper";
 import useCarousel from "./useCarouselHook";
 import { AllImageArray } from "../lib/types";
+import NameBanner from "../../../public/nameBanner";
 
 
 interface ProjectCarouselProps {
@@ -64,10 +65,13 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio, tagline })
   }
 
   return (
-    // <div className="mt-[6.32vh] md:my-0 md:flex md:flex-col md:font md:text-[16px]">
     <>
-      <div className="uppercase text-center md:flex md:flex-row md:justify-between md:px-4 md:items-center md:h-[70.7vh]">
-        <div className="mt-[62px] mb-[17px] md:m-0">
+    <div className="md:my-0 md:flex md:flex-col md:font md:text-[16px] md:relative md:w-[50vw]">
+      <div className="px-[16px] pt-[16px] md:px-6 md:pt-6 md:overflow-x-hidden">
+        <NameBanner />
+      </div>
+      <div className="uppercase text-center md:flex md:flex-row md:justify-between md:px-4 md:pt-[25.61vh] md:h-fit">
+        <div className="mt-[6.32vh] mb-[17px] md:m-0">
           {portfolio && `${prependZero(projectImgIndex + 1)}/${projectImageCount && prependZero(projectImageCount)}`}
         </div>
         <div className="mb-4 md:m-0">
@@ -80,12 +84,12 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio, tagline })
           {portfolio[projectIndex]?.projectType ?? ''}
         </div>
       </div>
-      <div className="w-full hidden justify-center mb-5 mt-[6.32vh] md:m-0 md:flex">
+      <div className="w-full hidden justify-center mb-5 mt-[6.32vh] md:m-0 md:flex md:absolute md:bottom-0 md:pb-[28px]">
         <div className="max-w-[70vw] md:max-w-[70.625%] text-center uppercase">
           {tagline?.copy ?? staticTagline}
         </div>
       </div>
-      <div id='swiper-frame' className="swiper-div mb-4 md:mb-0 w-full ">
+      <div id='swiper-frame' className="swiper-div mb-4 md:mb-0 w-full md:hidden">
         {allImgs &&
           <MobileSwiper
             project={portfolio[projectIndex]?.projectName}
@@ -103,7 +107,17 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio, tagline })
           {tagline?.copy ?? staticTagline}
         </div>
       </div>
-  {/* </div> */}
+    </div>
+      <div id='swiper-frame' className="hidden swiper-div mb-4 w-full md:mb-0 md:block md:col-start-2 md:w-[50vw]">
+        {allImgs &&
+          <MobileSwiper
+            project={portfolio[projectIndex]?.projectName}
+            allImages={allImgs}
+            next={next}
+            prev={prev}
+          />
+        }
+      </div>
     </>
   )
 }
