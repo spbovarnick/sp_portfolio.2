@@ -3,6 +3,7 @@ import { InfoPageQueryResult, TaglineQueryResult } from "@/sanity/types"
 import { infoPageQuery, taglineQuery } from "../lib/queries"
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
+import NameBanner from "../../../public/nameBanner";
 
 
 export default async function InfoPage({}){
@@ -18,13 +19,17 @@ export default async function InfoPage({}){
 
   console.log(infoContent?.pressContact)
   return (
-    <div className="text-center pt-[62px] md:pt-0 flex flex-col items-center flex-wrap">
+    <>
+    <div className="text-center md:pt-0 flex flex-col items-center flex-wrap">
+      <div className="px-[16px] pt-[16px] md:px-6 md:pt-6 md:w-[50vw] md:min-w-[50vw]">
+        <NameBanner />
+      </div>
       <div className="px-[34px] md:px-0 md:w-[70.52%]">
         <p className="uppercase">{tagline?.copy ?? ''}</p><br/>
         <p>{infoContent?.bioBlurb ?? ''}</p>
       </div>
       { infoContent?.portrait &&
-      <div className="relative md:h-screen w-full md:order-last md:col-span-1">
+      <div className="relative md:h-screen w-full md:order-last md:hidden">
         <Image
           className="w-full mt-[19px] h-full mb-4 md:mb-0"
           src={urlFor(infoContent?.portrait)
@@ -62,5 +67,27 @@ export default async function InfoPage({}){
           <a href={`mailto:${infoContent?.pressContact}`} target="_blank">{infoContent?.pressContact}</a>}
       </div>
     </div>
+    {infoContent?.portrait &&
+      <div className="relative md:h-screen w-full md:order-last md:block">
+        <Image
+          className="w-full mt-[19px] h-full mb-4 md:mb-0"
+          src={urlFor(infoContent?.portrait)
+            .width(800)
+            .height(800)
+            .url()
+          }
+          loading="lazy"
+          placeholder="blur"
+          // width={800}
+          // height={800}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width 1920px) 50vw"
+          objectFit="cover"
+          blurDataURL={infoContent?.portrait.asset?.metadata?.lqip}
+          alt={'Portrait of Sarita Posada'}
+        />
+      </div>
+    }
+    </>
   )
 }
