@@ -7,8 +7,10 @@ export default async function InfoLayout({
 }){
 
   return (
-    <div className="text-[17px] text-center flex flex-col items-center">
+    // <div className="text-[17px] text-center flex flex-col items-center">
+    <>
       {children}
-    </div>
+    </>
+    // </div>
   )
 }

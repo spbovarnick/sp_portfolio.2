@@ -266,9 +266,11 @@ export type ContactQueryResult = {
   location: string | null;
 } | null;
 // Variable: infoPageQuery
-// Query: *[_type == 'infoPage'][0]{    portrait{      asset ->    },    bioBlurb,    previousProjects[],    pressContact,  }
+// Query: *[_type == 'infoPage'][0]{    portrait{      credit,      creditUrl,      asset ->    },    bioBlurb,    previousProjects[],    pressContact,  }
 export type InfoPageQueryResult = {
   portrait: {
+    credit: string | null;
+    creditUrl: string | null;
     asset: {
       _id: string;
       _type: "sanity.imageAsset";
@@ -309,6 +311,6 @@ declare module "@sanity/client" {
     "*[_type == \"portfolio\"]|order(orderRank){\n    _id,\n    orderRank,\n    projectName,\n    photoCredit,\n    projectLocation,\n    photos[]{\n      asset ->\n    },\n    projectType,\n  }": PortfolioQueryResult;
     "*[_type == 'tagline'][0]{\n    copy,\n  }": TaglineQueryResult;
     "*[_type == 'contact'][0]{\n    emailAddy,\n    instagram,\n    location,\n  }": ContactQueryResult;
-    "*[_type == 'infoPage'][0]{\n    portrait{\n      asset ->\n    },\n    bioBlurb,\n    previousProjects[],\n    pressContact,\n  }": InfoPageQueryResult;
+    "*[_type == 'infoPage'][0]{\n    portrait{\n      credit,\n      creditUrl,\n      asset ->\n    },\n    bioBlurb,\n    previousProjects[],\n    pressContact,\n  }": InfoPageQueryResult;
   }
 }

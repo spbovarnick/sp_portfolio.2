@@ -32,6 +32,8 @@ export const contactQuery = defineQuery(
 export const infoPageQuery = defineQuery(
   `*[_type == 'infoPage'][0]{
     portrait{
+      credit,
+      creditUrl,
       asset ->
     },
     bioBlurb,
