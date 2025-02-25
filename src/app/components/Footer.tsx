@@ -9,7 +9,6 @@ interface FooterProps {
 
 const Footer = ({ contactInfo }: FooterProps) => {
   const pathname = usePathname();
-  console.log(pathname)
 
   return (
     <div className={`border-t border-black pt-[17px] pb-[19px]  bottom-0 left-0 right-0 w-full ${pathname.includes('/admin') ? 'hidden' : ''}`}>
