@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 import localFont from 'next/font/local';
 import Footer from "./components/Footer";
-import { ContactQueryResult } from "@/sanity/types";
+import { BgColorQueryResult, ContactQueryResult } from "@/sanity/types";
 import { sanityFetch } from "./lib/sanityFetch";
-import { contactQuery } from "./lib/queries";
+import { bgColorQuery, contactQuery } from "./lib/queries";
 // import NameBanner from "../../public/nameBanner";
 
 const helveticaNeue = localFont({
@@ -52,10 +52,17 @@ export default async function RootLayout({
     tags: ['contact'],
   })
 
+  const bgColor: BgColorQueryResult = await sanityFetch<BgColorQueryResult>({
+    query: bgColorQuery,
+    tags: ['query']
+  })
+
+  const hex = bgColor?.hexCode?.hex
+
   return (
     <html lang="en">
       <body
-        className={`${helveticaNeue.className} antialiased bg-[#fcf3de]`}
+        className={`${helveticaNeue.className} antialiased ${hex ? hex : "bg-[#fcf3de]"}`}
       >
         <div className="min-h-[calc(100vh-130px)] md:grid md:grid-col-2 md:gap-0 md:min-h-screen md:max-h-screen md:max-w-screen md:overflow-x-hidden">
           {children}

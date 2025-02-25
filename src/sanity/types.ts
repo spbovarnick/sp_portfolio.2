@@ -74,6 +74,15 @@ export type Slug = {
   source?: string;
 };
 
+export type BgColor = {
+  _id: string;
+  _type: "bgColor";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  hexCode?: Color;
+};
+
 export type Tagline = {
   _id: string;
   _type: "tagline";
@@ -212,7 +221,40 @@ export type Contact = {
   location?: string;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Slug | Tagline | Portfolio | InfoPage | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Contact;
+export type Color = {
+  _type: "color";
+  hex?: string;
+  alpha?: number;
+  hsl?: HslaColor;
+  hsv?: HsvaColor;
+  rgb?: RgbaColor;
+};
+
+export type RgbaColor = {
+  _type: "rgbaColor";
+  r?: number;
+  g?: number;
+  b?: number;
+  a?: number;
+};
+
+export type HsvaColor = {
+  _type: "hsvaColor";
+  h?: number;
+  s?: number;
+  v?: number;
+  a?: number;
+};
+
+export type HslaColor = {
+  _type: "hslaColor";
+  h?: number;
+  s?: number;
+  l?: number;
+  a?: number;
+};
+
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Slug | BgColor | Tagline | Portfolio | InfoPage | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Contact | Color | RgbaColor | HsvaColor | HslaColor;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/app/lib/queries.ts
 // Variable: portfolioQuery
@@ -303,6 +345,16 @@ export type InfoPageQueryResult = {
   }> | null;
   pressContact: string | null;
 } | null;
+// Variable: bgColorQuery
+// Query: *[_type == 'bgColor'][0]
+export type BgColorQueryResult = {
+  _id: string;
+  _type: "bgColor";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  hexCode?: Color;
+} | null;
 
 // Query TypeMap
 import "@sanity/client";
@@ -312,5 +364,6 @@ declare module "@sanity/client" {
     "*[_type == 'tagline'][0]{\n    copy,\n  }": TaglineQueryResult;
     "*[_type == 'contact'][0]{\n    emailAddy,\n    instagram,\n    location,\n  }": ContactQueryResult;
     "*[_type == 'infoPage'][0]{\n    portrait{\n      credit,\n      creditUrl,\n      asset ->\n    },\n    bioBlurb,\n    previousProjects[],\n    pressContact,\n  }": InfoPageQueryResult;
+    "*[_type == 'bgColor'][0]": BgColorQueryResult;
   }
 }
