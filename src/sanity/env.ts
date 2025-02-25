@@ -2,7 +2,7 @@ const getDataset = () => {
   let dataset, errorMessage;
   if (process.env.NODE_ENV === "development") {
     // return assertValue(process.env.NEXT_PUBLIC_SANITY_DEV_DATASET as string, "Missing environment variable: NEXT_PUBLIC_SANITY_DEV_DATASET")
-    dataset = process.env.NEXT_PUBLIC_SANITY_DEV_DATASET;
+    dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
     errorMessage = "Missing environment variable: NEXT_PUBLIC_SANITY_DEV_DATASET"
   }
   if (process.env.NODE_ENV === "production") {
