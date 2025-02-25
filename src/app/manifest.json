@@ -1,0 +1,11 @@
+{
+  "name": "Sarita Posada Interiors",
+  "short_name": "Sarita Posada",
+  "description": "Sarita Posada Interiors is a New-York based design studio that works across hospitality, retail, and residential interiors.",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/favicon.ico"
+    }
+  ]
+}

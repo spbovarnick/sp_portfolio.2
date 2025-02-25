@@ -80,8 +80,8 @@ export default async function InfoPage({}){
         <Image
           className="w-full h-full mb-4 md:mb-0"
           src={urlFor(infoContent?.portrait)
-            .width(800)
-            .height(800)
+            .width(900)
+            .height(900)
             .url()
           }
           loading="lazy"
