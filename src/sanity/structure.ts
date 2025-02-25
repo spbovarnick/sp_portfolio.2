@@ -4,6 +4,7 @@ import About from './icons/info';
 import {FolderIcon} from '@sanity/icons'
 import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list';
 import { Tag } from './icons/tag';
+import PaintBucket from './icons/bucket';
 
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
 export const structure: StructureResolver = (S, context) =>
@@ -51,4 +52,15 @@ export const structure: StructureResolver = (S, context) =>
             .documentId('infoPage')
             .title('Info Page')
         ),
+      S.listItem()
+        .title('Background Color')
+        .id('bgColor')
+        .icon(() => PaintBucket({ size: '512' }))
+        .child(
+          S.editor()
+            .id('bgColor')
+            .schemaType('bgColor')
+            .documentId('bgColor')
+            .title('Background Color')
+        )
     ])
