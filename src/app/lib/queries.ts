@@ -41,3 +41,7 @@ export const infoPageQuery = defineQuery(
     pressContact,
   }`
 )
+
+export const bgColorQuery = defineQuery(
+  `*[_type == 'bgColor'][0]`
+)
