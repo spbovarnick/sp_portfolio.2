@@ -17,10 +17,15 @@ const singletonTypes = new Set(['tagline', 'contact', 'infoPage', ])
 
 const singletonActions = new Set(["publish", "discardChanges", "restore"])
 
+const userTools = ['structure']
+
 export default defineConfig({
   basePath: '/admin',
   projectId,
   dataset,
+  scheduledPublishing: {
+    enabled: false
+  },
   // Add and edit the content schema in the './sanity/schemaTypes' folder
   plugins: [
     structureTool({structure}),
@@ -28,6 +33,14 @@ export default defineConfig({
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({defaultApiVersion: apiVersion}),
   ],
+  tools: (prev, context) => {
+    const { currentUser } = context
+    if (currentUser?.roles.find((role) => role.name != 'administrator')) {
+      return prev.filter((tool) => userTools.includes(tool.name))
+    }
+
+    return [...prev]
+  },
   schema: {
     types: schema.types,
     // Filter out singleton types from the global “New document” menu options
