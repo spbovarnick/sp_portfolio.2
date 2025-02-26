@@ -7,7 +7,7 @@ import { client } from "../../sanity/lib/client";
 export async function sanityFetch<QueryResponse>({
   query,
   qParams,
-  tags,
+  // tags,
 }: {
   query: string;
   qParams?: QueryParams;
@@ -16,7 +16,7 @@ export async function sanityFetch<QueryResponse>({
   try {
     return client.fetch<QueryResponse>(query, qParams || {}, {
       cache: process.env.NODE_ENV === "development" ? "no-cache" : "force-cache",
-      next: { tags },
+      next: { tags: ["contact", "infoPage", "portfolio", "tagline", "bgColor"] },
     });
   } catch (error) {
     console.error("Error fetching data:", error);

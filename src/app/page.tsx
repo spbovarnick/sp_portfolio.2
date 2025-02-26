@@ -16,8 +16,6 @@ export default async function Home() {
     tags: ['tagline']
   })
 
-  console.log(portfolio)
-
   return (
     <>
       {portfolio && <ProjectCarousel portfolio={portfolio} tagline={tagline} />}

@@ -16,8 +16,6 @@ export default async function InfoPage({}){
       tags: ['tagline']
   });
 
-
-  console.log(infoContent?.pressContact)
   return (
     <>
     <div className="text-center md:pt-0 md:flex md:flex-col md:items-center">

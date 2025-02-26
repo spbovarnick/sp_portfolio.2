@@ -23,7 +23,7 @@ const Footer = ({ contactInfo }: FooterProps) => {
           <a href={`mailto:${contactInfo?.emailAddy ?? `sarita@saritaposada.com`}`} target="_blank">EMAIL</a>
         </li>
         <li>
-          <span>{contactInfo?.location}</span>
+          <span>{contactInfo?.location ?? "NEW YORK, NEW YORK"}</span>
         </li>
       </ul>
       <div className="text-center text-[9px]">
