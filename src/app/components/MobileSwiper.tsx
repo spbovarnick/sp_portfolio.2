@@ -74,7 +74,7 @@ const MobileSwiper = ({ allImages, project, next, prev, }: MobileSwiperProps,) =
         <SwiperSlide key={photo.asset?._id}>
           <Image
             src={urlFor(photo)
-              .width(900)
+              .width(1242)
               // .height(900)
               .url()
             }
