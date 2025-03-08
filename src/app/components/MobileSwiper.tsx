@@ -75,10 +75,10 @@ const MobileSwiper = ({ allImages, project, next, prev, }: MobileSwiperProps,) =
           <Image
             src={urlFor(photo)
               .width(1242)
-              // .height(900)
+              .dpr(2)
+              .quality(100)
               .url()
             }
-            quality={100}
             placeholder="blur"
             objectFit="cover"
             fill={true}

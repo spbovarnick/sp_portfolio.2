@@ -32,14 +32,13 @@ export default async function InfoPage({}){
           className="w-full mt-[19px] h-full mb-4"
           src={urlFor(infoContent?.portrait)
             .width(1242)
+            .dpr(2)
+            .quality(90)
             // .height(800)
             .url()
           }
           loading="lazy"
           placeholder="blur"
-          // width={800}
-          // height={800}
-          quality={100}
           fill
           sizes="(max-width: 768px) 100vw, (max-width 1920px) 50vw"
           objectFit="cover"
