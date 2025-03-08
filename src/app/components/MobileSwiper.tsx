@@ -78,7 +78,7 @@ const MobileSwiper = ({ allImages, project, next, prev, }: MobileSwiperProps,) =
               // .height(900)
               .url()
             }
-
+            quality={100}
             placeholder="blur"
             objectFit="cover"
             fill={true}

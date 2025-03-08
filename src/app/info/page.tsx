@@ -39,6 +39,7 @@ export default async function InfoPage({}){
           placeholder="blur"
           // width={800}
           // height={800}
+          quality={100}
           fill
           sizes="(max-width: 768px) 100vw, (max-width 1920px) 50vw"
           objectFit="cover"
