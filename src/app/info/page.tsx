@@ -31,9 +31,9 @@ export default async function InfoPage({}){
         <Image
           className="w-full mt-[19px] h-full mb-4"
           src={urlFor(infoContent?.portrait)
-            .width(1242)
-            .dpr(2)
-            .quality(90)
+            .width(1000)
+            .dpr(3)
+            .quality(80)
             // .height(800)
             .url()
           }
