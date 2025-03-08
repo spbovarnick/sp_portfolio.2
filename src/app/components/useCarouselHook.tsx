@@ -37,10 +37,13 @@ const useCarousel = (projects: PortfolioQueryResult) => {
       if (projectIndex === 0) {
         setProjectIndex(projects.length - 1)
         setTotalImgIndex(totalImgCount - 1)
+        setProjectImgIndex((projects[projects.length - 1]?.photos?.length ?? 0) - 1);
       } else {
-        setProjectIndex(prev => prev - 1)
+        const newIndex = projectIndex - 1;
+        setProjectIndex(newIndex);
+        setProjectImgIndex((projects[newIndex]?.photos?.length ?? 1) - 1);
       }
-      setProjectImgIndex(projectImageCount - 1)
+      // setProjectImgIndex(projectImageCount - 1)
     }
   }, [projectImgIndex, projectIndex,])
 
