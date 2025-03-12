@@ -88,6 +88,7 @@ const MobileSwiper = ({ allImages, project, next, prev, }: MobileSwiperProps,) =
             blurDataURL={photo.asset?.metadata?.lqip}
             // synthetic click event handler that maintains native Swiper UI
             // onClick={e => handleSwiperNav(e)}
+            quality={100}
           />
         </SwiperSlide>
       ))}
