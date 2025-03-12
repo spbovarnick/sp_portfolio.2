@@ -1,6 +1,7 @@
 "use client"
 import { AllImageArray } from "../lib/types";
 import { Swiper, SwiperSlide,} from "swiper/react";
+import { Keyboard } from "swiper/modules";
 import { Swiper as SwiperType } from "swiper";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
@@ -57,6 +58,10 @@ const MobileSwiper = ({ allImages, project, next, prev, }: MobileSwiperProps,) =
       onSlidePrevTransitionStart={() => prev()}
       slidesPerView={1}
       loop={true}
+      keyboard={{
+        enabled: true,
+      }}
+      modules={[Keyboard]}
       className="w-full h-[45vh] md:h-screen"
     >
       {/* Two divs that overlay .swiper-slide, disabling native Swiper UI, allowing for easier cursor styling */}
