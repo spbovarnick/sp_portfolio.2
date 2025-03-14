@@ -66,15 +66,31 @@ const MobileSwiper = ({ allImages, project, next, prev, }: MobileSwiperProps,) =
     >
       {/* Two divs that overlay .swiper-slide, disabling native Swiper UI, allowing for easier cursor styling */}
       <div
-        id='left'
+        id="left"
         className="w-1/2 h-full absolute top-0 left-0 z-50 hidden md:block"
         onClick={e => handleNavClick(e)}
-      ></div>
+      >
+        <Image
+          src={'/sp_arrow_left.png'}
+          width={46}
+          height={34}
+          alt=""
+          className="arrow absolute top-1/2 left-1/2 opacity-0"
+        />
+      </div>
       <div
         id='right'
         className=" w-1/2 h-full absolute top-0 right-0 z-50 hidden md:block"
         onClick={e => handleNavClick(e)}
-      ></div>
+      >
+        <Image
+          src={'/sp_arrow_right.png'}
+          width={46}
+          height={34}
+          alt=""
+          className="arrow absolute top-1/2 left-1/2 opacity-0"
+        />
+      </div>
       {allImages?.map((photo) => (
         <SwiperSlide key={photo.asset?._id}>
           <Image

@@ -28,10 +28,10 @@ body {
   }
 }
 
-#left {
-  cursor: url(/left-circle-o.png), pointer;
+#swiper-frame:hover .arrow {
+  opacity: 1;
 }
 
-#right {
-  cursor: url(/right-circle-o.png), auto;
+.arrow {
+  transition: opacity 300ms ease-in-out;
 }
