@@ -32,6 +32,10 @@ body {
   opacity: 1;
 }
 
-.arrow {
-  transition: opacity 300ms ease-in-out;
+#left {
+  cursor: url(/sp_arrow_left.png), pointer;
+}
+
+#right {
+  cursor: url(/sp_arrow_right.png), auto;
 }
