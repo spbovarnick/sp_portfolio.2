@@ -59,6 +59,8 @@ export default async function RootLayout({
 
   const hex = bgColor?.hexCode?.hex
 
+  console.log(hex)
+
   return (
     <html lang="en">
       <body
