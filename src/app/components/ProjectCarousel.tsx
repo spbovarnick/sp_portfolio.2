@@ -56,7 +56,9 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio, tagline })
         PHOTOS BY {
           creditList.map((cred, i) => {
             return (
-              cred.photogUrl ? (<span key={cred._key}>{i > 0 && <span> & </span>}<a className="folioPicCred" href={cred.photogUrl}>{cred.photogName}</a></span>) : (<span key={cred._key}>{i > 0 && <span> & </span>}<span className="folioPicCred" key={cred._key}>{cred.photogName}</span></span>)
+              cred.photogUrl ? (
+                <span key={cred._key}>{i > 0 && <span> & </span>}<a className="folioPicCred" href={cred.photogUrl} target="_blank">{cred.photogName}</a></span>) : (<span key={cred._key}>{i > 0 && <span> & </span>}<span className="folioPicCred" key={cred._key}>{cred.photogName}</span></span>
+              )
             )
           })
         }
@@ -71,12 +73,12 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio, tagline })
         <NameBanner />
       </div>
       <div className="uppercase text-center md:flex md:flex-row md:justify-between md:px-4 md:pt-[25.61vh] md:h-fit">
-        <div className="mt-[6.32vh] mb-[17px] md:m-0">
+        <div className="mt-[6.32vh] mb-[17px] md:m-0 no-underline">
           {portfolio && `${prependZero(projectImgIndex + 1)}/${projectImageCount && prependZero(projectImageCount)}`}
         </div>
         <div className="mb-4 md:m-0">
           <div>
-            {portfolio[projectIndex]?.projectName}, {portfolio[projectIndex]?.projectLocation}
+            <a href="" className="no-underline"> {portfolio[projectIndex]?.projectName}, {portfolio[projectIndex]?.projectLocation} </a>
           </div>
           {portfolio[projectIndex]?.photoCredit && photoCredits(portfolio[projectIndex]?.photoCredit)}
         </div>
