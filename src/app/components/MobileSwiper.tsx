@@ -62,7 +62,7 @@ const MobileSwiper = ({ allImages, project, next, prev, }: MobileSwiperProps,) =
         enabled: true,
       }}
       modules={[Keyboard]}
-      className="w-full h-[45vh] md:h-screen"
+      className="w-full h-[100vw] md:h-screen"
     >
       {/* Two divs that overlay .swiper-slide, disabling native Swiper UI, allowing for easier cursor styling */}
       <div
