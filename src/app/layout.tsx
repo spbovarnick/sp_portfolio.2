@@ -57,21 +57,20 @@ export default async function RootLayout({
     tags: ['query']
   })
 
-  const hex = bgColor?.hexCode?.hex
-
-  console.log(hex)
+  const hex = bgColor?.hexCode?.hex || "#FCF3DE"
 
   return (
     <html lang="en">
-      <body
-        className={`${helveticaNeue.className} antialiased ${hex ? `bg-[${hex}]` : "bg-[#fcf3de]"}`}
+     {hex && <body
+        className={`${helveticaNeue.className} antialiased`}
+        style={{ backgroundColor: hex }}
       >
         <div className="min-h-[calc(100vh-130px)] md:grid md:grid-col-2 md:gap-0 md:min-h-screen md:max-h-screen md:max-w-screen md:overflow-x-hidden">
           {children}
         </div>
         {/* FOOTER */}
         <Footer contactInfo={contactInfo} />
-      </body>
+      </body>}
     </html>
   );
 }
