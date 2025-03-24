@@ -66,7 +66,7 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio, tagline })
 
   return (
     <>
-    <div className="md:my-0 md:flex md:flex-col md:font md:text-[16px] md:relative md:w-[50vw]">
+    <div className="md:my-0 md:flex md:flex-col md:font md:text-[13px] md:relative md:w-[50vw]">
       <div className="px-[16px] pt-[16px] md:px-6 md:pt-6 md:overflow-x-hidden">
         <NameBanner />
       </div>
