@@ -53,7 +53,7 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio, tagline })
   const photoCredits = (creditList: PhotoCred[]) => {
     return (
       <div>
-        PHOTOS BY {
+        PHOTO{creditList.length > 1 ? "S" : ""} BY {
           creditList.map((cred, i) => {
             return (
               cred.photogUrl ? (
