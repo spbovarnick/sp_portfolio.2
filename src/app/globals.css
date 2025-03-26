@@ -33,9 +33,9 @@ body {
 }
 
 #left {
-  cursor: url(/sp_arrow_left.png), pointer;
+  cursor: url(/sp_arrow_left.svg), pointer;
 }
 
 #right {
-  cursor: url(/sp_arrow_right.png), auto;
+  cursor: url(/sp_arrow_right.svg), auto;
 }
