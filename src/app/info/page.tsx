@@ -2,7 +2,7 @@ import { sanityFetch } from "../lib/sanityFetch"
 import { InfoPageQueryResult, TaglineQueryResult } from "@/sanity/types"
 import { infoPageQuery, taglineQuery } from "../lib/queries"
 import { urlFor } from "@/sanity/lib/image";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import NameBanner from "../../../public/nameBanner";
 
 
@@ -38,8 +38,8 @@ export default async function InfoPage({}){
             .url()
           }
           loading="lazy"
+          layout="fill"
           placeholder="blur"
-          fill
           sizes="(max-width: 768px) 100vw, (max-width 1920px) 50vw"
           objectFit="cover"
           blurDataURL={infoContent?.portrait.asset?.metadata?.lqip}
@@ -79,14 +79,15 @@ export default async function InfoPage({}){
           className="w-full h-full mb-4 md:mb-0"
           src={urlFor(infoContent?.portrait)
             .width(900)
-            .height(900)
+            .dpr(2)
+            .quality(100)
             .url()
           }
           loading="lazy"
           placeholder="blur"
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width 1920px) 50vw"
           objectFit="cover"
+          layout="fill"
+          sizes="(max-width: 768px) 100vw, (max-width 1920px) 50vw"
           blurDataURL={infoContent?.portrait.asset?.metadata?.lqip}
           alt={'Portrait of Sarita Posada'}
         />
