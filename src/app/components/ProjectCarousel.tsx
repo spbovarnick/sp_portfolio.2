@@ -41,7 +41,7 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio, tagline })
     }
   }, [portfolio]);
 
-  const staticTagline = "Sarita Posada Interiors is a design studio that creates high-end, brand-specific worlds for retail, hospitality, and residential projects.";
+  const staticTagline = "Sar  ita Posada Interiors is a design studio that creates high-end, brand-specific worlds for retail, hospitality, and residential projects.";
 
   const prependZero = (input: number) => {
     if (input < 10 ) {

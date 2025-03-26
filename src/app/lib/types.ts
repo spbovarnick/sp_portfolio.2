@@ -1,4 +1,5 @@
 import { SanityImageMetadata, SanityAssetSourceData } from "@/sanity/types";
+import { ImageCrop, ImageHotspot } from "sanity";
 
 export interface SinglePortfolioProject {
   _id: string;
@@ -32,6 +33,8 @@ export interface SinglePortfolioProject {
       url?: string;
       metadata?: SanityImageMetadata;
       source?: SanityAssetSourceData;
+      hotspot?: ImageHotspot;
+      crop?: ImageCrop;
     } | null;
   }> | null;
 };
@@ -90,5 +93,7 @@ export interface AllImageArray {
     url?: string;
     metadata?: SanityImageMetadata;
     source?: SanityAssetSourceData;
+    hotspot?: ImageHotspot;
+    crop?: ImageCrop;
   } | null;
 }

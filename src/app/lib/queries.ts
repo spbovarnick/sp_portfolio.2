@@ -10,7 +10,8 @@ export const portfolioQuery = defineQuery(
     projectLocation,
     photos[]{
       asset ->,
-      ...
+      hotspot,
+      crop
     },
     projectType,
   }`
