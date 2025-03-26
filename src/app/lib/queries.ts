@@ -9,7 +9,8 @@ export const portfolioQuery = defineQuery(
     photoCredit,
     projectLocation,
     photos[]{
-      asset ->
+      asset ->,
+      ...
     },
     projectType,
   }`
@@ -34,7 +35,9 @@ export const infoPageQuery = defineQuery(
     portrait{
       credit,
       creditUrl,
-      asset ->
+      asset ->,
+      hotspot,
+      crop
     },
     bioBlurb,
     previousProjects[],

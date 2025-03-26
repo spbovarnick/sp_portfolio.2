@@ -258,7 +258,7 @@ export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/app/lib/queries.ts
 // Variable: portfolioQuery
-// Query: *[_type == "portfolio"]|order(orderRank){    _id,    orderRank,    projectName,    photoCredit,    projectLocation,    photos[]{      asset ->    },    projectType,  }
+// Query: *[_type == "portfolio"]|order(orderRank){    _id,    orderRank,    projectName,    photoCredit,    projectLocation,    photos[]{      asset ->,      ...    },    projectType,  }
 export type PortfolioQueryResult = Array<{
   _id: string;
   orderRank: string | null;
@@ -270,28 +270,16 @@ export type PortfolioQueryResult = Array<{
   }> | null;
   projectLocation: string | null;
   photos: Array<{
-    asset: {
-      _id: string;
-      _type: "sanity.imageAsset";
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      originalFilename?: string;
-      label?: string;
-      title?: string;
-      description?: string;
-      altText?: string;
-      sha1hash?: string;
-      extension?: string;
-      mimeType?: string;
-      size?: number;
-      assetId?: string;
-      uploadId?: string;
-      path?: string;
-      url?: string;
-      metadata?: SanityImageMetadata;
-      source?: SanityAssetSourceData;
-    } | null;
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
   }> | null;
   projectType: string | null;
 }>;
@@ -308,7 +296,7 @@ export type ContactQueryResult = {
   location: string | null;
 } | null;
 // Variable: infoPageQuery
-// Query: *[_type == 'infoPage'][0]{    portrait{      credit,      creditUrl,      asset ->    },    bioBlurb,    previousProjects[],    pressContact,  }
+// Query: *[_type == 'infoPage'][0]{    portrait{      credit,      creditUrl,      asset ->,      hotspot,      crop    },    bioBlurb,    previousProjects[],    pressContact,  }
 export type InfoPageQueryResult = {
   portrait: {
     credit: string | null;
@@ -335,6 +323,8 @@ export type InfoPageQueryResult = {
       metadata?: SanityImageMetadata;
       source?: SanityAssetSourceData;
     };
+    hotspot: SanityImageHotspot | null;
+    crop: SanityImageCrop | null;
   } | null;
   bioBlurb: string | null;
   previousProjects: Array<{
@@ -360,10 +350,10 @@ export type BgColorQueryResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"portfolio\"]|order(orderRank){\n    _id,\n    orderRank,\n    projectName,\n    photoCredit,\n    projectLocation,\n    photos[]{\n      asset ->\n    },\n    projectType,\n  }": PortfolioQueryResult;
+    "*[_type == \"portfolio\"]|order(orderRank){\n    _id,\n    orderRank,\n    projectName,\n    photoCredit,\n    projectLocation,\n    photos[]{\n      asset ->,\n      ...\n    },\n    projectType,\n  }": PortfolioQueryResult;
     "*[_type == 'tagline'][0]{\n    copy,\n  }": TaglineQueryResult;
     "*[_type == 'contact'][0]{\n    emailAddy,\n    instagram,\n    location,\n  }": ContactQueryResult;
-    "*[_type == 'infoPage'][0]{\n    portrait{\n      credit,\n      creditUrl,\n      asset ->\n    },\n    bioBlurb,\n    previousProjects[],\n    pressContact,\n  }": InfoPageQueryResult;
+    "*[_type == 'infoPage'][0]{\n    portrait{\n      credit,\n      creditUrl,\n      asset ->,\n      hotspot,\n      crop\n    },\n    bioBlurb,\n    previousProjects[],\n    pressContact,\n  }": InfoPageQueryResult;
     "*[_type == 'bgColor'][0]": BgColorQueryResult;
   }
 }
