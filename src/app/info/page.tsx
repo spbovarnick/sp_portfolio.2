@@ -27,6 +27,7 @@ export default async function InfoPage({}){
         <p>{infoContent?.bioBlurb ?? ''}</p>
       </div>
       { infoContent?.portrait &&
+      // MOBILE PORTRAIT
       <div className="relative w-full h-[44.75vh] md:hidden">
         <Image
           className="w-full mt-[19px] h-full mb-4"
@@ -74,6 +75,7 @@ export default async function InfoPage({}){
       }
     </div>
     {infoContent?.portrait &&
+    // DESKTOP PORTRAIT
       <div className="relative hidden md:h-screen w-full md:order-last md:block md:col-start-2 md:w-[50vw]">
         <Image
           className="w-full h-full mb-4 md:mb-0"
