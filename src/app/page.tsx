@@ -11,6 +11,20 @@ export default async function Home() {
     tags: ["portfolio"]
   })
 
+  const shuffle = (array: PortfolioQueryResult) => {
+    const len = array.length;
+    const shuffle = array.slice();
+    for (let i = len - 1; i > 0; i -= 1){
+      const rando = Math.floor(Math.random() * (i + 1));
+      const current = shuffle[i];
+      shuffle[i] = shuffle[rando];
+      shuffle[rando] = current
+    };
+    return shuffle;
+  }
+
+  const shuffledPortfolio = shuffle(portfolio)
+
   const tagline: TaglineQueryResult = await sanityFetch<TaglineQueryResult>({
     query: taglineQuery,
     tags: ['tagline']
@@ -18,7 +32,7 @@ export default async function Home() {
 
   return (
     <>
-      {portfolio && <ProjectCarousel portfolio={portfolio} tagline={tagline} />}
+      {portfolio && <ProjectCarousel portfolio={shuffledPortfolio} tagline={tagline} />}
     </>
   );
 }
