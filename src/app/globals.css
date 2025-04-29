@@ -39,3 +39,7 @@ body {
 #right {
   cursor: url(/sp_arrow_right.svg), auto;
 }
+
+.swiper-pagination-bullet-active {
+  background: rgba(255, 255, 255, 0.8) !important;
+}

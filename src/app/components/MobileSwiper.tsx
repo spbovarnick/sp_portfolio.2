@@ -1,11 +1,12 @@
 "use client"
 import { AllImageArray } from "../lib/types";
 import { Swiper, SwiperSlide,} from "swiper/react";
-import { Keyboard } from "swiper/modules";
+import { Keyboard, Pagination } from "swiper/modules";
 import { Swiper as SwiperType } from "swiper";
 import Image from "next/legacy/image";
 import { urlFor } from "@/sanity/lib/image";
 import 'swiper/css';
+import 'swiper/css/pagination';
 import { MouseEvent, useRef } from "react";
 
 interface MobileSwiperProps {
@@ -57,11 +58,14 @@ const MobileSwiper = ({ allImages, project, next, prev, }: MobileSwiperProps,) =
       onSlideNextTransitionStart={() => next()}
       onSlidePrevTransitionStart={() => prev()}
       slidesPerView={1}
+      pagination={{
+        dynamicBullets: true
+      }}
       loop={true}
       keyboard={{
         enabled: true,
       }}
-      modules={[Keyboard]}
+      modules={[Keyboard, Pagination]}
       className="w-full h-[100vw] md:h-screen"
     >
       {/* Two divs that overlay .swiper-slide, disabling native Swiper UI, allowing for easier cursor styling */}
