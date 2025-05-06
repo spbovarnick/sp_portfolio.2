@@ -78,9 +78,14 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio, tagline })
         </div>
         <div className="mb-4 md:m-0">
           <div>
-            <a href="" className="no-underline"> {portfolio[projectIndex]?.projectName}, {portfolio[projectIndex]?.projectLocation} </a>
+            <span className="no-underline"> {portfolio[projectIndex]?.projectName}, {portfolio[projectIndex]?.projectLocation} </span>
           </div>
-          {portfolio[projectIndex]?.photoCredit && photoCredits(portfolio[projectIndex]?.photoCredit)}
+          <div className="hidden md:block">
+            {portfolio[projectIndex]?.photoCredit && photoCredits(portfolio[projectIndex]?.photoCredit)}
+          </div>
+          <div className="uppercase text-center md:hidden">
+            {portfolio[projectIndex]?.projectType ?? ''}
+          </div>
         </div>
         <div className="uppercase text-center hidden md:block">
           {portfolio[projectIndex]?.projectType ?? ''}
@@ -101,8 +106,8 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio, tagline })
           />
         }
       </div>
-      <div className="uppercase text-center md:hidden">
-        {portfolio[projectIndex]?.projectType ?? ''}
+      <div className="md:hidden uppercase text-center">
+        {portfolio[projectIndex]?.photoCredit && photoCredits(portfolio[projectIndex]?.photoCredit)}
       </div>
       <div className="w-full flex justify-center mb-5 mt-[6.32vh] md:m-0 md:hidden">
         <div className="max-w-[70vw] md:max-w-[70.625%] text-center uppercase">

@@ -7,7 +7,7 @@ import Image from "next/legacy/image";
 import { urlFor } from "@/sanity/lib/image";
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { MouseEvent, useRef } from "react";
+import { MouseEvent, useRef, useEffect, useState } from "react";
 
 interface MobileSwiperProps {
   project: string | null;
@@ -19,6 +19,15 @@ interface MobileSwiperProps {
 
 const MobileSwiper = ({ allImages, project, next, prev, }: MobileSwiperProps,) => {
   const swiperRef = useRef<SwiperType | null>(null)
+  const [showPagination, setShowPagination] = useState(false);
+
+  useEffect(() => {
+    const update = () => setShowPagination(window.innerWidth < 768);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
 
   // Click to swipe function that preserves native Swipe UI
   // const handleSwiperNav = (e: MouseEvent<HTMLElement>) => {
@@ -58,9 +67,7 @@ const MobileSwiper = ({ allImages, project, next, prev, }: MobileSwiperProps,) =
       onSlideNextTransitionStart={() => next()}
       onSlidePrevTransitionStart={() => prev()}
       slidesPerView={1}
-      pagination={{
-        dynamicBullets: true
-      }}
+      pagination={ showPagination ? { dynamicBullets: true } : false}
       loop={true}
       keyboard={{
         enabled: true,
