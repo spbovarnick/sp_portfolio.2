@@ -4,6 +4,7 @@ import { sanityFetch } from "./lib/sanityFetch";
 import ProjectCarousel from "./components/ProjectCarousel";
 // import NameBanner from "../../public/nameBanner";
 
+export const revalidate = 0;
 
 export default async function Home() {
   const portfolio: PortfolioQueryResult = await sanityFetch<PortfolioQueryResult>({
