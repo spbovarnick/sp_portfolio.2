@@ -2,9 +2,8 @@
 import { defineQuery } from "next-sanity";
 
 export const portfolioQuery = defineQuery(
-  `*[_type == "portfolio"]|order(orderRank){
+  `*[_type == "portfolio"]{
     _id,
-    orderRank,
     projectName,
     photoCredit,
     projectLocation,

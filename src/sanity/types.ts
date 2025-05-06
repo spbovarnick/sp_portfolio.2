@@ -106,6 +106,7 @@ export type Portfolio = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
@@ -136,6 +137,7 @@ export type InfoPage = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
@@ -258,10 +260,9 @@ export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/app/lib/queries.ts
 // Variable: portfolioQuery
-// Query: *[_type == "portfolio"]|order(orderRank){    _id,    orderRank,    projectName,    photoCredit,    projectLocation,    photos[]{      asset ->,      hotspot,      crop    },    projectType,  }
+// Query: *[_type == "portfolio"]{    _id,    projectName,    photoCredit,    projectLocation,    photos[]{      asset ->,      hotspot,      crop    },    projectType,  }
 export type PortfolioQueryResult = Array<{
   _id: string;
-  orderRank: string | null;
   projectName: string | null;
   photoCredit: Array<{
     photogName?: string;
@@ -364,7 +365,7 @@ export type BgColorQueryResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"portfolio\"]|order(orderRank){\n    _id,\n    orderRank,\n    projectName,\n    photoCredit,\n    projectLocation,\n    photos[]{\n      asset ->,\n      hotspot,\n      crop\n    },\n    projectType,\n  }": PortfolioQueryResult;
+    "*[_type == \"portfolio\"]{\n    _id,\n    projectName,\n    photoCredit,\n    projectLocation,\n    photos[]{\n      asset ->,\n      hotspot,\n      crop\n    },\n    projectType,\n  }": PortfolioQueryResult;
     "*[_type == 'tagline'][0]{\n    copy,\n  }": TaglineQueryResult;
     "*[_type == 'contact'][0]{\n    emailAddy,\n    instagram,\n    location,\n  }": ContactQueryResult;
     "*[_type == 'infoPage'][0]{\n    portrait{\n      credit,\n      creditUrl,\n      asset ->,\n      hotspot,\n      crop\n    },\n    bioBlurb,\n    previousProjects[],\n    pressContact,\n  }": InfoPageQueryResult;
