@@ -48,18 +48,18 @@ export default async function InfoPage({}){
         />
       </div>
       }
-      <div className="uppercase px-[60px] mb-[42px] md:px-0 md:w-[70.52%] md:mt-[5vh] md:h-fit md:mb-[5vh]">
-        <p className="italic">PREVIOUS PROJECTS INCLUDE:</p><br/>
-        <ul>
-          {infoContent?.previousProjects &&
-            infoContent?.previousProjects.map((proj) =>
-              <li key={proj._key}>
-                {proj?.projectName}, {proj?.projectCity} {proj?.studio && (` /  ${proj.studio}`)}
-              </li>
-            )
-          }
-        </ul>
-      </div>
+      { infoContent?.previousProjects &&
+        <div className="uppercase px-[60px] mb-[42px] md:px-0 md:w-[70.52%] md:mt-[5vh] md:h-fit md:mb-[5vh]">
+          <p className="italic">PREVIOUS PROJECTS INCLUDE:</p><br/>
+          <ul>
+            { infoContent?.previousProjects.map((proj) =>
+                <li key={proj._key}>
+                  {proj?.projectName}, {proj?.projectCity} {proj?.studio && (` /  ${proj.studio}`)}
+                </li>
+              )}
+          </ul>
+        </div>
+      }
       <div className="mb-[21px] md:m-0  uppercase">
         PRESS CONTACT: <br />
         { infoContent?.pressContact &&
