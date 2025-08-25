@@ -49,7 +49,7 @@ export default async function InfoPage({}){
       </div>
       }
       { infoContent?.previousProjects &&
-        <div className="uppercase px-[60px] mb-[42px] md:px-0 md:w-[70.52%] md:mt-[5vh] md:h-fit md:mb-[5vh]">
+        <div className="uppercase px-[60px]  md:px-0 md:w-[70.52%] md:mt-[5vh] md:h-fit">
           <p className="italic">PREVIOUS PROJECTS INCLUDE:</p><br/>
           <ul>
             { infoContent?.previousProjects.map((proj) =>
@@ -60,7 +60,7 @@ export default async function InfoPage({}){
           </ul>
         </div>
       }
-      <div className="mb-[21px] md:m-0  uppercase">
+      <div className="mt-[42px] mb-[21px] md:m-0 uppercase md:mt-[5vh]">
         PRESS CONTACT: <br />
         { infoContent?.pressContact &&
           <a href={`mailto:${infoContent?.pressContact}`} target="_blank">{infoContent?.pressContact}</a>}
