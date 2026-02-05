@@ -1,5 +1,5 @@
-import { PortfolioQueryResult, TaglineQueryResult } from "@/sanity/types";
-import { portfolioQuery, taglineQuery } from "./lib/queries";
+import { PortfolioQueryResult } from "@/sanity/types";
+import { portfolioQuery } from "./lib/queries";
 import { sanityFetch } from "./lib/sanityFetch";
 import ProjectCarousel from "./components/ProjectCarousel";
 // import NameBanner from "../../public/nameBanner";
@@ -26,14 +26,10 @@ export default async function Home() {
 
   const shuffledPortfolio = shuffle(portfolio)
 
-  const tagline: TaglineQueryResult = await sanityFetch<TaglineQueryResult>({
-    query: taglineQuery,
-    tags: ['tagline']
-  })
 
   return (
     <>
-      {portfolio && <ProjectCarousel portfolio={shuffledPortfolio} tagline={tagline} />}
+      {portfolio && <ProjectCarousel portfolio={shuffledPortfolio} />}
     </>
   );
 }
