@@ -3,7 +3,7 @@ import { ImageCrop, ImageHotspot } from "sanity";
 
 export interface SinglePortfolioProject {
   _id: string;
-  orderRank: string | null;
+  // orderRank: string | null;
   projectName: string | null;
   photoCredit: Array<{
     photogName?: string;
@@ -93,7 +93,7 @@ export interface AllImageArray {
     url?: string;
     metadata?: SanityImageMetadata;
     source?: SanityAssetSourceData;
-    hotspot?: ImageHotspot;
-    crop?: ImageCrop;
+    hotspot?: ImageHotspot | null;
+    crop?: ImageCrop | null;
   } | null;
 }

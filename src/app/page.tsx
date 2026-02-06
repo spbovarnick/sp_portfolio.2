@@ -1,8 +1,7 @@
 import { PortfolioQueryResult } from "@/sanity/types";
 import { portfolioQuery } from "./lib/queries";
 import { sanityFetch } from "./lib/sanityFetch";
-import ProjectCarousel from "./components/ProjectCarousel";
-// import NameBanner from "../../public/nameBanner";
+import MainLayout from "./components/MainLayout";
 
 export const revalidate = 0;
 
@@ -28,8 +27,6 @@ export default async function Home() {
 
 
   return (
-    <>
-      {portfolio && <ProjectCarousel portfolio={shuffledPortfolio} />}
-    </>
+    <MainLayout portfolio={shuffledPortfolio} />
   );
 }

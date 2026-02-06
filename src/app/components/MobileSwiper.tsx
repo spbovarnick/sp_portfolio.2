@@ -3,7 +3,7 @@ import { AllImageArray } from "../lib/types";
 import { Swiper, SwiperSlide,} from "swiper/react";
 import { Keyboard, Pagination } from "swiper/modules";
 import { Swiper as SwiperType } from "swiper";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -97,11 +97,11 @@ const MobileSwiper = ({ allImages, project, next, prev, }: MobileSwiperProps,) =
             }
             placeholder="blur"
             // loading="lazy"
-            objectFit="cover"
+            className="object-cover"
             sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw"
             alt={`Photo of ${project}`}
             blurDataURL={photo.asset?.metadata?.lqip}
-            layout="fill"
+            fill={true}
             // synthetic click event handler that maintains native Swiper UI
             // onClick={e => handleSwiperNav(e)}
             quality={100}
