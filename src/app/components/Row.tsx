@@ -24,10 +24,9 @@ const Row: React.FC<RowProps> = ({ project }) => {
     }
 
     const shuffledImgs = imageShuffler(project.photos ?? [])
-    console.log(shuffledImgs)
 
   return (
-    <>
+    <div className="grid grid-cols-1 grid-rows-1 gap-0 relative min-h-screen">
       <div className="left-img relative">
         <Image
           src={urlFor(shuffledImgs[1])
@@ -37,10 +36,7 @@ const Row: React.FC<RowProps> = ({ project }) => {
             .url()
           }
           placeholder="blur"
-          // loading="lazy"
-          // objectFit="cover"
-          // layout="fill"
-          fill={true}
+          fill
           sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw"
           alt={`Photo of ${project.projectName}`}
           blurDataURL={shuffledImgs[1].asset?.metadata?.lqip}
@@ -53,25 +49,22 @@ const Row: React.FC<RowProps> = ({ project }) => {
           src={urlFor(shuffledImgs[1])
             .width(1000)
             .dpr(2)
-            .quality(100)
+            .quality(75)
             .url()
           }
           placeholder="blur"
-          // loading="lazy"
-          objectFit="cover"
+          fill
           sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw"
-          alt={`Photo of ${project}`}
+          alt={`Photo of ${project.projectName}`}
           blurDataURL={shuffledImgs[1].asset?.metadata?.lqip}
-          layout="fill"
-          // synthetic click event handler that maintains native Swiper UI
-          // onClick={e => handleSwiperNav(e)}
           quality={100}
+          className="object-cover "
         />
       </div>
       <div className="info-text">
 
       </div>
-    </>
+    </div>
   )
 }
 
