@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from 'next/font/local';
+import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import { ContactQueryResult } from "@/sanity/types";
 import { sanityFetch } from "./lib/sanityFetch";
@@ -56,7 +57,10 @@ export default async function RootLayout({
      <body
         className={`${helveticaNeue.className} antialiased`}
       >
-          {children}
+        <main>
+          <Nav />
+            {children}
+        </main>
       </body>
     </html>
   );
