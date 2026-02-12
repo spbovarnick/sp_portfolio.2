@@ -5,6 +5,7 @@ import { PortfolioQueryResult } from "@/sanity/types"
 import { useEffect, useState } from "react";
 import { shuffle } from "../lib/util";
 import Row from "./Row"
+import Nav from "./Nav";
 
 interface ProjectProps {
   portfolio: PortfolioQueryResult
@@ -19,7 +20,8 @@ const Homepage: React.FC<ProjectProps> = ({ portfolio }) => {
   }
 
   return (
-    <>
+    <div className="relative snap-y snap-mandatory w-screen h-screen overflow-y-scroll">
+      <Nav />
       {projects.map((proj, index) => (
         <Row
           key={`${proj._id}-${index}`}
@@ -28,7 +30,7 @@ const Homepage: React.FC<ProjectProps> = ({ portfolio }) => {
           addToScroll={addToScroll}
         />
       ))}
-    </>
+    </div>
   )
 }
 

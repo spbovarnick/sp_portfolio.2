@@ -32,7 +32,7 @@ const Row: React.FC<RowProps> = ({
 
   return (
     <div
-      className="grid grid-cols-1 grid-rows-1 gap-0 relative min-h-screen"
+      className="grid grid-cols-1 grid-rows-1 gap-0 relative min-h-screen snap-center snap-always"
       ref={rowRef}
     >
       <div className="left-img relative">
