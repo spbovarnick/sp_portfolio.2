@@ -11,26 +11,21 @@ interface ProjectProps {
 }
 
 const Homepage: React.FC<ProjectProps> = ({ portfolio }) => {
-  const [page, setPage] = useState(1)
   const [projects, setProjects] = useState(portfolio)
 
   const addToScroll = () => {
-
+    const appendage = shuffle(portfolio)
+    setProjects((prev) => [...prev, ...appendage])
   }
-
-  useEffect(() => {
-
-  },[page])
-
 
   return (
     <>
-      {portfolio.map((proj, index) => (
+      {projects.map((proj, index) => (
         <Row
-          key={proj._id}
+          key={`${proj._id}-${index}`}
           project={proj}
-          isLast={index === portfolio.length - 1}
-          newLimit={() => setPage(page + 1)}
+          isLast={index === projects.length - 1}
+          addToScroll={addToScroll}
         />
       ))}
     </>
