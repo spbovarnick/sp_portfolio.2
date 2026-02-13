@@ -2,6 +2,7 @@ import { SinglePortfolioProject } from "../lib/types";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { urlFor } from "@/sanity/lib/image";
+import Link from "next/link";
 
 
 interface RowProps {
@@ -30,9 +31,11 @@ const Row: React.FC<RowProps> = ({
     observer.observe(rowRef.current)
   },[isLast])
 
+  console.log(project)
+
   return (
     <div
-      className="grid grid-cols-1 grid-rows-1 gap-0 relative min-h-screen snap-center snap-always"
+      className="grid grid-cols-1 grid-rows-1 gap-0 relative min-h-screen snap-center snap-always relative"
       ref={rowRef}
     >
       <div className="left-img relative">
@@ -73,8 +76,11 @@ const Row: React.FC<RowProps> = ({
           />
         }
       </div>
-      <div className="info-text">
-
+      <div className="info-text text-white uppercase absolute w-full bottom-7 left-0 text-center leading-6">
+        <div>{project.projectLocation}</div>
+        {project.projectName &&
+          <Link href={`/${encodeURIComponent(project.projectName)}`}>MORE INFO</Link>
+        }
       </div>
     </div>
   )
