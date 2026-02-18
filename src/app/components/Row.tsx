@@ -1,6 +1,6 @@
 import { SinglePortfolioProject } from "../lib/types";
-import Image from "next/image";
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import Link from "next/link";
 
@@ -26,19 +26,19 @@ const Row: React.FC<RowProps> = ({
         addToScroll();
         observer.unobserve(entry.target);
       }
-    })
+    }, { threshold: .6 });
 
-    observer.observe(rowRef.current)
-  },[isLast])
+    observer.observe(rowRef.current);
 
-  console.log(project)
+    return () => observer.disconnect();
+  },[isLast, addToScroll])
 
   return (
     <div
-      className="grid grid-cols-1 grid-rows-1 gap-0 relative min-h-screen snap-center snap-always relative"
+      className="row grid grid-cols-1 gap-0 md:grid-cols-2 relative h-screen relative"
       ref={rowRef}
     >
-      <div className="left-img relative">
+      <div className="left-img relative h-full">
        {project.photos &&
           <Image
               src={urlFor(project.photos[0])
@@ -57,10 +57,10 @@ const Row: React.FC<RowProps> = ({
             />
           }
       </div>
-      <div className="right-img hidden md:block">
+      <div className="right-img hidden md:block relative h-full">
         {project.photos &&
           <Image
-            src={urlFor(project.photos[0])
+            src={urlFor(project.photos[1])
               .width(1000)
               .dpr(2)
               .quality(75)
@@ -70,7 +70,7 @@ const Row: React.FC<RowProps> = ({
             fill
             sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw"
             alt={`Photo of ${project.projectName}`}
-            blurDataURL={project.photos[0].asset?.metadata?.lqip}
+            blurDataURL={project.photos[1].asset?.metadata?.lqip}
             quality={100}
             className="object-cover "
           />
