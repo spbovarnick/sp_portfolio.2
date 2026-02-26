@@ -32,7 +32,6 @@ const Homepage: React.FC<ProjectProps> = ({ portfolio }) => {
 
     const sections = gsap.utils.toArray<HTMLElement>(".row");
     if (sections.length < 2) {
-      console.log("No snap — not enough sections");
       return;
     }
 

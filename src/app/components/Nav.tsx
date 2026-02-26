@@ -9,7 +9,7 @@ const Nav = ({}) => {
       <Image
         src={Logo}
         placeholder="blur"
-        sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw"
+        sizes="(max-width: 768px) 150vw, (min-width: 769px) 100vw"
         quality={100}
         alt="Sarita Posada Logo"
         className="pt-[5.4vh] px-[12vw] w-full"

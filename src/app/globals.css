@@ -43,3 +43,11 @@ body {
 .swiper-pagination-bullet-active {
   background: rgba(255, 255, 255, 0.8) !important;
 }
+
+a:hover {
+  opacity: .7;
+}
+
+a {
+  transition: opacity 200ms cubic-bezier(.4, 0, .2, 1);
+}
