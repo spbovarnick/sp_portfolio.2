@@ -48,3 +48,18 @@ export const infoPageQuery = defineQuery(
 export const bgColorQuery = defineQuery(
   `*[_type == 'bgColor'][0]`
 )
+
+export const projectQuery = defineQuery(
+  `*[_type == 'portfolio' && projectName == $projectName][0]{
+      _id,
+      projectName,
+      photoCredit,
+      projectLocation,
+      photos[]{
+        asset ->,
+        hotspot,
+        crop
+      },
+      projectType,
+  }`
+)
