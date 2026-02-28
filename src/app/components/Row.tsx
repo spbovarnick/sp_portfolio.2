@@ -42,7 +42,7 @@ const Row: React.FC<RowProps> = ({
       style={{ opacity: index === 0 ? 1 : 0}}
     >
       <div className="left-img relative h-full">
-       {project.photos &&
+        {project.photos && project.photos[0] &&
           <Image
               src={urlFor(project.photos[0])
                 .width(1000)
@@ -61,7 +61,7 @@ const Row: React.FC<RowProps> = ({
           }
       </div>
       <div className="right-img hidden md:block relative h-full">
-        {project.photos &&
+        {project.photos && project.photos[1] &&
           <Image
             src={urlFor(project.photos[1])
               .width(1000)
