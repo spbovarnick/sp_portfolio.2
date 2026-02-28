@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from 'next/font/local';
-import { ContactQueryResult } from "@/sanity/types";
-import { sanityFetch } from "./lib/sanityFetch";
-import { contactQuery } from "./lib/queries";
+import { SanityLive } from "@/sanity/lib/client";
 
 const helveticaNeue = localFont({
   src: [
@@ -45,10 +43,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const contactInfo: ContactQueryResult = await sanityFetch<ContactQueryResult>({
-    query: contactQuery,
-    tags: ['contact'],
-  })
 
   return (
     <html lang="en">
@@ -57,6 +51,7 @@ export default async function RootLayout({
       >
         <main>
             {children}
+            <SanityLive />
         </main>
       </body>
     </html>
