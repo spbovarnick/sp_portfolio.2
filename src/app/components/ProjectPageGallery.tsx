@@ -24,7 +24,7 @@ export default function ProjectPageGallery({groups, projectName, firstRowHeight}
             style={{ height: rowHeight, opacity: groupIdx === 0 ? 1 : 0 }}
           >
             <div className="relative w-full h-full">
-              <Image
+              {group.images[0] && <Image
                 src={urlFor(group.images[0])
                   .width(1000)
                   .dpr(2)
@@ -39,7 +39,7 @@ export default function ProjectPageGallery({groups, projectName, firstRowHeight}
                 quality={100}
                 className="object-cover"
                 priority={groupIdx === 0}
-              />
+              />}
             </div>
           </div>
         ) : (
@@ -54,7 +54,7 @@ export default function ProjectPageGallery({groups, projectName, firstRowHeight}
                 className="relative w-full h-full overflow-hidden sm:flex-1"
               >
                 <div className="relative w-full h-full">
-                  <Image
+                  {img && <Image
                     src={urlFor(img)
                       .width(1000)
                       .dpr(2)
@@ -69,7 +69,7 @@ export default function ProjectPageGallery({groups, projectName, firstRowHeight}
                     quality={100}
                     className="object-cover"
                     priority={groupIdx === 0}
-                  />
+                  />}
                 </div>
               </div>
             ))}
