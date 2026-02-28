@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from 'next/font/local';
-import { SanityLive } from "@/sanity/lib/client";
+import { SanityLive } from "@/sanity/lib/live";
 
 const helveticaNeue = localFont({
   src: [
