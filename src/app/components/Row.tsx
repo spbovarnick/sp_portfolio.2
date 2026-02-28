@@ -56,7 +56,7 @@ const Row: React.FC<RowProps> = ({
               alt={`Photo of ${project.projectName}`}
               blurDataURL={project.photos[0].asset?.metadata?.lqip}
               quality={100}
-              className="object-cover "
+              className={`object-cover ${!project.photos[1] ? 'md:col-span-2' : ''}`}
             />
           }
       </div>
