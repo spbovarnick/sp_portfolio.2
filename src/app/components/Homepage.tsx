@@ -37,6 +37,29 @@ const Homepage: React.FC<ProjectProps> = ({ portfolio }) => {
 
     ScrollTrigger.getAll().forEach(t => t.kill());
 
+    sections.forEach((section, i) => {
+      if (i === 0) {
+        gsap.set(section, {opacity: 1});
+        return;
+      }
+
+      gsap.fromTo(section,
+        { opacity: 0 },
+        {
+          opacity: 1,
+          duration: .6,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: section,
+            scroller: container,
+            start: "top 90%",
+            end: "top 60%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    });
+
     ScrollTrigger.create({
       scroller: container,
 
@@ -78,6 +101,7 @@ const Homepage: React.FC<ProjectProps> = ({ portfolio }) => {
           project={proj}
           isLast={index === projects.length - 1}
           addToScroll={addToScroll}
+          index={index}
         />
       ))}
     </div>

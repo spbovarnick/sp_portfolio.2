@@ -9,12 +9,14 @@ interface RowProps {
   project: SinglePortfolioProject,
   isLast: boolean,
   addToScroll: () => void,
+  index: number,
 }
 
 const Row: React.FC<RowProps> = ({
   project,
   isLast,
   addToScroll,
+  index,
 }) => {
   const rowRef = useRef(null);
 
@@ -37,6 +39,7 @@ const Row: React.FC<RowProps> = ({
     <div
       className="row grid grid-cols-1 gap-0 md:grid-cols-2 relative h-screen relative"
       ref={rowRef}
+      style={{ opacity: index === 0 ? 1 : 0}}
     >
       <div className="left-img relative h-full">
        {project.photos &&
@@ -49,7 +52,7 @@ const Row: React.FC<RowProps> = ({
               }
               placeholder="blur"
               fill
-              sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw"
+              sizes="(max-width: 768px) 100vw, (min-width: 769px) 150vw"
               alt={`Photo of ${project.projectName}`}
               blurDataURL={project.photos[0].asset?.metadata?.lqip}
               quality={100}
@@ -68,7 +71,7 @@ const Row: React.FC<RowProps> = ({
             }
             placeholder="blur"
             fill
-            sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw"
+            sizes="(max-width: 768px) 100vw, (min-width: 769px) 150vw"
             alt={`Photo of ${project.projectName}`}
             blurDataURL={project.photos[1].asset?.metadata?.lqip}
             quality={100}
@@ -77,7 +80,7 @@ const Row: React.FC<RowProps> = ({
         }
       </div>
       <div className="info-text text-white uppercase absolute w-full bottom-7 left-0 text-center leading-6">
-        <div>{project.projectLocation}</div>
+        <div>{project.projectName}{project.projectLocation && `, ${project.projectLocation}`}</div>
         {project.projectName &&
           <Link href={`/${encodeURIComponent(project.projectName)}`}>MORE INFO</Link>
         }

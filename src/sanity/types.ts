@@ -12,68 +12,7 @@
  * ---------------------------------------------------------------------------------
  */
 
-// Source: src/sanity/extract.json
-export type SanityImagePaletteSwatch = {
-  _type: "sanity.imagePaletteSwatch";
-  background?: string;
-  foreground?: string;
-  population?: number;
-  title?: string;
-};
-
-export type SanityImagePalette = {
-  _type: "sanity.imagePalette";
-  darkMuted?: SanityImagePaletteSwatch;
-  lightVibrant?: SanityImagePaletteSwatch;
-  darkVibrant?: SanityImagePaletteSwatch;
-  vibrant?: SanityImagePaletteSwatch;
-  dominant?: SanityImagePaletteSwatch;
-  lightMuted?: SanityImagePaletteSwatch;
-  muted?: SanityImagePaletteSwatch;
-};
-
-export type SanityImageDimensions = {
-  _type: "sanity.imageDimensions";
-  height?: number;
-  width?: number;
-  aspectRatio?: number;
-};
-
-export type SanityFileAsset = {
-  _id: string;
-  _type: "sanity.fileAsset";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
-  uploadId?: string;
-  path?: string;
-  url?: string;
-  source?: SanityAssetSourceData;
-};
-
-export type Geopoint = {
-  _type: "geopoint";
-  lat?: number;
-  lng?: number;
-  alt?: number;
-};
-
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
-
+// Source: schema.json
 export type BgColor = {
   _id: string;
   _type: "bgColor";
@@ -81,6 +20,15 @@ export type BgColor = {
   _updatedAt: string;
   _rev: string;
   hexCode?: Color;
+};
+
+export type Color = {
+  _type: "color";
+  hex?: string;
+  alpha?: number;
+  hsl?: HslaColor;
+  hsv?: HsvaColor;
+  rgb?: RgbaColor;
 };
 
 export type Tagline = {
@@ -92,6 +40,13 @@ export type Tagline = {
   copy?: string;
 };
 
+export type SanityImageAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+};
+
 export type Portfolio = {
   _id: string;
   _type: "portfolio";
@@ -100,12 +55,7 @@ export type Portfolio = {
   _rev: string;
   projectName?: string;
   photos?: Array<{
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -124,37 +74,6 @@ export type Portfolio = {
   projectType?: string;
 };
 
-export type InfoPage = {
-  _id: string;
-  _type: "infoPage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  portrait?: {
-    asset: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    credit?: string;
-    creditUrl?: string;
-    _type: "image";
-  };
-  bioBlurb?: string;
-  previousProjects?: Array<{
-    projectName?: string;
-    projectCity?: string;
-    studio?: string;
-    _key: string;
-  }>;
-  pressContact?: string;
-};
-
 export type SanityImageCrop = {
   _type: "sanity.imageCrop";
   top?: number;
@@ -171,45 +90,14 @@ export type SanityImageHotspot = {
   width?: number;
 };
 
-export type SanityImageAsset = {
+export type InfoPage = {
   _id: string;
-  _type: "sanity.imageAsset";
+  _type: "infoPage";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
-  uploadId?: string;
-  path?: string;
-  url?: string;
-  metadata?: SanityImageMetadata;
-  source?: SanityAssetSourceData;
-};
-
-export type SanityAssetSourceData = {
-  _type: "sanity.assetSourceData";
-  name?: string;
-  id?: string;
-  url?: string;
-};
-
-export type SanityImageMetadata = {
-  _type: "sanity.imageMetadata";
-  location?: Geopoint;
-  dimensions?: SanityImageDimensions;
-  palette?: SanityImagePalette;
-  lqip?: string;
-  blurHash?: string;
-  hasAlpha?: boolean;
-  isOpaque?: boolean;
+  selectClients?: Array<string>;
+  pressContact?: string;
 };
 
 export type Contact = {
@@ -221,15 +109,6 @@ export type Contact = {
   emailAddy?: string;
   instagram?: string;
   location?: string;
-};
-
-export type Color = {
-  _type: "color";
-  hex?: string;
-  alpha?: number;
-  hsl?: HslaColor;
-  hsv?: HsvaColor;
-  rgb?: RgbaColor;
 };
 
 export type RgbaColor = {
@@ -256,27 +135,131 @@ export type HslaColor = {
   a?: number;
 };
 
+export type SanityImagePaletteSwatch = {
+  _type: "sanity.imagePaletteSwatch";
+  background?: string;
+  foreground?: string;
+  population?: number;
+  title?: string;
+};
+
+export type SanityImagePalette = {
+  _type: "sanity.imagePalette";
+  darkMuted?: SanityImagePaletteSwatch;
+  lightVibrant?: SanityImagePaletteSwatch;
+  darkVibrant?: SanityImagePaletteSwatch;
+  vibrant?: SanityImagePaletteSwatch;
+  dominant?: SanityImagePaletteSwatch;
+  lightMuted?: SanityImagePaletteSwatch;
+  muted?: SanityImagePaletteSwatch;
+};
+
+export type SanityImageDimensions = {
+  _type: "sanity.imageDimensions";
+  height?: number;
+  width?: number;
+  aspectRatio?: number;
+};
+
+export type SanityImageMetadata = {
+  _type: "sanity.imageMetadata";
+  location?: Geopoint;
+  dimensions?: SanityImageDimensions;
+  palette?: SanityImagePalette;
+  lqip?: string;
+  blurHash?: string;
+  thumbHash?: string;
+  hasAlpha?: boolean;
+  isOpaque?: boolean;
+};
+
+export type SanityFileAsset = {
+  _id: string;
+  _type: "sanity.fileAsset";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  originalFilename?: string;
+  label?: string;
+  title?: string;
+  description?: string;
+  altText?: string;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
+  uploadId?: string;
+  path?: string;
+  url?: string;
+  source?: SanityAssetSourceData;
+};
+
+export type SanityAssetSourceData = {
+  _type: "sanity.assetSourceData";
+  name?: string;
+  id?: string;
+  url?: string;
+};
+
+export type SanityImageAsset = {
+  _id: string;
+  _type: "sanity.imageAsset";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  originalFilename?: string;
+  label?: string;
+  title?: string;
+  description?: string;
+  altText?: string;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
+  uploadId?: string;
+  path?: string;
+  url?: string;
+  metadata?: SanityImageMetadata;
+  source?: SanityAssetSourceData;
+};
+
+export type Geopoint = {
+  _type: "geopoint";
+  lat?: number;
+  lng?: number;
+  alt?: number;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
+
 export type AllSanitySchemaTypes =
+  | BgColor
+  | Color
+  | Tagline
+  | SanityImageAssetReference
+  | Portfolio
+  | SanityImageCrop
+  | SanityImageHotspot
+  | InfoPage
+  | Contact
+  | RgbaColor
+  | HsvaColor
+  | HslaColor
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
-  | SanityFileAsset
-  | Geopoint
-  | Slug
-  | BgColor
-  | Tagline
-  | Portfolio
-  | InfoPage
-  | SanityImageCrop
-  | SanityImageHotspot
-  | SanityImageAsset
-  | SanityAssetSourceData
   | SanityImageMetadata
-  | Contact
-  | Color
-  | RgbaColor
-  | HsvaColor
-  | HslaColor;
+  | SanityFileAsset
+  | SanityAssetSourceData
+  | SanityImageAsset
+  | Geopoint
+  | Slug;
 
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
@@ -339,44 +322,9 @@ export type ContactQueryResult = {
 
 // Source: src/app/lib/queries.ts
 // Variable: infoPageQuery
-// Query: *[_type == 'infoPage'][0]{    portrait{      credit,      creditUrl,      asset ->,      hotspot,      crop    },    bioBlurb,    previousProjects[],    pressContact,  }
+// Query: *[_type == 'infoPage'][0]{    selectClients  }
 export type InfoPageQueryResult = {
-  portrait: {
-    credit: string | null;
-    creditUrl: string | null;
-    asset: {
-      _id: string;
-      _type: "sanity.imageAsset";
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      originalFilename?: string;
-      label?: string;
-      title?: string;
-      description?: string;
-      altText?: string;
-      sha1hash?: string;
-      extension?: string;
-      mimeType?: string;
-      size?: number;
-      assetId?: string;
-      uploadId?: string;
-      path?: string;
-      url?: string;
-      metadata?: SanityImageMetadata;
-      source?: SanityAssetSourceData;
-    };
-    hotspot: SanityImageHotspot | null;
-    crop: SanityImageCrop | null;
-  } | null;
-  bioBlurb: string | null;
-  previousProjects: Array<{
-    projectName?: string;
-    projectCity?: string;
-    studio?: string;
-    _key: string;
-  }> | null;
-  pressContact: string | null;
+  selectClients: Array<string> | null;
 } | null;
 
 // Source: src/app/lib/queries.ts
@@ -439,7 +387,7 @@ declare module "@sanity/client" {
     '*[_type == "portfolio"]{\n    _id,\n    projectName,\n    photoCredit,\n    projectLocation,\n    photos[]{\n      asset ->,\n      hotspot,\n      crop\n    },\n    projectType,\n  }': PortfolioQueryResult;
     "*[_type == 'tagline'][0]{\n    copy,\n  }": TaglineQueryResult;
     "*[_type == 'contact'][0]{\n    emailAddy,\n    instagram,\n    location,\n  }": ContactQueryResult;
-    "*[_type == 'infoPage'][0]{\n    portrait{\n      credit,\n      creditUrl,\n      asset ->,\n      hotspot,\n      crop\n    },\n    bioBlurb,\n    previousProjects[],\n    pressContact,\n  }": InfoPageQueryResult;
+    "*[_type == 'infoPage'][0]{\n    selectClients\n  }": InfoPageQueryResult;
     "*[_type == 'bgColor'][0]": BgColorQueryResult;
     "*[_type == 'portfolio' && projectName == $projectName][0]{\n      _id,\n      projectName,\n      photoCredit,\n      projectLocation,\n      photos[]{\n        asset ->,\n        hotspot,\n        crop\n      },\n      projectType,\n  }": ProjectQueryResult;
   }

@@ -1,9 +1,9 @@
 import { ProjectQueryResult } from "@/sanity/types";
 import { sanityFetch } from "../lib/sanityFetch";
 import { projectQuery } from "../lib/queries";
-import ProjectPageNav from "../components/ProjectPageNav";
+import ProjectPage from "../components/ProjectPage";
 
-export default async function ProjectPage({
+export default async function Page({
   params,
 }: {
   params: Promise<{ projectName: string}>
@@ -18,13 +18,10 @@ export default async function ProjectPage({
 
 
   return (
-    <div>
-      <ProjectPageNav
-        projectName={project?.projectName ?? ""}
-        location={project?.projectLocation ?? ""}
-        projectType={project?.projectType ?? null}
-        photoCredit={project?.photoCredit ?? null}
+    <>
+      <ProjectPage
+        project={project}
       />
-    </div>
+    </>
   )
 }
