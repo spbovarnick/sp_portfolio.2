@@ -32,19 +32,25 @@ export const contactQuery = defineQuery(
 
 export const infoPageQuery = defineQuery(
   `*[_type == 'infoPage'][0]{
-    portrait{
-      credit,
-      creditUrl,
-      asset ->,
-      hotspot,
-      crop
-    },
-    bioBlurb,
-    previousProjects[],
-    pressContact,
+    selectClients
   }`
 )
 
 export const bgColorQuery = defineQuery(
   `*[_type == 'bgColor'][0]`
+)
+
+export const projectQuery = defineQuery(
+  `*[_type == 'portfolio' && projectName == $projectName][0]{
+      _id,
+      projectName,
+      photoCredit,
+      projectLocation,
+      photos[]{
+        asset ->,
+        hotspot,
+        crop
+      },
+      projectType,
+  }`
 )

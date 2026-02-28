@@ -1,39 +1,22 @@
-import { PortfolioQueryResult, TaglineQueryResult } from "@/sanity/types";
-import { portfolioQuery, taglineQuery } from "./lib/queries";
+import { PortfolioQueryResult } from "@/sanity/types";
+import { shuffle } from "./lib/util";
+import { portfolioQuery } from "./lib/queries";
 import { sanityFetch } from "./lib/sanityFetch";
-import ProjectCarousel from "./components/ProjectCarousel";
-// import NameBanner from "../../public/nameBanner";
+import Homepage from "./components/Homepage";
 
 export const revalidate = 0;
 
-export default async function Home() {
-  const portfolio: PortfolioQueryResult = await sanityFetch<PortfolioQueryResult>({
-    query: portfolioQuery,
-    tags: ["portfolio"]
-  })
+const portfolio: PortfolioQueryResult = await sanityFetch<PortfolioQueryResult>({
+  query: portfolioQuery,
+  tags: ["portfolio"]
+})
 
-  const shuffle = (array: PortfolioQueryResult) => {
-    const len = array.length;
-    const shuffle = array.slice();
-    for (let i = len - 1; i > 0; i -= 1){
-      const rando = Math.floor(Math.random() * (i + 1));
-      const current = shuffle[i];
-      shuffle[i] = shuffle[rando];
-      shuffle[rando] = current
-    };
-    return shuffle;
-  }
+export default async function Home() {
 
   const shuffledPortfolio = shuffle(portfolio)
 
-  const tagline: TaglineQueryResult = await sanityFetch<TaglineQueryResult>({
-    query: taglineQuery,
-    tags: ['tagline']
-  })
 
   return (
-    <>
-      {portfolio && <ProjectCarousel portfolio={shuffledPortfolio} tagline={tagline} />}
-    </>
+    <Homepage portfolio={shuffledPortfolio} />
   );
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import { PortfolioQueryResult, TaglineQueryResult } from "@/sanity/types"
+import { PortfolioQueryResult } from "@/sanity/types"
 import { useEffect, useState,} from "react";
 import MobileSwiper from "./MobileSwiper";
 import useCarousel from "./useCarouselHook";
@@ -10,7 +10,6 @@ import NameBanner from "../../../public/nameBanner";
 
 interface ProjectCarouselProps {
   portfolio: PortfolioQueryResult;
-  tagline: TaglineQueryResult;
 }
 
 interface PhotoCred {
@@ -19,7 +18,7 @@ interface PhotoCred {
   _key: string;
 }
 
-const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio, tagline }) => {
+const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio }) => {
   const {
     projectImgIndex,
     projectIndex,
@@ -93,7 +92,7 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio, tagline })
       </div>
       <div className="w-full hidden justify-center mb-5 mt-[6.32vh] md:m-0 md:flex md:absolute md:bottom-0 md:pb-[28px]">
         <div className="max-w-[70vw] md:max-w-[70.625%] text-center uppercase">
-          {tagline?.copy ?? staticTagline}
+          {staticTagline}
         </div>
       </div>
       <div id='swiper-frame' className="swiper-div mb-4 md:mb-0 w-full md:hidden">
@@ -111,7 +110,7 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ portfolio, tagline })
       </div>
       <div className="w-full flex justify-center mb-5 mt-[6.32vh] md:m-0 md:hidden">
         <div className="max-w-[70vw] md:max-w-[70.625%] text-center uppercase">
-          {tagline?.copy ?? staticTagline}
+          { staticTagline}
         </div>
       </div>
     </div>
