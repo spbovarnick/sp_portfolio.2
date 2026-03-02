@@ -1,5 +1,3 @@
-import Logo from "@/../public/SP_Logo_Blk.png"
-import Image from "next/image";
 import Link from "next/link";
 import { forwardRef } from "react";
 import NameBanner from "../../../public/nameBanner";
