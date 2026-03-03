@@ -80,9 +80,8 @@ const Row: React.FC<RowProps> = ({
         }
       </div>
       <div className="info-text text-white uppercase absolute w-full bottom-7 left-0 text-center leading-6">
-        <div>{project.projectName}{project.projectLocation && `, ${project.projectLocation}`}</div>
         {project.projectName &&
-          <Link href={`/${encodeURIComponent(project.projectName)}`}>MORE INFO</Link>
+        <Link href={`/${encodeURIComponent(project.projectName)}`}>{project.projectName}{project.projectLocation && `, ${project.projectLocation}`}</Link>
         }
       </div>
     </div>

@@ -45,12 +45,31 @@ function buildGroups(images: AllImageArray[]): ImageGroup[] {
   return groups;
 }
 
+const useScreenWidth = () => {
+  const [screenWidth, setScreenWidth] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth : 1024
+);
+
+  useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [])
+
+  return screenWidth;
+}
+
 export default function ProjectPage({project}: ProjectPageProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
   const [navHeight, setNavHeight] = useState(0);
 
+  const windowWidth = useScreenWidth();
+
+  const isMobile = windowWidth < 768
+
   const groups = buildGroups(project?.photos ?? []);
+
 
   useEffect(() => {
     const nav = navRef.current;
@@ -66,6 +85,8 @@ export default function ProjectPage({project}: ProjectPageProps) {
     const container = scrollRef.current;
     if (!container) return;
 
+
+
     const sections = gsap.utils.toArray<HTMLDivElement>(".row", container);
     if (sections.length < 2) {
       return;
@@ -74,6 +95,8 @@ export default function ProjectPage({project}: ProjectPageProps) {
     ScrollTrigger.defaults({ scroller: container });
 
     ScrollTrigger.getAll().forEach(t => t.kill());
+
+
 
     sections.forEach((section, i) => {
       if (i === 0) {
@@ -97,6 +120,29 @@ export default function ProjectPage({project}: ProjectPageProps) {
         }
       );
     });
+
+    // let isSnapping = false;
+
+    ScrollTrigger.create({
+      scroller: container,
+      start: "top top",
+      end: () => container.scrollHeight - container.clientHeight,
+      onUpdate: (self) => {
+        const nav = navRef.current;
+        if (!nav) return;
+
+        if (self.progress < 0.01) {
+          nav.style.transform = "translateY(0)";
+          return;
+        }
+
+        if (self.direction === 1) {
+          nav.style.transform = "translateY(-100%)";
+        } else if (self.direction === -1) {
+          nav.style.transform = "translateY(0)";
+        }
+      }
+    })
 
     ScrollTrigger.create({
       scroller: container,
@@ -126,7 +172,7 @@ export default function ProjectPage({project}: ProjectPageProps) {
   return (
     <div
       ref={scrollRef}
-      className="relative w-screen h-screen overflow-y-scroll"
+      className="relative w-full h-screen overflow-y-scroll"
       style={{ "--nav-h": `${navHeight}px`} as React.CSSProperties }
     >
       <ProjectPageNav
@@ -135,9 +181,10 @@ export default function ProjectPage({project}: ProjectPageProps) {
         projectType={project?.projectType ?? null}
         photoCredit={project?.photoCredit ?? null}
         ref={navRef}
-      />
+        />
       {project?.photos &&
         <ProjectPageGallery
+          isMobile={isMobile}
           groups={groups}
           projectName={project.projectName ?? null}
           firstRowHeight={`calc(100vh - ${navHeight}px)`}

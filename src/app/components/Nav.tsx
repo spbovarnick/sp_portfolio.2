@@ -12,8 +12,8 @@ const Nav = ({}) => {
         />
       </div>
       <div className="text-white text-center mt-5 md:m-0 md:relative md:top-[16%] h-fit md:flex md:justify-end md:pr-16">
-        <Link className="mr-[5vw]" href={"/info"}>STUDIO</Link>
-        <Link className="ml-[5vw]" href={"/"}>WORK</Link>
+        <Link className="" href={"/info"}>STUDIO</Link>
+        <Link className="ml-12" href={"/"}>WORK</Link>
       </div>
     </nav>
   )
