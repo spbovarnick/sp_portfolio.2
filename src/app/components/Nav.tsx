@@ -5,15 +5,15 @@ import NameBanner from "../../../public/nameBanner";
 const Nav = ({}) => {
 
   return (
-    <nav className="absolute z-10 w-full flex flex-col">
-      <div className="pt-[5.4vh] px-[12vw] w-full">
+    <nav className="fixed z-10 w-full flex flex-col md:grid grid-cols-2 gap-0 pt-[5.4vh] px-[12vw] md:px-10 md:pt-[52px]">
+      <div className="w-full md:w-2/3">
         <NameBanner
           color={"white"}
         />
       </div>
-      <div className="text-white text-center mt-5">
-        <Link className="mr-[5vw]" href={"/info"}>STUDIO</Link>
-        <Link className="ml-[5vw]" href={"/"}>WORK</Link>
+      <div className="text-white text-center mt-5 md:m-0 md:relative md:top-[16%] h-fit md:flex md:justify-end md:pr-16">
+        <Link className="" href={"/info"}>STUDIO</Link>
+        <Link className="ml-12" href={"/"}>WORK</Link>
       </div>
     </nav>
   )
