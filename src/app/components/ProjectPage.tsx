@@ -154,13 +154,13 @@ export default function ProjectPage({project}: ProjectPageProps) {
 
       snap: {
         snapTo: 1 / (sections.length - 1),
-        duration: .5,
-        ease: "power3.out",
-        delay: .3,
+        duration: 1.5,
+        ease: "power1.out",
+        delay: 0,
         directional: true,
       },
 
-      invalidateOnRefresh: true,
+      invalidateOnRefresh: false,
     });
 
     ScrollTrigger.refresh();

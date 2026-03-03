@@ -70,13 +70,13 @@ const Homepage: React.FC<ProjectProps> = ({ portfolio }) => {
 
       snap: {
         snapTo: 1 / (sections.length - 1),
-        duration: 0.5,
-        ease: "power3.out",
-        delay: .3,
+        duration: 1.5,
+        ease: "power1.out",
+        delay: 0,
         directional: true,
       },
 
-      invalidateOnRefresh: true,
+      invalidateOnRefresh: false,
     });
 
     ScrollTrigger.refresh();
@@ -84,7 +84,7 @@ const Homepage: React.FC<ProjectProps> = ({ portfolio }) => {
   }, {
     scope: scrollRef,
     dependencies: [projects.length],
-    revertOnUpdate: true,
+    revertOnUpdate: false,
   });
 
 
@@ -99,7 +99,7 @@ const Homepage: React.FC<ProjectProps> = ({ portfolio }) => {
         <Row
           key={`${proj._id}-${index}`}
           project={proj}
-          isLast={index === projects.length - 1}
+          isLast={ index === projects.length - 3 }
           addToScroll={addToScroll}
           index={index}
         />
