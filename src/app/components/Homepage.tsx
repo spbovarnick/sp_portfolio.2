@@ -35,13 +35,11 @@ const Homepage: React.FC<ProjectProps> = ({ portfolio }) => {
       return;
     }
 
-    ScrollTrigger.getAll().forEach(t => t.kill());
-
     sections.forEach((section, i) => {
-      if (i === 0) {
-        gsap.set(section, {opacity: 1});
-        return;
-      }
+      if (i === 0) return;
+      if (section.dataset.animated) return;
+
+      section.dataset.animated = "true";
 
       gsap.fromTo(section,
         { opacity: 0 },
@@ -58,25 +56,6 @@ const Homepage: React.FC<ProjectProps> = ({ portfolio }) => {
           },
         }
       );
-    });
-
-    ScrollTrigger.create({
-      scroller: container,
-
-      trigger: sections[0],
-      start: "top top",
-
-      end: () => container.scrollHeight - container.clientHeight,
-
-      snap: {
-        snapTo: 1 / (sections.length - 1),
-        duration: 1.5,
-        ease: "power1.out",
-        delay: 0,
-        directional: true,
-      },
-
-      invalidateOnRefresh: false,
     });
 
     ScrollTrigger.refresh();

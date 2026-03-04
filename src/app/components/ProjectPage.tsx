@@ -94,15 +94,9 @@ export default function ProjectPage({project}: ProjectPageProps) {
 
     ScrollTrigger.defaults({ scroller: container });
 
-    ScrollTrigger.getAll().forEach(t => t.kill());
-
-
-
     sections.forEach((section, i) => {
-      if (i === 0) {
-        gsap.set(section, { opacity: 1 });
-        return;
-      }
+      if (i === 0) return;
+      if (section.dataset.animated) return;
 
       gsap.fromTo(section,
         { opacity: 0 },
@@ -120,8 +114,6 @@ export default function ProjectPage({project}: ProjectPageProps) {
         }
       );
     });
-
-    // let isSnapping = false;
 
     ScrollTrigger.create({
       scroller: container,
@@ -143,25 +135,6 @@ export default function ProjectPage({project}: ProjectPageProps) {
         }
       }
     })
-
-    ScrollTrigger.create({
-      scroller: container,
-
-      trigger: sections[0],
-      start: "bottom bottom",
-
-      end: () => container.scrollHeight - container.clientHeight,
-
-      snap: {
-        snapTo: 1 / (sections.length - 1),
-        duration: 1.5,
-        ease: "power1.out",
-        delay: 0,
-        directional: true,
-      },
-
-      invalidateOnRefresh: false,
-    });
 
     ScrollTrigger.refresh();
   }, {
