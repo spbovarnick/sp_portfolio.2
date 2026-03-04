@@ -13,7 +13,7 @@ export default function InfoPageNav() {
           color="black"
         />
       </div>
-      <div className="text-center mt-5 md:m-0 md:relative md:top-[16%] h-fit md:flex md:justify-end md:pr-16">
+      <div className="text-center mt-5 md:m-0 md:relative md:top-8 h-fit md:flex md:justify-end md:pr-16">
         <Link className="" href={"/info"}>STUDIO</Link>
         <Link className="ml-12" href={"/"}>WORK</Link>
       </div>

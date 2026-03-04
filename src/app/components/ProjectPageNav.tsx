@@ -46,12 +46,10 @@ const ProjectPageNav = forwardRef<HTMLElement, ProjectPageNavProps>(
         ref={ref}
         className="z-10 w-full flex flex-col md:grid grid-cols-2 gap-0 pt-[5.4vh] px-[12vw] md:px-10 md:pt-[52px] uppercase text-black fixed bg-white transition-transform duration-300 ease-in-out text-center md:text-left"
       >
-        <div className="content-start justify-items-start">
-          <div className="w-full md:w-2/3">
-            <NameBanner
-              color="black"
-            />
-          </div>
+        <div className="w-full md:w-2/3">
+          <NameBanner
+            color="black"
+          />
           <div className="mt-11 mb-7 hidden md:block">
             <div className="">{projectName}, {location}</div>
             <div className="">{projectType}</div>
@@ -60,7 +58,7 @@ const ProjectPageNav = forwardRef<HTMLElement, ProjectPageNavProps>(
             }
           </div>
         </div>
-        <div className="text-center mt-5 md:m-0 md:relative md:top-[16%] h-fit md:flex md:justify-end md:pr-16">
+        <div className="text-center mt-5 md:m-0 md:relative md:top-8 h-fit md:flex md:justify-end md:pr-16">
           <Link className="" href={"/info"}>STUDIO</Link>
           <Link className="ml-12" href={"/"}>WORK</Link>
         </div>
