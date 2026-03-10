@@ -20,7 +20,7 @@ export default async function InfoPage({}){
 
   return (
     <>
-    <div className="text-center md:pt-0 md:flex md:flex-col md:items-center">
+    <div className="text-center md:pt-0 md:flex md:flex-col md:items-center uppercase">
       <InfoPageNav />
       <div className="info flex flex-col items-center w-full mt-40 md:mt-60">
         <div className="px-[34px] md:px-0 md:w-[40vw]">
@@ -34,7 +34,7 @@ export default async function InfoPage({}){
           </div>
         }
         <div className="mt-11 md:m-0 md:mt-14">
-            For all inquiries: <a href="mailto:info@saritaposada.com" target="_blank">info@saritaposada.com</a>
+            For all inquiries: <a href="mailto:info@saritaposada.com" target="_blank">office@saritaposada.com</a>
         </div>
         <div className="mt-11 md:m-0 md:mt-14">
             &#169; saritaposada

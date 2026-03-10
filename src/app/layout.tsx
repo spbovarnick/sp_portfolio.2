@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 import localFont from 'next/font/local';
 import { SanityLive } from "@/sanity/lib/live";
+import { BgColorQueryResult } from "@/sanity/types";
+import { sanityFetch } from "./lib/sanityFetch";
+import { bgColorQuery } from "./lib/queries";
 
 const helveticaNeue = localFont({
   src: [
@@ -44,16 +47,26 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
+  const bgColor: BgColorQueryResult = await sanityFetch<BgColorQueryResult>({
+    query: bgColorQuery,
+    tags: ['query']
+  })
+
+  const hex = bgColor?.hexCode?.hex || "#FCF3DE"
+
   return (
     <html lang="en">
-     <body
-        className={`${helveticaNeue.className} antialiased`}
-      >
-        <main>
-            {children}
-            <SanityLive />
-        </main>
-      </body>
+    {hex &&
+      <body
+          className={`${helveticaNeue.className} antialiased`}
+          style={{ "--bg-color": hex, backgroundColor: "var(--bg-color" } as React.CSSProperties}
+        >
+          <main>
+              {children}
+              <SanityLive />
+          </main>
+        </body>
+      }
     </html>
   );
 }

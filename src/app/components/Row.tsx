@@ -36,10 +36,12 @@ const Row: React.FC<RowProps> = ({
   },[isLast, addToScroll])
 
   return (
-    <div
+    project.projectName &&
+    <Link
       className="row grid grid-cols-1 gap-0 md:grid-cols-2 relative h-screen relative"
       ref={rowRef}
       style={{ opacity: index === 0 ? 1 : 0}}
+        href={`/${encodeURIComponent(project.projectName)}`}
     >
       <div className={`left-img relative h-screen ${!project.photos?.[1] ? 'md:col-span-2' : ''}`}>
         {project.photos && project.photos[0] &&
@@ -81,10 +83,10 @@ const Row: React.FC<RowProps> = ({
       </div>
       <div className="info-text text-white uppercase absolute w-full bottom-7 left-0 text-center leading-6">
         {project.projectName &&
-        <Link href={`/${encodeURIComponent(project.projectName)}`}>{project.projectName}{project.projectLocation && `, ${project.projectLocation}`}</Link>
+        <span className="">{project.projectName}{project.projectLocation && `, ${project.projectLocation}`}</span>
         }
       </div>
-    </div>
+    </Link>
   )
 }
 
