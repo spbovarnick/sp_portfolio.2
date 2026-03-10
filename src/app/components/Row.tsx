@@ -83,7 +83,7 @@ const Row: React.FC<RowProps> = ({
       </div>
       <div className="info-text text-white uppercase absolute w-full bottom-7 left-0 text-center leading-6">
         {project.projectName &&
-        <span className="">{project.projectName}{project.projectLocation && `, ${project.projectLocation}`}</span>
+        <span className="name-hover">{project.projectName}{project.projectLocation && `, ${project.projectLocation}`}</span>
         }
       </div>
     </Link>
