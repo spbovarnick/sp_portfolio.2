@@ -2,7 +2,7 @@
 import { defineQuery } from "next-sanity";
 
 export const portfolioQuery = defineQuery(
-  `*[_type == "portfolio"]{
+  `*[_type == "portfolio" && featured == true]{
     _id,
     projectName,
     photoCredit,
@@ -13,6 +13,22 @@ export const portfolioQuery = defineQuery(
       crop
     },
     projectType,
+  }`
+);
+
+export const landingPortfolioQuery = defineQuery(
+  `*[_type == "portfolio" && featured == true]{
+    _id,
+    projectName,
+    photoCredit,
+    projectLocation,
+    photos[]{
+      asset ->,
+      hotspot,
+      crop
+    },
+    projectType,
+    featured,
   }`
 );
 

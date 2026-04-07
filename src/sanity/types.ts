@@ -62,6 +62,7 @@ export type Portfolio = {
     _type: "image";
     _key: string;
   }>;
+  featured?: boolean;
   orderRank?: string;
   projectLocation?: string;
   role?: string;
@@ -265,7 +266,7 @@ export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: src/app/lib/queries.ts
 // Variable: portfolioQuery
-// Query: *[_type == "portfolio"]{    _id,    projectName,    photoCredit,    projectLocation,    photos[]{      asset ->,      hotspot,      crop    },    projectType,  }
+// Query: *[_type == "portfolio" && featured == true]{    _id,    projectName,    photoCredit,    projectLocation,    photos[]{      asset ->,      hotspot,      crop    },    projectType,  }
 export type PortfolioQueryResult = Array<{
   _id: string;
   projectName: string | null;
@@ -302,6 +303,48 @@ export type PortfolioQueryResult = Array<{
     crop: SanityImageCrop | null;
   }> | null;
   projectType: string | null;
+}>;
+
+// Source: src/app/lib/queries.ts
+// Variable: landingPortfolioQuery
+// Query: *[_type == "portfolio" && featured == true]{    _id,    projectName,    photoCredit,    projectLocation,    photos[]{      asset ->,      hotspot,      crop    },    projectType,    featured,  }
+export type LandingPortfolioQueryResult = Array<{
+  _id: string;
+  projectName: string | null;
+  photoCredit: Array<{
+    photogName?: string;
+    photogUrl?: string;
+    _key: string;
+  }> | null;
+  projectLocation: string | null;
+  photos: Array<{
+    asset: {
+      _id: string;
+      _type: "sanity.imageAsset";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      originalFilename?: string;
+      label?: string;
+      title?: string;
+      description?: string;
+      altText?: string;
+      sha1hash?: string;
+      extension?: string;
+      mimeType?: string;
+      size?: number;
+      assetId?: string;
+      uploadId?: string;
+      path?: string;
+      url?: string;
+      metadata?: SanityImageMetadata;
+      source?: SanityAssetSourceData;
+    } | null;
+    hotspot: SanityImageHotspot | null;
+    crop: SanityImageCrop | null;
+  }> | null;
+  projectType: string | null;
+  featured: true;
 }>;
 
 // Source: src/app/lib/queries.ts
@@ -384,7 +427,8 @@ export type ProjectQueryResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_type == "portfolio"]{\n    _id,\n    projectName,\n    photoCredit,\n    projectLocation,\n    photos[]{\n      asset ->,\n      hotspot,\n      crop\n    },\n    projectType,\n  }': PortfolioQueryResult;
+    '*[_type == "portfolio" && featured == true]{\n    _id,\n    projectName,\n    photoCredit,\n    projectLocation,\n    photos[]{\n      asset ->,\n      hotspot,\n      crop\n    },\n    projectType,\n  }': PortfolioQueryResult;
+    '*[_type == "portfolio" && featured == true]{\n    _id,\n    projectName,\n    photoCredit,\n    projectLocation,\n    photos[]{\n      asset ->,\n      hotspot,\n      crop\n    },\n    projectType,\n    featured,\n  }': LandingPortfolioQueryResult;
     "*[_type == 'tagline'][0]{\n    copy,\n  }": TaglineQueryResult;
     "*[_type == 'contact'][0]{\n    emailAddy,\n    instagram,\n    location,\n  }": ContactQueryResult;
     "*[_type == 'infoPage'][0]{\n    selectClients\n  }": InfoPageQueryResult;

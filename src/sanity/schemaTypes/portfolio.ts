@@ -25,6 +25,13 @@ export default defineType({
         },
       }],
     }),
+    defineField({
+      name: 'featured',
+      title: 'Featured',
+      type: 'boolean',
+      description: 'Idenitfy select projects to appear on the home/landing page',
+      initialValue: true,
+    }),
     orderRankField({ type: 'category' }),
     defineField({
       name: 'projectLocation',

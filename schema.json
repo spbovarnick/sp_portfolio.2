@@ -275,6 +275,13 @@
         },
         "optional": true
       },
+      "featured": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
+        },
+        "optional": true
+      },
       "orderRank": {
         "type": "objectAttribute",
         "value": {
