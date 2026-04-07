@@ -11,8 +11,6 @@ const portfolio: PortfolioQueryResult = await sanityFetch<PortfolioQueryResult>(
 export default async function Project() {
 
   return (
-    <>
-      <PortfolioGrid portfolio={portfolio} />
-    </>
+    <PortfolioGrid portfolio={portfolio} />
   )
 }

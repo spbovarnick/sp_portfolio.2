@@ -2,7 +2,7 @@
 import { defineQuery } from "next-sanity";
 
 export const portfolioQuery = defineQuery(
-  `*[_type == "portfolio" && featured == true]{
+  `*[_type == "portfolio"]{
     _id,
     projectName,
     photoCredit,
