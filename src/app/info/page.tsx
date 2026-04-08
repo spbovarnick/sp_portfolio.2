@@ -2,7 +2,8 @@ import { sanityFetch } from "../lib/sanityFetch"
 import { InfoPageQueryResult, TaglineQueryResult } from "@/sanity/types"
 import { infoPageQuery, taglineQuery } from "../lib/queries"
 import InfoPageNav from "../components/InfoPageNav";
-import Link from "next/link";
+import { urlFor } from "@/sanity/lib/image";
+import Image from "next/image";
 
 
 export default async function InfoPage({}){
@@ -16,27 +17,39 @@ export default async function InfoPage({}){
       tags: ['tagline']
   });
 
-  const clients = infoContent?.selectClients
-
   return (
     <>
-    <div className="text-center md:pt-0 md:flex md:flex-col md:items-center uppercase">
+    <div className="text-center md:pt-0 flex flex-col items-center uppercase">
       <InfoPageNav />
-      <div className="info flex flex-col items-center w-full mt-40 md:mt-60">
-        <div className="px-[34px] md:px-0 md:w-[40vw]">
-          <p className="">{tagline?.copy ?? ''}</p>
-        </div>
-        { clients &&
-          <div className="mt-11 md:m-0 md:mt-14">
-            Selected clients include {clients.map((client, idx) => (
-              <span key={idx}>{client}{idx === clients.length - 1 ? '.' : ','}</span>
-            ))}
+      <div className="info flex flex-col items-center content-center w-[40vw] mt-10 md:mt-20">
+        {infoContent?.portrait &&
+            <Image
+              className="object-cover mb-8"
+              src={urlFor(infoContent?.portrait)
+                .width(1000)
+                .height(666)
+                .dpr(3)
+                .quality(80)
+                .url()
+              }
+              width={1000}
+              height={666}
+              placeholder="blur"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              quality={100}
+              alt={'Portrait of Sarita Posada'}
+              blurDataURL={infoContent?.portrait.asset?.metadata?.lqip}
+            />
+          }
+        {tagline?.copy &&
+          <div className="px-[34px] md:px-0 md:w-[40vw]">
+            <p className="">{tagline?.copy ?? ''}</p>
           </div>
         }
-        <div className="mt-11 md:m-0 md:mt-14">
-            For all inquiries: <a href="mailto:info@saritaposada.com" target="_blank">office@saritaposada.com</a>
+        <div className="mt-4">
+            For all inquiries: <a href="mailto:info@saritaposada.com" target="_blank" className="underline">office@saritaposada.com</a>
         </div>
-        <div className="mt-11 md:m-0 md:mt-14">
+        <div className="mt-4">
             &#169; saritaposada
         </div>
       </div>
