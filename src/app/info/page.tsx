@@ -21,7 +21,7 @@ export default async function InfoPage({}){
     <>
     <div className="text-center md:pt-0 flex flex-col items-center uppercase">
       <InfoPageNav />
-      <div className="info flex flex-col items-center content-center w-[40vw] mt-10 md:mt-20">
+      <div className="info flex flex-col items-center content-center w-[80vw] md:w-[40vw] mt-10 md:mt-20">
         {infoContent?.portrait &&
             <Image
               className="object-cover mb-8"
