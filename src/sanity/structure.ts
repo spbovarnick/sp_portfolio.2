@@ -31,17 +31,6 @@ export const structure: StructureResolver = (S, context) =>
             .title('Tagline')
         ),
       S.listItem()
-        .title('Contact Info')
-        .id('contact')
-        .icon(() => At({ size: '512' }))
-        .child(
-          S.editor()
-            .id('contact')
-            .schemaType('contact')
-            .documentId('contact')
-            .title('Contact Info')
-        ),
-      S.listItem()
         .title('Info Page')
         .id('infoPage')
         .icon(() => About({ size: '512' }))

@@ -56,17 +56,18 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-    {hex &&
+      <head>
+        <style>{`:root { --bg-color: ${hex}; }`}</style>
+      </head>
       <body
-          className={`${helveticaNeue.className} antialiased`}
-          style={{ "--bg-color": hex, backgroundColor: "var(--bg-color" } as React.CSSProperties}
-        >
-          <main>
-              {children}
-              <SanityLive />
-          </main>
-        </body>
-      }
+        className={`${helveticaNeue.className} antialiased`}
+        style={{ backgroundColor: hex }}
+      >
+        <main>
+          {children}
+          <SanityLive />
+        </main>
+      </body>
     </html>
   );
 }

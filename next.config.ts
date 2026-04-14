@@ -9,7 +9,10 @@ const nextConfig: NextConfig = {
         hostname: "cdn.sanity.io",
       }
     ]
-  }
+  },
+  turbopack: {
+    root: import.meta.dirname,
+  },
   /* config options here */
 };
 

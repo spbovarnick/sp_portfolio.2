@@ -16,6 +16,22 @@ export const portfolioQuery = defineQuery(
   }`
 );
 
+export const landingPortfolioQuery = defineQuery(
+  `*[_type == "portfolio" && featured == true]{
+    _id,
+    projectName,
+    photoCredit,
+    projectLocation,
+    photos[]{
+      asset ->,
+      hotspot,
+      crop
+    },
+    projectType,
+    featured,
+  }`
+);
+
 export const taglineQuery = defineQuery(
   `*[_type == 'tagline'][0]{
     copy,
@@ -32,7 +48,14 @@ export const contactQuery = defineQuery(
 
 export const infoPageQuery = defineQuery(
   `*[_type == 'infoPage'][0]{
-    selectClients
+    portrait{
+      credit,
+      creditUrl,
+      asset ->,
+      hotspot,
+      crop
+    },
+    pressContact
   }`
 )
 

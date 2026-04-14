@@ -62,6 +62,7 @@ export type Portfolio = {
     _type: "image";
     _key: string;
   }>;
+  featured?: boolean;
   orderRank?: string;
   projectLocation?: string;
   role?: string;
@@ -96,6 +97,23 @@ export type InfoPage = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  portrait?: {
+    asset: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    credit?: string;
+    creditUrl?: string;
+    _type: "image";
+  };
+  bioBlurb?: string;
+  previousProjects?: Array<{
+    projectName?: string;
+    projectCity?: string;
+    studio?: string;
+    _key: string;
+  }>;
   selectClients?: Array<string>;
   pressContact?: string;
 };
@@ -305,6 +323,48 @@ export type PortfolioQueryResult = Array<{
 }>;
 
 // Source: src/app/lib/queries.ts
+// Variable: landingPortfolioQuery
+// Query: *[_type == "portfolio" && featured == true]{    _id,    projectName,    photoCredit,    projectLocation,    photos[]{      asset ->,      hotspot,      crop    },    projectType,    featured,  }
+export type LandingPortfolioQueryResult = Array<{
+  _id: string;
+  projectName: string | null;
+  photoCredit: Array<{
+    photogName?: string;
+    photogUrl?: string;
+    _key: string;
+  }> | null;
+  projectLocation: string | null;
+  photos: Array<{
+    asset: {
+      _id: string;
+      _type: "sanity.imageAsset";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      originalFilename?: string;
+      label?: string;
+      title?: string;
+      description?: string;
+      altText?: string;
+      sha1hash?: string;
+      extension?: string;
+      mimeType?: string;
+      size?: number;
+      assetId?: string;
+      uploadId?: string;
+      path?: string;
+      url?: string;
+      metadata?: SanityImageMetadata;
+      source?: SanityAssetSourceData;
+    } | null;
+    hotspot: SanityImageHotspot | null;
+    crop: SanityImageCrop | null;
+  }> | null;
+  projectType: string | null;
+  featured: true;
+}>;
+
+// Source: src/app/lib/queries.ts
 // Variable: taglineQuery
 // Query: *[_type == 'tagline'][0]{    copy,  }
 export type TaglineQueryResult = {
@@ -322,9 +382,37 @@ export type ContactQueryResult = {
 
 // Source: src/app/lib/queries.ts
 // Variable: infoPageQuery
-// Query: *[_type == 'infoPage'][0]{    selectClients  }
+// Query: *[_type == 'infoPage'][0]{    portrait{      credit,      creditUrl,      asset ->,      hotspot,      crop    },    pressContact  }
 export type InfoPageQueryResult = {
-  selectClients: Array<string> | null;
+  portrait: {
+    credit: string | null;
+    creditUrl: string | null;
+    asset: {
+      _id: string;
+      _type: "sanity.imageAsset";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      originalFilename?: string;
+      label?: string;
+      title?: string;
+      description?: string;
+      altText?: string;
+      sha1hash?: string;
+      extension?: string;
+      mimeType?: string;
+      size?: number;
+      assetId?: string;
+      uploadId?: string;
+      path?: string;
+      url?: string;
+      metadata?: SanityImageMetadata;
+      source?: SanityAssetSourceData;
+    };
+    hotspot: SanityImageHotspot | null;
+    crop: SanityImageCrop | null;
+  } | null;
+  pressContact: string | null;
 } | null;
 
 // Source: src/app/lib/queries.ts
@@ -385,9 +473,10 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     '*[_type == "portfolio"]{\n    _id,\n    projectName,\n    photoCredit,\n    projectLocation,\n    photos[]{\n      asset ->,\n      hotspot,\n      crop\n    },\n    projectType,\n  }': PortfolioQueryResult;
+    '*[_type == "portfolio" && featured == true]{\n    _id,\n    projectName,\n    photoCredit,\n    projectLocation,\n    photos[]{\n      asset ->,\n      hotspot,\n      crop\n    },\n    projectType,\n    featured,\n  }': LandingPortfolioQueryResult;
     "*[_type == 'tagline'][0]{\n    copy,\n  }": TaglineQueryResult;
     "*[_type == 'contact'][0]{\n    emailAddy,\n    instagram,\n    location,\n  }": ContactQueryResult;
-    "*[_type == 'infoPage'][0]{\n    selectClients\n  }": InfoPageQueryResult;
+    "*[_type == 'infoPage'][0]{\n    portrait{\n      credit,\n      creditUrl,\n      asset ->,\n      hotspot,\n      crop\n    },\n    pressContact\n  }": InfoPageQueryResult;
     "*[_type == 'bgColor'][0]": BgColorQueryResult;
     "*[_type == 'portfolio' && projectName == $projectName][0]{\n      _id,\n      projectName,\n      photoCredit,\n      projectLocation,\n      photos[]{\n        asset ->,\n        hotspot,\n        crop\n      },\n      projectType,\n  }": ProjectQueryResult;
   }

@@ -1,6 +1,6 @@
 "use client";
 
-import { PortfolioQueryResult } from "@/sanity/types"
+import { LandingPortfolioQueryResult } from "@/sanity/types"
 
 import { useState, useRef } from "react";
 
@@ -14,7 +14,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 interface ProjectProps {
-  portfolio: PortfolioQueryResult
+  portfolio: LandingPortfolioQueryResult
 }
 
 const Homepage: React.FC<ProjectProps> = ({ portfolio }) => {

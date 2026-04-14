@@ -4,6 +4,8 @@ export default defineType({
   name: 'contact',
   title: 'Contact',
   type: 'document',
+  readOnly: true,
+  hidden: true,
   fields: [
     defineField({
       name: 'emailAddy',

@@ -1,4 +1,4 @@
-import { PortfolioQueryResult } from "@/sanity/types";
+import { LandingPortfolioQueryResult } from "@/sanity/types";
 
 
 export const imageShuffler = <T,>(array: T[]) => {
@@ -13,7 +13,7 @@ export const imageShuffler = <T,>(array: T[]) => {
   return shuffledImgs;
 }
 
-export const shuffle = (array: PortfolioQueryResult) => {
+export const shuffle = (array: LandingPortfolioQueryResult) => {
   const len = array.length;
   const shuffled = array.slice();
   for (let i = len - 1; i > 0; i -= 1){
