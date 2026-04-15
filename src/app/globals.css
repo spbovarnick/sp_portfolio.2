@@ -51,3 +51,7 @@ body {
 .name-hover, a {
   transition: opacity 200ms cubic-bezier(.4, 0, .2, 1);
 }
+
+#tagline, p:first-of-type {
+  margin-bottom: 1em;
+}

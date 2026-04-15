@@ -43,7 +43,7 @@ export default async function InfoPage({}){
             />
           }
         {tagline?.copy &&
-          <div className="px-[34px] md:px-0 md:w-[40vw]">
+          <div id="tagline" className="px-[34px] md:px-0 md:w-[40vw]">
             <PortableText value={tagline.copy} />
           </div>
         }
