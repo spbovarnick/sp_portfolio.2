@@ -2,6 +2,7 @@ import { sanityFetch } from "../lib/sanityFetch"
 import { InfoPageQueryResult, TaglineQueryResult } from "@/sanity/types"
 import { infoPageQuery, taglineQuery } from "../lib/queries"
 import InfoPageNav from "../components/InfoPageNav";
+import { PortableText } from "@portabletext/react";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 
@@ -43,7 +44,7 @@ export default async function InfoPage({}){
           }
         {tagline?.copy &&
           <div className="px-[34px] md:px-0 md:w-[40vw]">
-            <p className="">{tagline?.copy ?? ''}</p>
+            <PortableText value={tagline.copy} />
           </div>
         }
         <div className="mt-4">

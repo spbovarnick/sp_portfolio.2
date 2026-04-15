@@ -32,8 +32,7 @@ const PortfolioGridTile: React.FC<TileProps> = ({ project }) => {
             />
           </div>
         }
-        <div className="mb-2">{project.projectName}, {project.projectLocation}</div>
-        <div>MORE INFO</div>
+        <div className="">{project.projectName}, {project.projectLocation}</div>
       </div>
     </Link>
   )

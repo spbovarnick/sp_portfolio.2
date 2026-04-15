@@ -13,7 +13,7 @@ const PortfolioGridNav = forwardRef<HTMLElement>(function PortfolioGridNav(_, re
       </div>
       <div className="text-center mt-5 md:m-0 md:relative md:top-8 h-fit md:flex md:justify-end md:pr-16">
         <Link className="" href={"/info"}>INFO</Link>
-        <Link className="ml-12" href={"/portfolio"}>WORK</Link>
+        <Link className="ml-12" href={"/portfolio"}>PROJECTS</Link>
       </div>
     </nav>
   )
