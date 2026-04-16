@@ -54,10 +54,10 @@ const Row: React.FC<RowProps> = ({
               }
               placeholder="blur"
               fill
-              sizes="(max-width: 768px) 100vw, (min-width: 769px) 150vw"
+              sizes="(max-width: 768px) 100vw, 50vw"
               alt={`Photo of ${project.projectName}`}
               blurDataURL={project.photos[0].asset?.metadata?.lqip}
-              quality={100}
+              quality={75}
               className="object-cover "
             />
           }
@@ -73,10 +73,10 @@ const Row: React.FC<RowProps> = ({
             }
             placeholder="blur"
             fill
-            sizes="(max-width: 768px) 100vw, (min-width: 769px) 150vw"
+            sizes="(max-width: 768px) 100vw, 50vw"
             alt={`Photo of ${project.projectName}`}
             blurDataURL={project.photos[1].asset?.metadata?.lqip}
-            quality={100}
+            quality={75}
             className="object-cover "
           />
         }

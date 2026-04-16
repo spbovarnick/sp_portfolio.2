@@ -12,7 +12,7 @@ const PortfolioGridTile: React.FC<TileProps> = ({ project }) => {
   return (
     project?.projectName &&
     <Link href={`/${encodeURIComponent(project.projectName)}`}>
-      <div className="text-center">
+      <div className="text-center uppercase">
       {project.photos && project.photos[0] &&
         <div className="relative aspect-square w-full overflow-hidden mb-4">
           <Image
@@ -27,7 +27,7 @@ const PortfolioGridTile: React.FC<TileProps> = ({ project }) => {
               sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw"
               alt={`Photo of ${project.projectName}`}
               blurDataURL={project.photos[0].asset?.metadata?.lqip}
-              quality={100}
+              quality={75}
               className="object-cover "
             />
           </div>

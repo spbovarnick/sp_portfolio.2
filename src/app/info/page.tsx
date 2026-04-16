@@ -37,7 +37,7 @@ export default async function InfoPage({}){
               height={666}
               placeholder="blur"
               sizes="(max-width: 768px) 100vw, 50vw"
-              quality={100}
+              quality={80}
               alt={'Portrait of Sarita Posada'}
               blurDataURL={infoContent?.portrait.asset?.metadata?.lqip}
             />
@@ -48,7 +48,10 @@ export default async function InfoPage({}){
           </div>
         }
         <div className="mt-4">
-            For all inquiries: <a href="mailto:info@saritaposada.com" target="_blank" className="underline">office@saritaposada.com</a>
+            INQUIRIES: <a href="mailto:info@saritaposada.com" target="_blank" className="underline">office@saritaposada.com</a>
+        </div>
+        <div className="">
+            PRESS: <a href="mailto:OLIVIA@OLIVIALUGARINI.COM" target="_blank" className="underline">OLIVIA@OLIVIALUGARINI.COM</a>
         </div>
         <div className="mt-4">
             &#169; saritaposada

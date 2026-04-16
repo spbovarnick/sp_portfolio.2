@@ -43,10 +43,10 @@ export default function ProjectPageGallery({groups, projectName, firstRowHeight,
                   }
                   placeholder="blur"
                   fill
-                  sizes="(max-width: 768px) 100vw, (min-width: 769px) 150vw"
+                  sizes="100vw"
                   alt={`Photo of ${projectName ?? "project"}`}
                   blurDataURL={group.images[0].asset?.metadata?.lqip}
-                  quality={100}
+                  quality={75}
                   className="object-cover"
                   priority={groupIdx === 0}
                 />}
@@ -78,10 +78,10 @@ export default function ProjectPageGallery({groups, projectName, firstRowHeight,
                         }
                         placeholder="blur"
                         fill
-                        sizes="125vw"
+                        sizes="100vw"
                         alt={`Photo of ${projectName ?? "project"}`}
                         blurDataURL={img.asset?.metadata?.lqip}
-                        quality={100}
+                        quality={75}
                         className="object-cover"
                         priority={groupIdx === 0}
                       />}
@@ -115,10 +115,10 @@ export default function ProjectPageGallery({groups, projectName, firstRowHeight,
                       }
                       placeholder="blur"
                       fill
-                      sizes="100vw"
+                      sizes="(max-width: 768px) 100vw, 50vw"
                       alt={`Photo of ${projectName ?? "project"}`}
                       blurDataURL={img.asset?.metadata?.lqip}
-                      quality={100}
+                      quality={75}
                       className="object-cover"
                       priority={groupIdx === 0}
                     />}
