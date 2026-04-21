@@ -22,7 +22,7 @@ export const landingPortfolioQuery = defineQuery(
     projectName,
     photoCredit,
     projectLocation,
-    photos[]{
+    photos[featured == true]{
       asset ->,
       hotspot,
       crop

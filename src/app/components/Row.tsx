@@ -1,5 +1,4 @@
 import { SinglePortfolioProject } from "../lib/types";
-import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import Link from "next/link";
@@ -7,39 +6,18 @@ import Link from "next/link";
 
 interface RowProps {
   project: SinglePortfolioProject,
-  isLast: boolean,
-  addToScroll: () => void,
   index: number,
 }
 
 const Row: React.FC<RowProps> = ({
   project,
-  isLast,
-  addToScroll,
   index,
 }) => {
-  const rowRef = useRef(null);
-
-  useEffect(() => {
-    if (!rowRef.current) return;
-
-    const observer = new IntersectionObserver(([entry]) => {
-      if (isLast && entry.isIntersecting) {
-        addToScroll();
-        observer.unobserve(entry.target);
-      }
-    }, { threshold: .6 });
-
-    observer.observe(rowRef.current);
-
-    return () => observer.disconnect();
-  },[isLast, addToScroll])
 
   return (
     project.projectName &&
     <Link
       className="row grid grid-cols-1 gap-0 md:grid-cols-2 relative h-screen relative"
-      ref={rowRef}
       style={{ opacity: index === 0 ? 1 : 0}}
         href={`/${encodeURIComponent(project.projectName)}`}
     >
