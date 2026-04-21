@@ -46,6 +46,13 @@ export default defineType({
       type: 'boolean',
       description: 'Idenitfy select projects to appear on the home/landing page',
       initialValue: true,
+      validation: (rule) => rule.custom((value, context) => {
+        if (value !== true) return true;
+        const photos = (context.document?.photos as { featured?: boolean }[] | undefined) ?? [];
+        const featuredCount = photos.filter((p) => p.featured === true).length;
+        if (featuredCount !== 2) return 'You must mark exactly 2 photos as "Featured on Homepage" before featuring this project';
+        return true;
+      }),
     }),
     orderRankField({ type: 'category' }),
     defineField({
