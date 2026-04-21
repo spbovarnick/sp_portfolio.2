@@ -61,7 +61,7 @@ export default async function RootLayout({
       </head>
       <body
         className={`${helveticaNeue.className} antialiased`}
-        style={{ backgroundColor: hex }}
+
       >
         <main>
           {children}

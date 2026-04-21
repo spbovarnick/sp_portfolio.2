@@ -4,7 +4,7 @@ import { ProjectQueryResult } from "@/sanity/types";
 import ProjectPageGallery from "./ProjectPageGallery";
 import { AllImageArray } from "../lib/types";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useSyncExternalStore } from "react";
 
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -53,17 +53,14 @@ function buildGroups(images: AllImageArray[]): ImageGroup[] {
 }
 
 const useScreenWidth = () => {
-  const [screenWidth, setScreenWidth] = useState(() =>
-    typeof window !== "undefined" ? window.innerWidth : 1024
-);
-
-  useEffect(() => {
-    const handleResize = () => setScreenWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [])
-
-  return screenWidth;
+  return useSyncExternalStore(
+    (callback) => {
+      window.addEventListener("resize", callback);
+      return () => window.removeEventListener("resize", callback);
+    },
+    () => window.innerWidth,
+    () => 1024
+  );
 }
 
 export default function ProjectPage({project}: ProjectPageProps) {
