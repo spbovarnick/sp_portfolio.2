@@ -19,7 +19,7 @@ export default async function InfoPage({}){
 
   return (
     <>
-      <div className="flex flex-col uppercase min-h-screen md:grid md:grid-cols-2">
+      <div className="flex flex-col uppercase text-center min-h-screen md:grid md:grid-cols-2">
         <div className="w-full md:h-screen h-[60vh]">
           {infoContent?.portrait &&
               <Image
