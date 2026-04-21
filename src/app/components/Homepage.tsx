@@ -2,7 +2,7 @@
 
 import { LandingPortfolioQueryResult } from "@/sanity/types"
 
-import { useState, useRef } from "react";
+import { useRef } from "react";
 
 import { shuffle } from "../lib/util";
 import Row from "./Row"
@@ -18,13 +18,8 @@ interface ProjectProps {
 }
 
 const Homepage: React.FC<ProjectProps> = ({ portfolio }) => {
-  const [projects, setProjects] = useState(portfolio)
+  const shuffledPortfolio = shuffle(portfolio)
   const scrollRef = useRef<HTMLDivElement>(null);
-
-  const addToScroll = () => {
-    const appendage = shuffle(portfolio)
-    setProjects((prev) => [...prev, ...appendage])
-  }
 
   useGSAP(() => {
     const container = scrollRef.current;
@@ -62,7 +57,7 @@ const Homepage: React.FC<ProjectProps> = ({ portfolio }) => {
 
   }, {
     scope: scrollRef,
-    dependencies: [projects.length],
+    dependencies: [shuffledPortfolio.length],
     revertOnUpdate: false,
   });
 
@@ -74,12 +69,10 @@ const Homepage: React.FC<ProjectProps> = ({ portfolio }) => {
       className="relative w-screen h-screen overflow-y-scroll"
     >
       <Nav />
-      {projects.map((proj, index) => (
+      {shuffledPortfolio.map((proj, index) => (
         <Row
           key={`${proj._id}-${index}`}
           project={proj}
-          isLast={ index === projects.length - 3 }
-          addToScroll={addToScroll}
           index={index}
         />
       ))}
