@@ -23,7 +23,22 @@ export default defineType({
         options: {
           hotspot: true
         },
+        fields: [
+          defineField({
+            name: 'featured',
+            title: 'Featured on Homepage',
+            type: 'boolean',
+            description: 'Feature this image on the homepage if project is selected to feature on homepage (max 2 per project)',
+            initialValue: false,
+          }),
+        ],
       }],
+      validation: (rule) => rule.custom((photos) => {
+        if (!Array.isArray(photos)) return true;
+        const featuredCount = (photos as { featured?: boolean }[]).filter((p) => p.featured === true).length;
+        if (featuredCount > 2) return 'Only 2 images per project can be featured on the homepage';
+        return true;
+      }),
     }),
     defineField({
       name: 'featured',
