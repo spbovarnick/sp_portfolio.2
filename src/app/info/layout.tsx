@@ -1,4 +1,5 @@
 import React from "react"
+import Nav from "../components/Nav";
 
 export default async function InfoLayout({
   children,
@@ -8,6 +9,9 @@ export default async function InfoLayout({
 
   return (
     <>
+    <Nav
+      page={"info"}
+    />
       {children}
     </>
   );

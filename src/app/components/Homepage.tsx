@@ -67,7 +67,9 @@ const Homepage: React.FC<ProjectProps> = ({ portfolio }) => {
       ref={scrollRef}
       className="relative w-screen h-screen overflow-y-scroll"
     >
-      <Nav />
+      <Nav
+        page={"home"}
+      />
       {portfolio.map((proj, index) => (
         <Row
           key={`${proj._id}-${index}`}
