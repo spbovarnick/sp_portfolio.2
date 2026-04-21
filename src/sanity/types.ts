@@ -301,7 +301,7 @@ export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: src/app/lib/queries.ts
 // Variable: portfolioQuery
-// Query: *[_type == "portfolio"]{    _id,    projectName,    photoCredit,    projectLocation,    photos[]{      asset ->,      hotspot,      crop    },    projectType,  }
+// Query: *[_type == "portfolio"] | order(orderRank){    _id,    projectName,    photoCredit,    projectLocation,    photos[]{      asset ->,      hotspot,      crop    },    projectType,  }
 export type PortfolioQueryResult = Array<{
   _id: string;
   projectName: string | null;
@@ -507,7 +507,7 @@ export type ProjectQueryResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_type == "portfolio"]{\n    _id,\n    projectName,\n    photoCredit,\n    projectLocation,\n    photos[]{\n      asset ->,\n      hotspot,\n      crop\n    },\n    projectType,\n  }': PortfolioQueryResult;
+    '*[_type == "portfolio"] | order(orderRank){\n    _id,\n    projectName,\n    photoCredit,\n    projectLocation,\n    photos[]{\n      asset ->,\n      hotspot,\n      crop\n    },\n    projectType,\n  }': PortfolioQueryResult;
     '*[_type == "portfolio" && featured == true]{\n    _id,\n    projectName,\n    photoCredit,\n    projectLocation,\n    photos[featured == true]{\n      asset ->,\n      hotspot,\n      crop\n    },\n    projectType,\n    featured,\n  }': LandingPortfolioQueryResult;
     "*[_type == 'tagline'][0]{\n    copy,\n  }": TaglineQueryResult;
     "*[_type == 'contact'][0]{\n    emailAddy,\n    instagram,\n    location,\n  }": ContactQueryResult;
