@@ -30,9 +30,6 @@ const Homepage: React.FC<ProjectProps> = ({ portfolio }) => {
 
     sections.forEach((section, i) => {
       if (i === 0) return;
-      if (section.dataset.animated) return;
-
-      section.dataset.animated = "true";
 
       gsap.fromTo(section,
         { opacity: 0 },
@@ -51,12 +48,16 @@ const Homepage: React.FC<ProjectProps> = ({ portfolio }) => {
       );
     });
 
-    ScrollTrigger.refresh();
+    const rafId = requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
+    });
+
+    return () => cancelAnimationFrame(rafId);
 
   }, {
     scope: scrollRef,
     dependencies: [portfolio.length],
-    revertOnUpdate: false,
+    revertOnUpdate: true,
   });
 
 
