@@ -34,7 +34,7 @@ export default function ProjectPageGallery({groups, projectName, isMobile}: Gall
                   src={urlFor(group.images[0])
                     .width(1000)
                     .dpr(2)
-                    .quality(75)
+                    .quality(100)
                     .url()
                   }
                   placeholder="blur"
@@ -42,7 +42,7 @@ export default function ProjectPageGallery({groups, projectName, isMobile}: Gall
                   sizes="100vw"
                   alt={`Photo of ${projectName ?? "project"}`}
                   blurDataURL={group.images[0].asset?.metadata?.lqip}
-                  quality={75}
+                  quality={100}
                   className="object-cover"
                   priority={groupIdx === 0}
                 />}
