@@ -1,15 +1,15 @@
 "use client";
 
 import { ProjectQueryResult } from "@/sanity/types";
-import ProjectPageNav from "./ProjectPageNav";
 import ProjectPageGallery from "./ProjectPageGallery";
 import { AllImageArray } from "../lib/types";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useSyncExternalStore } from "react";
 
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import Nav from "./Nav";
 gsap.registerPlugin(ScrollTrigger);
 
 
@@ -23,6 +23,13 @@ export interface ImageGroup {
   type: GroupType;
   images: AllImageArray[];
 };
+
+interface PhotoCred {
+  photogName?: string;
+  photogUrl?: string;
+  _key: string;
+}
+
 
 function buildGroups(images: AllImageArray[]): ImageGroup[] {
   const groups: ImageGroup[] = [];
@@ -46,40 +53,25 @@ function buildGroups(images: AllImageArray[]): ImageGroup[] {
 }
 
 const useScreenWidth = () => {
-  const [screenWidth, setScreenWidth] = useState(() =>
-    typeof window !== "undefined" ? window.innerWidth : 1024
-);
-
-  useEffect(() => {
-    const handleResize = () => setScreenWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [])
-
-  return screenWidth;
+  return useSyncExternalStore(
+    (callback) => {
+      window.addEventListener("resize", callback);
+      return () => window.removeEventListener("resize", callback);
+    },
+    () => window.innerWidth,
+    () => 1024
+  );
 }
 
 export default function ProjectPage({project}: ProjectPageProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
-  const [navHeight, setNavHeight] = useState(0);
 
   const windowWidth = useScreenWidth();
 
   const isMobile = windowWidth < 768
 
   const groups = buildGroups(project?.photos ?? []);
-
-
-  useEffect(() => {
-    const nav = navRef.current;
-    if (!nav) return;
-
-    const rO = new ResizeObserver(() => setNavHeight(nav.offsetHeight));
-
-    rO.observe(nav);
-    return () => rO.disconnect();
-  }, []);
 
   useGSAP(() => {
     const container = scrollRef.current;
@@ -142,27 +134,54 @@ export default function ProjectPage({project}: ProjectPageProps) {
     dependencies: [groups]
   })
 
+  const photoCreditsElement = (creditList: PhotoCred[]) => {
+    return (
+      <div
+        className=""
+      >
+        PHOTO{creditList.length > 1 ? "S" : ""} BY {
+          creditList.map((cred, i) => {
+            return (
+              cred.photogUrl ? (
+                <span key={cred._key}>{i > 0 && <span> & </span>}<a className="folioPicCred" href={cred.photogUrl} target="_blank">{cred.photogName}</a></span>) : (<span key={cred._key}>{i > 0 && <span> & </span>}<span className="folioPicCred" key={cred._key}>{cred.photogName}</span></span>
+              )
+            )
+          })
+        }
+      </div>
+    )
+  }
+
   return (
     <div
       ref={scrollRef}
-      className="relative w-full h-screen overflow-y-scroll"
-      style={{ "--nav-h": `${navHeight}px`} as React.CSSProperties }
+      className="relative w-full h-screen overflow-y-scroll relative"
     >
-      <ProjectPageNav
-        projectName={project?.projectName ?? ""}
-        location={project?.projectLocation ?? ""}
-        projectType={project?.projectType ?? null}
-        photoCredit={project?.photoCredit ?? null}
+      <Nav
+        page="project"
         ref={navRef}
-        />
+      />
       {project?.photos &&
         <ProjectPageGallery
           isMobile={isMobile}
           groups={groups}
           projectName={project.projectName ?? null}
-          firstRowHeight={`calc(100vh - ${navHeight}px)`}
         />
       }
+      <div className="text-white z-[100] uppercase px-6 md:px-10 fixed bottom-6 md:bottom-10">
+        {project?.projectName &&
+          <p>{project?.projectName}</p>
+        }
+        {project?.projectLocation &&
+          <p>{project?.projectLocation}</p>
+        }
+        {project?.projectType &&
+          <p>{project?.projectType}</p>
+        }
+        {project?.photoCredit &&
+          photoCreditsElement(project?.photoCredit)
+        }
+      </div>
     </div>
   )
 }

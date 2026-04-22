@@ -13,8 +13,7 @@
 }
 
 body {
-  /* background: #F8FAF5; */
-  /* background: #b9ceac; */
+  background-color: var(--bg-color);
   font-size: 13px;
   line-height: 14px;
   letter-spacing: -0.234px;
@@ -52,6 +51,6 @@ body {
   transition: opacity 200ms cubic-bezier(.4, 0, .2, 1);
 }
 
-#tagline, p:first-of-type {
+#tagline p:first-of-type {
   margin-bottom: 1em;
 }
