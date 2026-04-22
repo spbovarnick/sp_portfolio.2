@@ -21,14 +21,12 @@ export default function ProjectPageGallery({groups, projectName, isMobile}: Gall
 
         // full row, one img per row
         if (group.type === "full") {
-          const aspectRatio = group.images[0]?.asset?.metadata?.dimensions?.aspectRatio;
           return (
             <div
               key={groupIdx}
-              className="relative w-full row"
+              className="relative w-full row h-screen"
               style={{
                 opacity: isFirst ? 1 : 0,
-                height: aspectRatio && !isMobile ? `calc(100vw / ${aspectRatio})` : "100vh",
                }}
             >
               <div className="relative w-full h-full">
