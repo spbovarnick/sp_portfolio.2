@@ -5,6 +5,7 @@ import { SanityLive } from "@/sanity/lib/live";
 import { BgColorQueryResult } from "@/sanity/types";
 import { sanityFetch } from "./lib/sanityFetch";
 import { bgColorQuery } from "./lib/queries";
+import PageTransition from "./components/PageTransition";
 
 const helveticaNeue = localFont({
   src: [
@@ -64,7 +65,9 @@ export default async function RootLayout({
 
       >
         <main>
-          {children}
+          <PageTransition>
+            {children}
+          </PageTransition>
           <SanityLive />
         </main>
       </body>

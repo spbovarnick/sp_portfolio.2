@@ -4,7 +4,7 @@ import { ProjectQueryResult } from "@/sanity/types";
 import ProjectPageGallery from "./ProjectPageGallery";
 import { AllImageArray } from "../lib/types";
 
-import { useRef, useEffect, useSyncExternalStore } from "react";
+import { useRef, useSyncExternalStore } from "react";
 
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";

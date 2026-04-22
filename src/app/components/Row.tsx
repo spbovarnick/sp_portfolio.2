@@ -6,19 +6,15 @@ import Link from "next/link";
 
 interface RowProps {
   project: SinglePortfolioProject,
-  index: number,
 }
 
-const Row: React.FC<RowProps> = ({
-  project,
-  index,
-}) => {
+const Row: React.FC<RowProps> = ({ project }) => {
 
   return (
     project.projectName &&
     <Link
       className="row grid grid-cols-1 gap-0 md:grid-cols-2 relative h-screen relative"
-      style={{ opacity: index === 0 ? 1 : 0}}
+      style={{ opacity: 0 }}
         href={`/${encodeURIComponent(project.projectName)}`}
     >
       <div className={`left-img relative h-screen ${!project.photos?.[1] ? 'md:col-span-2' : ''}`}>

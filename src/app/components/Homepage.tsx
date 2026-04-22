@@ -29,7 +29,13 @@ const Homepage: React.FC<ProjectProps> = ({ portfolio }) => {
     }
 
     sections.forEach((section, i) => {
-      if (i === 0) return;
+      if (i === 0) {
+        gsap.fromTo(section,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.6, ease: "power2.out", delay: 0.2 }
+        );
+        return;
+      }
 
       gsap.fromTo(section,
         { opacity: 0 },
@@ -74,7 +80,6 @@ const Homepage: React.FC<ProjectProps> = ({ portfolio }) => {
         <Row
           key={`${proj._id}-${index}`}
           project={proj}
-          index={index}
         />
       ))}
     </div>

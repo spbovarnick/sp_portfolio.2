@@ -63,6 +63,7 @@ const PortfolioGrid: React.FC<PortfolioPageProps> = ({ portfolio }) => {
     <div
       ref={scrollRef}
       className="relative w-full h-screen overflow-y-scroll pb-12"
+      style={{ "--nav-h": `${navHeight}px` } as React.CSSProperties}
     >
       <PortfolioGridNav ref={navRef} />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12 px-8" style={{ paddingTop: `calc(var(--nav-h) + 2.5rem)` }}>
