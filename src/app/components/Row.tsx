@@ -11,11 +11,11 @@ interface RowProps {
 const Row: React.FC<RowProps> = ({ project }) => {
 
   return (
-    project.projectName &&
+    project.projectName && project.slug &&
     <Link
       className="row grid grid-cols-1 gap-0 md:grid-cols-2 relative h-screen relative"
       style={{ opacity: 0 }}
-        href={`/${encodeURIComponent(project.projectName)}`}
+        href={`/${project.slug}`}
     >
       <div className={`left-img relative h-screen ${!project.photos?.[1] ? 'md:col-span-2' : ''}`}>
         {project.photos && project.photos[0] &&

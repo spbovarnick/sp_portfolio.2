@@ -5,6 +5,7 @@ export interface SinglePortfolioProject {
   _id: string;
   // orderRank: string | null;
   projectName: string | null;
+  slug: string | null;
   photoCredit: Array<{
     photogName?: string;
     photogUrl?: string;

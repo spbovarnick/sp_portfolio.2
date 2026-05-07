@@ -71,6 +71,7 @@ export type Portfolio = {
   _updatedAt: string;
   _rev: string;
   projectName?: string;
+  slug?: Slug;
   photos?: Array<{
     asset?: SanityImageAssetReference;
     media?: unknown;
@@ -107,6 +108,12 @@ export type SanityImageHotspot = {
   y?: number;
   height?: number;
   width?: number;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
 };
 
 export type InfoPage = {
@@ -268,12 +275,6 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
-
 export type AllSanitySchemaTypes =
   | BgColor
   | Color
@@ -282,6 +283,7 @@ export type AllSanitySchemaTypes =
   | Portfolio
   | SanityImageCrop
   | SanityImageHotspot
+  | Slug
   | InfoPage
   | Contact
   | RgbaColor
@@ -294,17 +296,17 @@ export type AllSanitySchemaTypes =
   | SanityFileAsset
   | SanityAssetSourceData
   | SanityImageAsset
-  | Geopoint
-  | Slug;
+  | Geopoint;
 
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: src/app/lib/queries.ts
 // Variable: portfolioQuery
-// Query: *[_type == "portfolio"] | order(orderRank){    _id,    projectName,    photoCredit,    projectLocation,    photos[]{      asset ->,      hotspot,      crop    },    projectType,  }
+// Query: *[_type == "portfolio"] | order(orderRank){    _id,    projectName,    "slug": slug.current,    photoCredit,    projectLocation,    photos[]{      asset ->,      hotspot,      crop    },    projectType,  }
 export type PortfolioQueryResult = Array<{
   _id: string;
   projectName: string | null;
+  slug: string | null;
   photoCredit: Array<{
     photogName?: string;
     photogUrl?: string;
@@ -342,10 +344,11 @@ export type PortfolioQueryResult = Array<{
 
 // Source: src/app/lib/queries.ts
 // Variable: landingPortfolioQuery
-// Query: *[_type == "portfolio" && featured == true]{    _id,    projectName,    photoCredit,    projectLocation,    photos[featured == true]{      asset ->,      hotspot,      crop    },    projectType,    featured,  }
+// Query: *[_type == "portfolio" && featured == true]{    _id,    projectName,    "slug": slug.current,    photoCredit,    projectLocation,    photos[featured == true]{      asset ->,      hotspot,      crop    },    projectType,    featured,  }
 export type LandingPortfolioQueryResult = Array<{
   _id: string;
   projectName: string | null;
+  slug: string | null;
   photoCredit: Array<{
     photogName?: string;
     photogUrl?: string;
@@ -463,11 +466,19 @@ export type BgColorQueryResult = {
 } | null;
 
 // Source: src/app/lib/queries.ts
+// Variable: allProjectSlugsQuery
+// Query: *[_type == "portfolio" && defined(slug.current)]{ "slug": slug.current }
+export type AllProjectSlugsQueryResult = Array<{
+  slug: string | null;
+}>;
+
+// Source: src/app/lib/queries.ts
 // Variable: projectQuery
-// Query: *[_type == 'portfolio' && projectName == $projectName][0]{      _id,      projectName,      photoCredit,      projectLocation,      photos[]{        asset ->,        hotspot,        crop      },      projectType,  }
+// Query: *[_type == 'portfolio' && slug.current == $slug][0]{      _id,      projectName,      "slug": slug.current,      photoCredit,      projectLocation,      photos[]{        asset ->,        hotspot,        crop      },      projectType,  }
 export type ProjectQueryResult = {
   _id: string;
   projectName: string | null;
+  slug: string | null;
   photoCredit: Array<{
     photogName?: string;
     photogUrl?: string;
@@ -507,12 +518,13 @@ export type ProjectQueryResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_type == "portfolio"] | order(orderRank){\n    _id,\n    projectName,\n    photoCredit,\n    projectLocation,\n    photos[]{\n      asset ->,\n      hotspot,\n      crop\n    },\n    projectType,\n  }': PortfolioQueryResult;
-    '*[_type == "portfolio" && featured == true]{\n    _id,\n    projectName,\n    photoCredit,\n    projectLocation,\n    photos[featured == true]{\n      asset ->,\n      hotspot,\n      crop\n    },\n    projectType,\n    featured,\n  }': LandingPortfolioQueryResult;
+    '*[_type == "portfolio"] | order(orderRank){\n    _id,\n    projectName,\n    "slug": slug.current,\n    photoCredit,\n    projectLocation,\n    photos[]{\n      asset ->,\n      hotspot,\n      crop\n    },\n    projectType,\n  }': PortfolioQueryResult;
+    '*[_type == "portfolio" && featured == true]{\n    _id,\n    projectName,\n    "slug": slug.current,\n    photoCredit,\n    projectLocation,\n    photos[featured == true]{\n      asset ->,\n      hotspot,\n      crop\n    },\n    projectType,\n    featured,\n  }': LandingPortfolioQueryResult;
     "*[_type == 'tagline'][0]{\n    copy,\n  }": TaglineQueryResult;
     "*[_type == 'contact'][0]{\n    emailAddy,\n    instagram,\n    location,\n  }": ContactQueryResult;
     "*[_type == 'infoPage'][0]{\n    portrait{\n      credit,\n      creditUrl,\n      asset ->,\n      hotspot,\n      crop\n    },\n    pressContact\n  }": InfoPageQueryResult;
     "*[_type == 'bgColor'][0]": BgColorQueryResult;
-    "*[_type == 'portfolio' && projectName == $projectName][0]{\n      _id,\n      projectName,\n      photoCredit,\n      projectLocation,\n      photos[]{\n        asset ->,\n        hotspot,\n        crop\n      },\n      projectType,\n  }": ProjectQueryResult;
+    '*[_type == "portfolio" && defined(slug.current)]{ "slug": slug.current }': AllProjectSlugsQueryResult;
+    "*[_type == 'portfolio' && slug.current == $slug][0]{\n      _id,\n      projectName,\n      \"slug\": slug.current,\n      photoCredit,\n      projectLocation,\n      photos[]{\n        asset ->,\n        hotspot,\n        crop\n      },\n      projectType,\n  }": ProjectQueryResult;
   }
 }

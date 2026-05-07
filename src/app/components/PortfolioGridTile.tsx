@@ -10,8 +10,8 @@ interface TileProps {
 const PortfolioGridTile: React.FC<TileProps> = ({ project }) => {
 
   return (
-    project?.projectName &&
-    <Link href={`/${encodeURIComponent(project.projectName)}`}>
+    project?.projectName && project?.slug &&
+    <Link href={`/${project.slug}`}>
       <div className="text-center uppercase">
       {project.photos && project.photos[0] &&
         <div className="relative aspect-square w-full overflow-hidden mb-4">

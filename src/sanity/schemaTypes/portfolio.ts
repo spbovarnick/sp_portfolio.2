@@ -1,4 +1,4 @@
-import { defineField, defineType } from "sanity";
+import { defineField, defineType, SanityDocument } from "sanity";
 import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
 
 export default defineType({
@@ -12,6 +12,17 @@ export default defineType({
       title: 'Project Name',
       type: 'string',
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'slug',
+      title: 'URL Slug',
+      type: 'slug',
+      options: {
+        source: (doc: SanityDocument) =>
+          [doc.projectName, doc.projectLocation].filter(Boolean).join(' '),
+        maxLength: 96,
+      },
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'photos',

@@ -5,6 +5,7 @@ export const portfolioQuery = defineQuery(
   `*[_type == "portfolio"] | order(orderRank){
     _id,
     projectName,
+    "slug": slug.current,
     photoCredit,
     projectLocation,
     photos[]{
@@ -20,6 +21,7 @@ export const landingPortfolioQuery = defineQuery(
   `*[_type == "portfolio" && featured == true]{
     _id,
     projectName,
+    "slug": slug.current,
     photoCredit,
     projectLocation,
     photos[featured == true]{
@@ -63,10 +65,15 @@ export const bgColorQuery = defineQuery(
   `*[_type == 'bgColor'][0]`
 )
 
+export const allProjectSlugsQuery = defineQuery(
+  `*[_type == "portfolio" && defined(slug.current)]{ "slug": slug.current }`
+)
+
 export const projectQuery = defineQuery(
-  `*[_type == 'portfolio' && projectName == $projectName][0]{
+  `*[_type == 'portfolio' && slug.current == $slug][0]{
       _id,
       projectName,
+      "slug": slug.current,
       photoCredit,
       projectLocation,
       photos[]{
