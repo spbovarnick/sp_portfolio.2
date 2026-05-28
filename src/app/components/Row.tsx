@@ -1,11 +1,11 @@
-import { SinglePortfolioProject } from "../lib/types";
+import { LandingPortfolioQueryResult } from "@/sanity/types";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import Link from "next/link";
 
 
 interface RowProps {
-  project: SinglePortfolioProject,
+  project: LandingPortfolioQueryResult[number],
 }
 
 const Row: React.FC<RowProps> = ({ project }) => {
@@ -17,9 +17,51 @@ const Row: React.FC<RowProps> = ({ project }) => {
       style={{ opacity: 0 }}
         href={`/${project.slug}`}
     >
-      <div className={`left-img relative h-screen ${!project.photos?.[1] ? 'md:col-span-2' : ''}`}>
-        {project.photos && project.photos[0] &&
-          <Image
+      { project.photos?.length === 2 ?
+        <>
+          <div className={`left-img relative h-screen ${!project.photos?.[1] ? 'md:col-span-2' : ''}`}>
+            {project.photos && project.photos[0] &&
+              <Image
+                  src={urlFor(project.photos[0])
+                    .width(1000)
+                    .dpr(2)
+                    .quality(75)
+                    .url()
+                  }
+                  placeholder="blur"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  alt={`Photo of ${project.projectName}`}
+                  blurDataURL={project.photos[0].asset?.metadata?.lqip}
+                  quality={75}
+                  className="object-cover "
+                />
+              }
+          </div>
+          <div className="right-img hidden md:block relative h-screen">
+            {project.photos && project.photos[1] &&
+              <Image
+                src={urlFor(project.photos[1])
+                  .width(1000)
+                  .dpr(2)
+                  .quality(75)
+                  .url()
+                }
+                placeholder="blur"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                alt={`Photo of ${project.projectName}`}
+                blurDataURL={project.photos[1].asset?.metadata?.lqip}
+                quality={75}
+                className="object-cover "
+              />
+            }
+          </div>
+        </>
+      :
+        <div className={`full-row relative h-screen ${!project.photos?.[1] ? 'md:col-span-2' : ''}`}>
+          {project.photos && project.photos[0] &&
+            <Image
               src={urlFor(project.photos[0])
                 .width(1000)
                 .dpr(2)
@@ -28,33 +70,15 @@ const Row: React.FC<RowProps> = ({ project }) => {
               }
               placeholder="blur"
               fill
-              sizes="(max-width: 768px) 100vw, 50vw"
+              sizes="(max-width: 768px) 100vw"
               alt={`Photo of ${project.projectName}`}
               blurDataURL={project.photos[0].asset?.metadata?.lqip}
               quality={75}
               className="object-cover "
             />
           }
-      </div>
-      <div className="right-img hidden md:block relative h-screen">
-        {project.photos && project.photos[1] &&
-          <Image
-            src={urlFor(project.photos[1])
-              .width(1000)
-              .dpr(2)
-              .quality(75)
-              .url()
-            }
-            placeholder="blur"
-            fill
-            sizes="(max-width: 768px) 100vw, 50vw"
-            alt={`Photo of ${project.projectName}`}
-            blurDataURL={project.photos[1].asset?.metadata?.lqip}
-            quality={75}
-            className="object-cover "
-          />
-        }
-      </div>
+        </div>
+      }
       <div className="info-text text-white uppercase absolute w-full bottom-7 left-0 text-center leading-6">
         {project.projectName &&
         <span className="name-hover">{project.projectName}{project.projectLocation && `, ${project.projectLocation}`}</span>
