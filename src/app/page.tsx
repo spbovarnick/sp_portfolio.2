@@ -1,5 +1,5 @@
 import { LandingPortfolioQueryResult } from "@/sanity/types";
-import { shuffle } from "./lib/util";
+import { shufflePhotos } from "./lib/util";
 import { landingPortfolioQuery } from "./lib/queries";
 import { sanityFetch } from "./lib/sanityFetch";
 import Homepage from "./components/Homepage";
@@ -13,10 +13,10 @@ const portfolio: LandingPortfolioQueryResult = await sanityFetch<LandingPortfoli
 
 export default async function Home() {
 
-  const shuffledPortfolio = shuffle(portfolio)
+  const orderedPortfolio = shufflePhotos(portfolio)
 
 
   return (
-    <Homepage portfolio={shuffledPortfolio} />
+    <Homepage portfolio={orderedPortfolio} />
   );
 }

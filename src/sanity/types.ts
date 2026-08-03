@@ -78,10 +78,12 @@ export type Portfolio = {
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     featured?: boolean;
+    orientation?: "landscape" | "vertical";
     _type: "image";
     _key: string;
   }>;
   featured?: boolean;
+  homepageOrder?: number;
   orderRank?: string;
   projectLocation?: string;
   role?: string;
@@ -344,7 +346,7 @@ export type PortfolioQueryResult = Array<{
 
 // Source: src/app/lib/queries.ts
 // Variable: landingPortfolioQuery
-// Query: *[_type == "portfolio" && featured == true]{    _id,    projectName,    "slug": slug.current,    photoCredit,    projectLocation,    photos[featured == true]{      asset ->,      hotspot,      crop    },    projectType,    featured,  }
+// Query: *[_type == "portfolio" && featured == true] | order(coalesce(homepageOrder, 9999) asc){    _id,    projectName,    "slug": slug.current,    photoCredit,    projectLocation,    photos[featured == true]{      asset ->,      hotspot,      crop    },    projectType,    featured,  }
 export type LandingPortfolioQueryResult = Array<{
   _id: string;
   projectName: string | null;
@@ -474,7 +476,7 @@ export type AllProjectSlugsQueryResult = Array<{
 
 // Source: src/app/lib/queries.ts
 // Variable: projectQuery
-// Query: *[_type == 'portfolio' && slug.current == $slug][0]{      _id,      projectName,      "slug": slug.current,      photoCredit,      projectLocation,      photos[]{        asset ->,        hotspot,        crop      },      projectType,  }
+// Query: *[_type == 'portfolio' && slug.current == $slug][0]{      _id,      projectName,      "slug": slug.current,      photoCredit,      projectLocation,      photos[]{        asset ->,        hotspot,        crop,        orientation      },      projectType,  }
 export type ProjectQueryResult = {
   _id: string;
   projectName: string | null;
@@ -510,6 +512,7 @@ export type ProjectQueryResult = {
     } | null;
     hotspot: SanityImageHotspot | null;
     crop: SanityImageCrop | null;
+    orientation: "landscape" | "vertical" | null;
   }> | null;
   projectType: string | null;
 } | null;
@@ -519,12 +522,12 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     '*[_type == "portfolio"] | order(orderRank){\n    _id,\n    projectName,\n    "slug": slug.current,\n    photoCredit,\n    projectLocation,\n    photos[]{\n      asset ->,\n      hotspot,\n      crop\n    },\n    projectType,\n  }': PortfolioQueryResult;
-    '*[_type == "portfolio" && featured == true]{\n    _id,\n    projectName,\n    "slug": slug.current,\n    photoCredit,\n    projectLocation,\n    photos[featured == true]{\n      asset ->,\n      hotspot,\n      crop\n    },\n    projectType,\n    featured,\n  }': LandingPortfolioQueryResult;
+    '*[_type == "portfolio" && featured == true] | order(coalesce(homepageOrder, 9999) asc){\n    _id,\n    projectName,\n    "slug": slug.current,\n    photoCredit,\n    projectLocation,\n    photos[featured == true]{\n      asset ->,\n      hotspot,\n      crop\n    },\n    projectType,\n    featured,\n  }': LandingPortfolioQueryResult;
     "*[_type == 'tagline'][0]{\n    copy,\n  }": TaglineQueryResult;
     "*[_type == 'contact'][0]{\n    emailAddy,\n    instagram,\n    location,\n  }": ContactQueryResult;
     "*[_type == 'infoPage'][0]{\n    portrait{\n      credit,\n      creditUrl,\n      asset ->,\n      hotspot,\n      crop\n    },\n    pressContact\n  }": InfoPageQueryResult;
     "*[_type == 'bgColor'][0]": BgColorQueryResult;
     '*[_type == "portfolio" && defined(slug.current)]{ "slug": slug.current }': AllProjectSlugsQueryResult;
-    "*[_type == 'portfolio' && slug.current == $slug][0]{\n      _id,\n      projectName,\n      \"slug\": slug.current,\n      photoCredit,\n      projectLocation,\n      photos[]{\n        asset ->,\n        hotspot,\n        crop\n      },\n      projectType,\n  }": ProjectQueryResult;
+    "*[_type == 'portfolio' && slug.current == $slug][0]{\n      _id,\n      projectName,\n      \"slug\": slug.current,\n      photoCredit,\n      projectLocation,\n      photos[]{\n        asset ->,\n        hotspot,\n        crop,\n        orientation\n      },\n      projectType,\n  }": ProjectQueryResult;
   }
 }

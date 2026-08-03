@@ -42,6 +42,20 @@ export default defineType({
             description: 'Feature this image on the homepage if project is selected to feature on homepage (max 2 per project)',
             initialValue: false,
           }),
+          defineField({
+            name: 'orientation',
+            title: 'Display As',
+            type: 'string',
+            description: 'On the project page, Landscape crops this photo to fill the row edge-to-edge. Vertical shows the whole photo uncropped, letterboxed on the background color.',
+            options: {
+              list: [
+                { title: 'Landscape (crop to fill)', value: 'landscape' },
+                { title: 'Vertical (show full photo)', value: 'vertical' },
+              ],
+              layout: 'radio',
+            },
+            initialValue: 'landscape',
+          }),
         ],
       }],
       validation: (rule) => rule.custom((photos) => {
@@ -57,6 +71,13 @@ export default defineType({
       type: 'boolean',
       description: 'Idenitfy select projects to appear on the home/landing page',
       initialValue: true,
+    }),
+    defineField({
+      name: 'homepageOrder',
+      title: 'Homepage Order',
+      type: 'number',
+      description: 'Controls where this project appears on the homepage (lower numbers appear first). Only applies when Featured is on. Leave blank to show after ordered projects.',
+      hidden: ({ document }) => !document?.featured,
     }),
     orderRankField({ type: 'category' }),
     defineField({

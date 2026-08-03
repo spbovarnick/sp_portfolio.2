@@ -58,4 +58,5 @@ export interface AllImageArray {
     hotspot?: ImageHotspot | null;
     crop?: ImageCrop | null;
   } | null;
+  orientation?: "landscape" | "vertical" | null;
 }
