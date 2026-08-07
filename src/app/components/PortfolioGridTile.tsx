@@ -1,10 +1,10 @@
-import { ProjectQueryResult } from "@/sanity/types"
+import { PortfolioQueryResult } from "@/sanity/types"
 import { urlFor } from "@/sanity/lib/image"
 import Link from "next/link"
 import Image from "next/image"
 
 interface TileProps {
-  project: ProjectQueryResult,
+  project: PortfolioQueryResult[number],
 }
 
 const PortfolioGridTile: React.FC<TileProps> = ({ project }) => {

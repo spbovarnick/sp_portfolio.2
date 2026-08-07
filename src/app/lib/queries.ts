@@ -18,7 +18,7 @@ export const portfolioQuery = defineQuery(
 );
 
 export const landingPortfolioQuery = defineQuery(
-  `*[_type == "portfolio" && featured == true]{
+  `*[_type == "portfolio" && featured == true && count(photos[featured == true]) > 0] | order(coalesce(homepageOrder, 9999) asc){
     _id,
     projectName,
     "slug": slug.current,
@@ -79,7 +79,8 @@ export const projectQuery = defineQuery(
       photos[]{
         asset ->,
         hotspot,
-        crop
+        crop,
+        orientation
       },
       projectType,
   }`

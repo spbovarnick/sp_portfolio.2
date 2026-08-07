@@ -13,16 +13,8 @@ export const imageShuffler = <T,>(array: T[]) => {
   return shuffledImgs;
 }
 
-export const shuffle = (array: LandingPortfolioQueryResult) => {
-  const len = array.length;
-  const shuffled = array.slice();
-  for (let i = len - 1; i > 0; i -= 1){
-    const rando = Math.floor(Math.random() * (i + 1));
-    const current = shuffled[i];
-    shuffled[i] = shuffled[rando];
-    shuffled[rando] = current
-  };
-  return shuffled.map(proj => ({
+export const shufflePhotos = (array: LandingPortfolioQueryResult) => {
+  return array.map(proj => ({
     ...proj,
     photos: imageShuffler(proj.photos ?? [])
   }));

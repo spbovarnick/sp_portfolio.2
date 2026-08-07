@@ -439,6 +439,23 @@
                 },
                 "optional": true
               },
+              "orientation": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "union",
+                  "of": [
+                    {
+                      "type": "string",
+                      "value": "landscape"
+                    },
+                    {
+                      "type": "string",
+                      "value": "vertical"
+                    }
+                  ]
+                },
+                "optional": true
+              },
               "_type": {
                 "type": "objectAttribute",
                 "value": {
@@ -466,6 +483,13 @@
         "type": "objectAttribute",
         "value": {
           "type": "boolean"
+        },
+        "optional": true
+      },
+      "homepageOrder": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "number"
         },
         "optional": true
       },
