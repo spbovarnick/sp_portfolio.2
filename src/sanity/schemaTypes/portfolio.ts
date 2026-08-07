@@ -75,6 +75,15 @@ export default defineType({
       type: 'boolean',
       description: 'Idenitfy select projects to appear on the home/landing page',
       initialValue: true,
+      validation: (rule) => rule.custom((featured, context) => {
+        if (!featured) return true;
+        const document = context.document as SanityDocument & { photos?: { featured?: boolean }[] };
+        const featuredPhotoCount = (document?.photos ?? []).filter((p) => p?.featured === true).length;
+        if (featuredPhotoCount < 1) {
+          return 'Mark at least 1 photo as "Featured on Homepage" in the Photos section before turning this on';
+        }
+        return true;
+      }),
     }),
     defineField({
       name: 'homepageOrder',
