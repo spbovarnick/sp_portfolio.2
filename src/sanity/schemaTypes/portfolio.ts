@@ -58,10 +58,14 @@ export default defineType({
           }),
         ],
       }],
-      validation: (rule) => rule.custom((photos) => {
+      validation: (rule) => rule.custom((photos, context) => {
         if (!Array.isArray(photos)) return true;
         const featuredCount = (photos as { featured?: boolean }[]).filter((p) => p.featured === true).length;
         if (featuredCount > 2) return 'Only 2 images per project can be featured on the homepage';
+        const document = context.document as SanityDocument & { featured?: boolean };
+        if (document?.featured && featuredCount < 1) {
+          return 'Select at least 1 photo to feature before this project can appear on the homepage';
+        }
         return true;
       }),
     }),

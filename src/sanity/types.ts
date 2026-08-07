@@ -346,7 +346,7 @@ export type PortfolioQueryResult = Array<{
 
 // Source: src/app/lib/queries.ts
 // Variable: landingPortfolioQuery
-// Query: *[_type == "portfolio" && featured == true] | order(coalesce(homepageOrder, 9999) asc){    _id,    projectName,    "slug": slug.current,    photoCredit,    projectLocation,    photos[featured == true]{      asset ->,      hotspot,      crop    },    projectType,    featured,  }
+// Query: *[_type == "portfolio" && featured == true && count(photos[featured == true]) > 0] | order(coalesce(homepageOrder, 9999) asc){    _id,    projectName,    "slug": slug.current,    photoCredit,    projectLocation,    photos[featured == true]{      asset ->,      hotspot,      crop    },    projectType,    featured,  }
 export type LandingPortfolioQueryResult = Array<{
   _id: string;
   projectName: string | null;
@@ -384,7 +384,7 @@ export type LandingPortfolioQueryResult = Array<{
     crop: SanityImageCrop | null;
   }> | null;
   projectType: string | null;
-  featured: true;
+  featured: boolean | null;
 }>;
 
 // Source: src/app/lib/queries.ts
@@ -522,7 +522,7 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     '*[_type == "portfolio"] | order(orderRank){\n    _id,\n    projectName,\n    "slug": slug.current,\n    photoCredit,\n    projectLocation,\n    photos[]{\n      asset ->,\n      hotspot,\n      crop\n    },\n    projectType,\n  }': PortfolioQueryResult;
-    '*[_type == "portfolio" && featured == true] | order(coalesce(homepageOrder, 9999) asc){\n    _id,\n    projectName,\n    "slug": slug.current,\n    photoCredit,\n    projectLocation,\n    photos[featured == true]{\n      asset ->,\n      hotspot,\n      crop\n    },\n    projectType,\n    featured,\n  }': LandingPortfolioQueryResult;
+    '*[_type == "portfolio" && featured == true && count(photos[featured == true]) > 0] | order(coalesce(homepageOrder, 9999) asc){\n    _id,\n    projectName,\n    "slug": slug.current,\n    photoCredit,\n    projectLocation,\n    photos[featured == true]{\n      asset ->,\n      hotspot,\n      crop\n    },\n    projectType,\n    featured,\n  }': LandingPortfolioQueryResult;
     "*[_type == 'tagline'][0]{\n    copy,\n  }": TaglineQueryResult;
     "*[_type == 'contact'][0]{\n    emailAddy,\n    instagram,\n    location,\n  }": ContactQueryResult;
     "*[_type == 'infoPage'][0]{\n    portrait{\n      credit,\n      creditUrl,\n      asset ->,\n      hotspot,\n      crop\n    },\n    pressContact\n  }": InfoPageQueryResult;
