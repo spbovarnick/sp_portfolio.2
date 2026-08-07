@@ -124,4 +124,23 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
   ],
+  preview: {
+    select: {
+      title: 'projectName',
+      featured: 'featured',
+      homepageOrder: 'homepageOrder',
+    },
+    prepare({ title, featured, homepageOrder }) {
+      const subtitle = !featured
+        ? 'Not on homepage'
+        : typeof homepageOrder === 'number'
+          ? `On homepage — #${homepageOrder}`
+          : 'On homepage — order not set';
+
+      return {
+        title: title || 'Untitled project',
+        subtitle,
+      };
+    },
+  },
 })
