@@ -46,11 +46,11 @@ export default defineType({
             name: 'orientation',
             title: 'Display As',
             type: 'string',
-            description: 'On the project page, Landscape crops this photo to fill the row edge-to-edge. Vertical shows the whole photo uncropped, letterboxed on the background color.',
+            description: 'On the project page, Landscape photos get their own full-width row. Two Vertical photos placed next to each other in this list pair up side-by-side, like on the homepage — a Vertical photo without a Vertical neighbor falls back to full-width.',
             options: {
               list: [
-                { title: 'Landscape (crop to fill)', value: 'landscape' },
-                { title: 'Vertical (show full photo)', value: 'vertical' },
+                { title: 'Landscape (full-width row)', value: 'landscape' },
+                { title: 'Vertical (pairs side-by-side)', value: 'vertical' },
               ],
               layout: 'radio',
             },
