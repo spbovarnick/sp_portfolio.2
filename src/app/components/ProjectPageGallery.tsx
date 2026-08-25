@@ -43,7 +43,7 @@ export default function ProjectPageGallery({groups, projectName, isMobile}: Gall
                   alt={`Photo of ${projectName ?? "project"}`}
                   blurDataURL={group.images[0].asset?.metadata?.lqip}
                   quality={100}
-                  className={group.images[0].orientation === "vertical" ? "object-contain" : "object-cover"}
+                  className="object-cover"
                   priority={groupIdx === 0}
                 />}
               </div>
@@ -78,7 +78,7 @@ export default function ProjectPageGallery({groups, projectName, isMobile}: Gall
                         alt={`Photo of ${projectName ?? "project"}`}
                         blurDataURL={img.asset?.metadata?.lqip}
                         quality={75}
-                        className={img.orientation === "vertical" ? "object-contain" : "object-cover"}
+                        className="object-cover"
                         priority={groupIdx === 0}
                       />}
                     </div>
@@ -115,7 +115,7 @@ export default function ProjectPageGallery({groups, projectName, isMobile}: Gall
                       alt={`Photo of ${projectName ?? "project"}`}
                       blurDataURL={img.asset?.metadata?.lqip}
                       quality={75}
-                      className={img.orientation === "vertical" ? "object-contain" : "object-cover"}
+                      className="object-cover"
                       priority={groupIdx === 0}
                     />}
                   </div>

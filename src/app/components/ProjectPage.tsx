@@ -34,19 +34,21 @@ interface PhotoCred {
 function buildGroups(images: AllImageArray[]): ImageGroup[] {
   const groups: ImageGroup[] = [];
   let i = 0;
-  let groupIdx = 0;
 
   while (i < images.length) {
-    const type: GroupType = groupIdx % 2 === 0 ? "full" : "half"
-    const count = type === "full" ? 1 : 2;
-    const slice = images.slice(i, i + count);
+    const current = images[i];
+    const next = images[i + 1];
 
-    if (slice.length > 0) {
-      groups.push({ type, images: slice });
+    // Two Vertical photos in a row pair up side-by-side, like the homepage.
+    // Landscape photos, and any Vertical photo without a Vertical neighbor,
+    // get their own full-width row.
+    if (current.orientation === "vertical" && next?.orientation === "vertical") {
+      groups.push({ type: "half", images: [current, next] });
+      i += 2;
+    } else {
+      groups.push({ type: "full", images: [current] });
+      i += 1;
     }
-
-    i += count;
-    groupIdx++;
   }
 
   return groups;
